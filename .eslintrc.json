@@ -1,0 +1,87 @@
+{
+  "env": {
+      "browser": true,
+      "es6": true,
+      "jest": true
+  },
+  "parser": "babel-eslint",
+  "extends": [
+      "airbnb"
+  ],
+  "globals": {
+      "Atomics": "readonly",
+      "SharedArrayBuffer": "readonly"
+  },
+  "parserOptions": {
+      "ecmaFeatures": {
+          "jsx": true
+      },
+      "ecmaVersion": 2018,
+      "sourceType": "module"
+  },
+  "plugins": [
+      "react",
+      "eslint-plugin-react",
+      "eslint-plugin-import"
+  ],
+  "rules": {
+      "max-len": [
+          "error",
+          {
+              "code": 120
+          }
+      ],
+      "indent": [
+        "error",
+        2
+      ],
+      "quotes": [
+        "error",
+        "single"
+      ],
+      "semi": [
+        "error",
+        "always"
+      ],
+      "curly": [
+        "error",
+        "all"
+      ],
+      "prefer-promise-reject-errors": [
+          "off"
+      ],
+      "react/jsx-filename-extension": [
+          "off"
+      ],
+      "react/prop-types": [
+          "warn"
+      ],
+      "no-return-assign": [
+          "off"
+      ],
+      "react/jsx-props-no-spreading": [
+          "off"
+      ],
+      "no-useless-catch": [
+          "off"
+      ],
+      "import/prefer-default-export": "off",
+      "eol-last": [
+        "error",
+        "always"
+      ],
+      "no-console": [
+        "error"
+      ],
+      "no-undefined": [
+        "error"
+      ],
+      "import/no-extraneous-dependencies": [
+          "error",
+          {
+              "devDependencies": true
+          }
+      ],
+      "no-use-before-define": ["error", { "functions": false }]
+  }
+}
