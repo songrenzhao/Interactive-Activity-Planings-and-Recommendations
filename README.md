@@ -1,68 +1,26 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Project
+- This project tended to extend the CCNY Joint Senior Design Program on Assistive Technology Across School Boundaries
+- [CSc 59866/59867 Capstone I/II Fall 2019 – Spring 2020](http://ccvcl.org/bat-branding-assistive-technologies-for-social-good/)
 
-## Available Scripts
 
-In the project directory, you can run:
+## Team Member
+- [Songren Zhao](https://www.linkedin.com/in/songrenzhao/)
+- [Xiaoyan (Yannis) Zhang](https://www.linkedin.com/in/xiaoyanzhang0999/)
+- [Hyojun Moon](https://www.linkedin.com/in/hyojun-moon-a28196126/)
 
-### `yarn start`
+## Getting started
+1. Clone the repo to your local machine 
+2. Make sure your node version is @12.16.0
+3. Install [NPM](https://www.npmjs.com/) on your local machine.
+4. Install [Node](https://nodejs.org/en/) on your local machine.
+5. Run `cd Interactive-Activity-Planings-and-Recommendations` to navigate into the folder
+6. Run `npm run start` to boot up client
+7. After that is done `cd server` then `npm run dev` to boot up server
+8. A page should pop up, if not please enter `http://localhost:3000/` on your browser
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
-
-### `yarn test`
-
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `yarn build`
-
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+## Built with 
+- [React.js](https://reactjs.org/)
+- [Node.js](https://nodejs.org/en/)
+- [Material UI](https://material-ui.com/)
+- [Socket.io](https://socket.io/)
+- [Babel.js](https://babeljs.io/)
