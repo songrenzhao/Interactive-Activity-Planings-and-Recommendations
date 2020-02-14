@@ -8,11 +8,6 @@
     "dev": "nodemon --watch src --exec babel-node src",
     "build": "babel src -d dist"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm run lint"
-    }
-  },
   "keywords": [],
   "author": "Team IAPR",
   "license": "ISC",
