@@ -6,7 +6,7 @@ import { SignUp } from './pages/signUp';
 const App = () => (
   <Router>
     <Route path="/" exact component={SignIn} />
-    <Route path="/signup" exact component={SignUp} />
+    <Route path="/signup" component={SignUp} />
   </Router>
 );
 
