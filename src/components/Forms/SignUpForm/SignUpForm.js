@@ -1,5 +1,5 @@
 import React from 'react';
 
-export const Chat = () => (
+export const SignUpForm = () => (
   <h1>Chat</h1>
 );

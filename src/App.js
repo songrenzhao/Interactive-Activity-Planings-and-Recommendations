@@ -1,12 +1,11 @@
 import React from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-import { Join } from './components/Join';
-import { Chat } from './components/Chat';
+import { SignIn } from './pages/signIn';
 
 const App = () => (
   <Router>
-    <Route path="/" exact component={Join} />
-    <Route path="/chat" component={Chat} />
+    <Route path="/" exact component={SignIn} />
+    {/* <Route path="/chat" component={Chat} /> */}
   </Router>
 );
 
