@@ -18,6 +18,9 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: 'column',
     alignItems: 'center',
   },
+  signUpContainer: {
+    background: '#F2F3F3',
+  },
   avatar: {
     width: theme.spacing(15),
     height: theme.spacing(15),
