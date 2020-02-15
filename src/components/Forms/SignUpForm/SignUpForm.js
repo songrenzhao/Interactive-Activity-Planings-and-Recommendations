@@ -10,19 +10,17 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import useStyles from './style';
 
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {'Copyright © '}
-      <Link color="inherit" href="https://www.goodwillnynj.org/">
-        Goodwill NYNJ
-      </Link>
-      {' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
+const Copyright = () => (
+  <Typography variant="body2" color="textSecondary" align="center">
+    {'Copyright © '}
+    <Link color="inherit" href="https://www.goodwillnynj.org/">
+      Goodwill NYNJ
+    </Link>
+    {' '}
+    {new Date().getFullYear()}
+    {'.'}
+  </Typography>
+);
 
 export const SignUpForm = () => {
   const classes = useStyles();
@@ -36,7 +34,7 @@ export const SignUpForm = () => {
           <Typography component="h1" variant="h5">
             Create an Account
           </Typography>
-          <form className={classes.form} noValidate>
+          <form className={classes.form}>
             <TextField
               variant="outlined"
               margin="normal"
