@@ -89,7 +89,7 @@ export const SignUpForm = () => {
             </Button>
             <Grid container>
               <Grid item xs={12} className={classes.signInRedirect}>
-                <Link href="/" variant="body2">
+                <Link href="/signin" variant="body2">
                   Have an account? Sign In
                 </Link>
               </Grid>
