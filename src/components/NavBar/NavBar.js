@@ -71,6 +71,7 @@ export const NavBar = () => {
           paper: clsx(classes.drawerPaper, !open && classes.drawerPaperClose),
         }}
         open={open}
+        className={classes.sideBar}
       >
         <Divider />
         <List>{mainListItems}</List>
@@ -82,7 +83,7 @@ export const NavBar = () => {
         <Container maxWidth="lg" className={classes.container}>
           <Grid container spacing={3}>
             <Grid item xs={12} md={8} lg={9}>
-              <Paper className={fixedHeightPaper} />
+              <Paper className={fixedHeightPaper}> asdf </Paper>
             </Grid>
             <Grid item xs={12} md={4} lg={3}>
               <Paper className={fixedHeightPaper} />

@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-const drawerWidth = 200;
+const drawerWidth = 190;
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -65,6 +65,9 @@ const useStyles = makeStyles((theme) => ({
   },
   fixedHeight: {
     height: 240,
+  },
+  sideBar: {
+    marginTop: theme.spacing(6),
   },
 }));
 
