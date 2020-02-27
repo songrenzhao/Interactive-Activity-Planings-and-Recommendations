@@ -26,7 +26,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "server": "cd server && npm run dev",
-    "lint": "eslint ./src && eslint ./server/src"
+    "lint": "eslint ./src && eslint ./server/src",
+    "lint:fix": "eslint ./src --fix"
   },
   "husky": {
     "hooks": {
