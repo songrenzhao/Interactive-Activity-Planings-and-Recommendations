@@ -14,42 +14,114 @@ export default function Location() {
         <Grid item xs={12}>
           <FormControlLabel
             control={<Checkbox color="secondary" name="location" value="yes" />}
-            label="Gamestop"
+            label={(
+              <>
+                <img
+                  alt="Gamestop"
+                  src="/images/place/gamestop.jpg"
+                  className="profile-img"
+                  width="100px"
+                  height="100px"
+                  style={{ marginRight: '5px' }}
+                />
+                Gamestop
+              </>
+            )}
           />
         </Grid>
 
         <Grid item xs={12}>
           <FormControlLabel
             control={<Checkbox color="secondary" name="location" value="yes" />}
-            label="Target"
+            label={(
+              <>
+                <img
+                  alt="Target"
+                  src="/images/place/target.jpg"
+                  className="profile-img"
+                  width="100px"
+                  height="100px"
+                  style={{ marginRight: '5px' }}
+                />
+                Target
+              </>
+            )}
           />
         </Grid>
 
         <Grid item xs={12}>
           <FormControlLabel
             control={<Checkbox color="secondary" name="location" value="yes" />}
-            label="Best Buy"
+            label={(
+              <>
+                <img
+                  alt="BestBuy"
+                  src="/images/place/bestbuy.jpg"
+                  className="profile-img"
+                  width="100px"
+                  height="100px"
+                  style={{ marginRight: '5px' }}
+                />
+                Best Buy
+              </>
+            )}
           />
         </Grid>
 
         <Grid item xs={12}>
           <FormControlLabel
             control={<Checkbox color="secondary" name="location" value="yes" />}
-            label="Walmart"
+            label={(
+              <>
+                <img
+                  alt="Walmart"
+                  src="/images/place/walmart.jpg"
+                  className="profile-img"
+                  width="100px"
+                  height="100px"
+                  style={{ marginRight: '5px' }}
+                />
+                Walmart
+              </>
+            )}
           />
         </Grid>
 
         <Grid item xs={12}>
           <FormControlLabel
             control={<Checkbox color="secondary" name="location" value="yes" />}
-            label="SamSung Store"
+            label={(
+              <>
+                <img
+                  alt="samsung"
+                  src="/images/place/samsung_store.jpg"
+                  className="profile-img"
+                  width="100px"
+                  height="100px"
+                  style={{ marginRight: '5px' }}
+                />
+                Samsung Store
+              </>
+            )}
           />
         </Grid>
 
         <Grid item xs={12}>
           <FormControlLabel
             control={<Checkbox color="secondary" name="location" value="yes" />}
-            label="Apple Store"
+            label={(
+              <>
+                <img
+                  alt="AppleStore"
+                  src="/images/place/applestore.jpg"
+                  className="profile-img"
+                  width="100px"
+                  height="100px"
+                  style={{ marginRight: '5px' }}
+                />
+                Apple Store
+              </>
+            )}
           />
         </Grid>
 

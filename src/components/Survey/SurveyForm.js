@@ -22,8 +22,8 @@ function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {'Copyright © '}
-      <Link color="inherit" href="https://material-ui.com/">
-        Your Website
+      <Link color="inherit" href="https://www.goodwillnynj.org/">
+        Goodwill NYNJ
       </Link>
       {' '}
       {new Date().getFullYear()}
@@ -41,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: theme.spacing(2),
     marginRight: theme.spacing(2),
     [theme.breakpoints.up(600 + theme.spacing(2) * 2)]: {
-      width: 600,
+      width: 800,
       marginLeft: 'auto',
       marginRight: 'auto',
     },

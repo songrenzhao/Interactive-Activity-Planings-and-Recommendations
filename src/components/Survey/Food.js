@@ -8,48 +8,120 @@ export default function Food() {
   return (
     <>
       <Typography variant="h6" gutterBottom>
-        Food you want to have for this month (choose 4).
+        Food you want to have for this month.
       </Typography>
       <Grid container spacing={3}>
         <Grid item xs={12}>
           <FormControlLabel
-            control={<Checkbox color="secondary" name="location" value="yes" />}
-            label="Subway"
+            control={<Checkbox color="secondary" name="food" value="yes" />}
+            label={(
+              <>
+                <img
+                  alt="Subway"
+                  src="/images/Food/subway.jpg"
+                  className="profile-img"
+                  width="100px"
+                  height="100px"
+                  style={{ marginRight: '5px' }}
+                />
+                Subway
+              </>
+            )}
           />
         </Grid>
 
         <Grid item xs={12}>
           <FormControlLabel
-            control={<Checkbox color="secondary" name="Food" value="yes" />}
-            label="McDonalds"
+            control={<Checkbox color="secondary" name="food" value="yes" />}
+            label={(
+              <>
+                <img
+                  alt="Mcdonalds"
+                  src="/images/Food/mcdonalds.jpg"
+                  className="profile-img"
+                  width="100px"
+                  height="100px"
+                  style={{ marginRight: '5px' }}
+                />
+                Mcdonalds
+              </>
+            )}
           />
         </Grid>
 
         <Grid item xs={12}>
           <FormControlLabel
-            control={<Checkbox color="secondary" name="Food" value="yes" />}
-            label="Popeyes"
+            control={<Checkbox color="secondary" name="food" value="yes" />}
+            label={(
+              <>
+                <img
+                  alt="Popeyes"
+                  src="/images/Food/popeyes.png"
+                  className="profile-img"
+                  width="100px"
+                  height="100px"
+                  style={{ marginRight: '5px' }}
+                />
+                Popeyes
+              </>
+            )}
           />
         </Grid>
 
         <Grid item xs={12}>
           <FormControlLabel
-            control={<Checkbox color="secondary" name="Food" value="yes" />}
-            label="Wendy’s"
+            control={<Checkbox color="secondary" name="food" value="yes" />}
+            label={(
+              <>
+                <img
+                  alt="wendys"
+                  src="/images/Food/wendys.jpg"
+                  className="profile-img"
+                  width="100px"
+                  height="100px"
+                  style={{ marginRight: '5px' }}
+                />
+                wendys
+              </>
+            )}
           />
         </Grid>
 
         <Grid item xs={12}>
           <FormControlLabel
-            control={<Checkbox color="secondary" name="Food" value="yes" />}
-            label="Burger King"
+            control={<Checkbox color="secondary" name="food" value="yes" />}
+            label={(
+              <>
+                <img
+                  alt="burgerking"
+                  src="/images/Food/burgerking.jpg"
+                  className="profile-img"
+                  width="100px"
+                  height="100px"
+                  style={{ marginRight: '5px' }}
+                />
+                Burger King
+              </>
+            )}
           />
         </Grid>
 
         <Grid item xs={12}>
           <FormControlLabel
-            control={<Checkbox color="secondary" name="Food" value="yes" />}
-            label="Pizza"
+            control={<Checkbox color="secondary" name="food" value="yes" />}
+            label={(
+              <>
+                <img
+                  alt="Pizza"
+                  src="/images/Food/pizza.jpg"
+                  className="profile-img"
+                  width="100px"
+                  height="100px"
+                  style={{ marginRight: '5px' }}
+                />
+                Pizza
+              </>
+            )}
           />
         </Grid>
 

@@ -8,7 +8,7 @@ export default function Sport() {
   return (
     <>
       <Typography variant="h6" gutterBottom>
-        Sports you want to choose for this month (choose 4).
+        Sports you want to choose for this month.
       </Typography>
       <Grid container spacing={3}>
         <Grid item xs={12}>

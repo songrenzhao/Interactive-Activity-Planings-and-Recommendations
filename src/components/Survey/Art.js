@@ -8,7 +8,7 @@ export default function Art() {
   return (
     <>
       <Typography variant="h6" gutterBottom>
-        Arts & Craft you want to choose for this month (choose 4).
+        Arts & Craft you want to choose for this month.
       </Typography>
       <Grid container spacing={3}>
         <Grid item xs={12}>

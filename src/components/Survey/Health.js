@@ -8,7 +8,7 @@ export default function Health() {
   return (
     <>
       <Typography variant="h6" gutterBottom>
-        Health and Fitness you want to choose for this month (choose 4).
+        Health and Fitness you want to choose for this month.
       </Typography>
       <Grid container spacing={3}>
         <Grid item xs={12}>

@@ -8,7 +8,7 @@ export default function Performing() {
   return (
     <>
       <Typography variant="h6" gutterBottom>
-        Performing art you want to choose for this month (choose 4).
+        Performing art you want to choose for this month.
       </Typography>
       <Grid container spacing={3}>
         <Grid item xs={12}>
