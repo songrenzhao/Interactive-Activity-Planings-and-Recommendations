@@ -108,7 +108,16 @@ export const SurveyForm = () => {
       <AppBar position="absolute" color="default" className={classes.appBar}>
         <Toolbar>
           <Typography variant="h6" color="inherit" noWrap>
-            IAPR
+            <a href="/src/pages/home">
+              <img
+                alt="logo"
+                src="/images/IAPR_logo.png"
+                className="profile-img"
+                width="60px"
+                height="60px"
+                style={{ marginRight: '5px' }}
+              />
+            </a>
           </Typography>
         </Toolbar>
       </AppBar>
