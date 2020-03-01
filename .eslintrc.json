@@ -74,7 +74,7 @@
         "always"
       ],
       "no-console": [
-        "error"
+        "off"
       ],
       "no-undefined": [
         "error"

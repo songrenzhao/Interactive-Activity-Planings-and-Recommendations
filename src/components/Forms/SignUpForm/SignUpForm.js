@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { Redirect } from 'react-router-dom';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
+import axios from 'axios';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import Link from '@material-ui/core/Link';
@@ -22,11 +24,69 @@ const Copyright = () => (
   </Typography>
 );
 
+const preprarePayload = (formData) => {
+  const {
+    name, username, email, password,
+  } = formData;
+  const payload = {
+    url: 'https://iapr.herokuapp.com/graphql',
+    method: 'post',
+    data: {
+      query: `
+        mutation {
+          signUp(name: "${name}", username: "${username}", email: "${email}", password: "${password}") {
+            status
+          }
+        }
+      `,
+    },
+  };
+  return payload;
+};
+
 export const SignUpForm = () => {
   const classes = useStyles();
+  const [formData, setFormData] = useState({
+    name: '',
+    username: '',
+    email: '',
+    password: '',
+  });
+  const [isSignedUp, setIsSignedUp] = useState(false);
+
+  const handleChange = (event) => {
+    const updatedForm = { ...formData };
+    updatedForm[event.target.name] = event.target.value;
+    setFormData(updatedForm);
+  };
+
+  const signUpRequest = async () => {
+    try {
+      const reqInfo = preprarePayload(formData);
+      const response = await axios(reqInfo);
+      const isSignUpSuccess = response.status === 200;
+      if (isSignUpSuccess) {
+        setIsSignedUp(true);
+      }
+    } catch (error) {
+      throw error;
+    }
+  };
+
+  async function handleSubmit(e) {
+    try {
+      e.preventDefault();
+      await signUpRequest();
+    } catch (error) {
+      const newError = { isError: true, errorMsg: 'Internal Service Error' };
+      console.log(newError);
+    }
+  }
+
   return (
     <Grid container component="main" className={classes.root}>
       <CssBaseline />
+      {isSignedUp && <Redirect to="/signin" />}
       <Grid item xs={false} sm={4} md={7} className={classes.image} />
       <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square className={classes.signUpContainer}>
         <div className={classes.paper}>
@@ -34,7 +94,20 @@ export const SignUpForm = () => {
           <Typography component="h1" variant="h5">
             Create an Account
           </Typography>
-          <form className={classes.form}>
+          <form className={classes.form} onSubmit={handleSubmit}>
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              id="name"
+              label="name"
+              name="name"
+              value={formData.name}
+              onChange={handleChange}
+              autoComplete="name"
+              autoFocus
+            />
             <TextField
               variant="outlined"
               margin="normal"
@@ -43,6 +116,8 @@ export const SignUpForm = () => {
               id="username"
               label="Username"
               name="username"
+              value={formData.username}
+              onChange={handleChange}
               autoComplete="username"
               autoFocus
             />
@@ -54,6 +129,8 @@ export const SignUpForm = () => {
               id="email"
               label="Email"
               name="email"
+              value={formData.email}
+              onChange={handleChange}
               autoComplete="email"
             />
             <TextField
@@ -63,17 +140,8 @@ export const SignUpForm = () => {
               fullWidth
               name="password"
               label="Enter your password"
-              type="password"
-              id="password"
-              autoComplete="new-password"
-            />
-            <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              name="password"
-              label="Confirm your password"
+              value={formData.password}
+              onChange={handleChange}
               type="password"
               id="password"
               autoComplete="new-password"
