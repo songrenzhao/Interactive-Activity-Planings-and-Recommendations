@@ -4,6 +4,7 @@ import { Home } from '../pages/home';
 import { SignIn } from '../pages/signIn';
 import { SignUp } from '../pages/signUp';
 import { Dashboard } from '../pages/dashboard';
+import { Survey } from '../pages/Survey';
 
 const App = () => (
   <Router>
@@ -11,6 +12,7 @@ const App = () => (
     <Route path="/signin" component={SignIn} />
     <Route path="/signup" component={SignUp} />
     <Route path="/dashboard" component={Dashboard} />
+    <Route path="/Survey" component={Survey} />
   </Router>
 );
 
