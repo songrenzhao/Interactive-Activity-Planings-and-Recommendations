@@ -4,7 +4,7 @@ import Typography from '@material-ui/core/Typography';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 
-export default function Performing() {
+export default function Performing(prop) {
   return (
     <>
       <Typography variant="h6" gutterBottom>
@@ -13,7 +13,8 @@ export default function Performing() {
       <Grid container spacing={3}>
         <Grid item xs={12}>
           <FormControlLabel
-            control={<Checkbox color="secondary" name="performing" value="yes" />}
+            control={<Checkbox color="secondary" name="performing" value="dancing" />}
+            onChange={prop.onChange}
             label={(
               // eslint-disable-next-line react/jsx-no-comment-textnodes
               <>
@@ -33,7 +34,8 @@ export default function Performing() {
 
         <Grid item xs={12}>
           <FormControlLabel
-            control={<Checkbox color="secondary" name="performing" value="yes" />}
+            control={<Checkbox color="secondary" name="performing" value="theater" />}
+            onChange={prop.onChange}
             label={(
               <>
                 <img
@@ -52,7 +54,8 @@ export default function Performing() {
 
         <Grid item xs={12}>
           <FormControlLabel
-            control={<Checkbox color="secondary" name="performing" value="yes" />}
+            control={<Checkbox color="secondary" name="performing" value="music" />}
+            onChange={prop.onChange}
             label={(
               <>
                 <img

@@ -4,7 +4,7 @@ import Typography from '@material-ui/core/Typography';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 
-export default function Sport() {
+export default function Sport(prop) {
   return (
     <>
       <Typography variant="h6" gutterBottom>
@@ -13,7 +13,8 @@ export default function Sport() {
       <Grid container spacing={3}>
         <Grid item xs={12}>
           <FormControlLabel
-            control={<Checkbox color="secondary" name="sport" value="yes" />}
+            control={<Checkbox color="secondary" name="sport" value="baseball" />}
+            onChange={prop.onChange}
             label={(
               <>
                 <img
@@ -32,7 +33,8 @@ export default function Sport() {
 
         <Grid item xs={12}>
           <FormControlLabel
-            control={<Checkbox color="secondary" name="sport" value="yes" />}
+            control={<Checkbox color="secondary" name="sport" value="Basketball" />}
+            onChange={prop.onChange}
             label={(
               <>
                 <img
@@ -51,7 +53,8 @@ export default function Sport() {
 
         <Grid item xs={12}>
           <FormControlLabel
-            control={<Checkbox color="secondary" name="sport" value="yes" />}
+            control={<Checkbox color="secondary" name="sport" value="Football" />}
+            onChange={prop.onChange}
             label={(
               <>
                 <img
@@ -70,7 +73,8 @@ export default function Sport() {
 
         <Grid item xs={12}>
           <FormControlLabel
-            control={<Checkbox color="secondary" name="sport" value="yes" />}
+            control={<Checkbox color="secondary" name="sport" value="Hockey" />}
+            onChange={prop.onChange}
             label={(
               <>
                 <img
@@ -89,7 +93,8 @@ export default function Sport() {
 
         <Grid item xs={12}>
           <FormControlLabel
-            control={<Checkbox color="secondary" name="sport" value="yes" />}
+            control={<Checkbox color="secondary" name="sport" value="skateboarding" />}
+            onChange={prop.onChange}
             label={(
               <>
                 <img
@@ -108,7 +113,8 @@ export default function Sport() {
 
         <Grid item xs={12}>
           <FormControlLabel
-            control={<Checkbox color="secondary" name="sport" value="yes" />}
+            control={<Checkbox color="secondary" name="sport" value="Soccer" />}
+            onChange={prop.onChange}
             label={(
               <>
                 <img
@@ -127,7 +133,8 @@ export default function Sport() {
 
         <Grid item xs={12}>
           <FormControlLabel
-            control={<Checkbox color="secondary" name="sport" value="yes" />}
+            control={<Checkbox color="secondary" name="sport" value="Swimming" />}
+            onChange={prop.onChange}
             label={(
               <>
                 <img
@@ -146,7 +153,8 @@ export default function Sport() {
 
         <Grid item xs={12}>
           <FormControlLabel
-            control={<Checkbox color="secondary" name="sport" value="yes" />}
+            control={<Checkbox color="secondary" name="sport" value="Tennis" />}
+            onChange={prop.onChange}
             label={(
               <>
                 <img
@@ -166,7 +174,8 @@ export default function Sport() {
         <Grid item xs={12}>
           <FormControlLabel
             // eslint-disable-next-line max-len
-            control={<Checkbox color="secondary" name="sport" value="yes" />}
+            control={<Checkbox color="secondary" name="sport" value="Track Filed" />}
+            onChange={prop.onChange}
             label={(
               <>
                 <img
