@@ -26,7 +26,7 @@ const rows = [
   createData('Sport', 'Basketball', 'FootBall', 'Skateboard', 'Swimming'),
   createData('Art&craft', 'Drawing', 'Clay Modeling', 'Painting', 'Beading'),
   createData('Health&Fitness', 'Exercising', 'Health Cooking Class', 'Meditation', 'Yoga'),
-  createData('Performing Art', 'Dancing'),
+  createData('Performing_Art', 'Dancing'),
 ];
 
 export const SurveyTable = () => {
@@ -37,7 +37,8 @@ export const SurveyTable = () => {
       <Table className={classes.table} aria-label="table">
         <TableHead>
           <TableRow>
-            <TableCell>Surveys Questions and Answers</TableCell>
+            <TableCell align="left">Questions and Answers</TableCell>
+            <TableCell align="left">Questions</TableCell>
             <TableCell align="left">Answer1</TableCell>
             <TableCell align="left">Answer2</TableCell>
             <TableCell align="left">Answer3</TableCell>
@@ -50,6 +51,7 @@ export const SurveyTable = () => {
               <TableCell component="th" scope="row">
                 {row.name}
               </TableCell>
+              <TableCell align="Left">{row.Questions}</TableCell>
               <TableCell align="left">{row.Answer1}</TableCell>
               <TableCell align="left">{row.Answer2}</TableCell>
               <TableCell align="left">{row.Answer3}</TableCell>

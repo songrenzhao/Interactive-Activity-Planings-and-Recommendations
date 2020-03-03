@@ -29,15 +29,15 @@ export default function SurveyPost() {
           <div className={classes.cardDetails}>
             <CardContent>
               <Typography component="h2" variant="h5">
-                asdf
+                Participant A
               </Typography>
               <Typography variant="subtitle1" color="textSecondary">
-                asdf
+                Survey Report
               </Typography>
               <Typography variant="subtitle1" paragraph>
-                asdf
+                3/3/2020
               </Typography>
-              <Typography variant="subtitle1" color="primary">
+              <Typography variant="subtitle1" color="primary" button component="a" href="/SurveyTable">
                 Continue reading...
               </Typography>
             </CardContent>

@@ -43,11 +43,11 @@ export const SurveyList = () => {
     <>
       <CssBaseline />
       <Container maxWidth="lg">
-        <Header title="Blog" />
+        <Header title="Survey Report" />
         <main>
           <Grid container spacing={4}>
             {surveyPost.map((post) => (
-              <SurveyPost key={post.title} post={post} />
+              <SurveyPost key={post.title} post={post} href="/SurveyTable" />
             ))}
           </Grid>
         </main>

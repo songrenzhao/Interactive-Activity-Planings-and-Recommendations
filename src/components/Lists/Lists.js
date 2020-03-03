@@ -19,11 +19,11 @@ export const mainListItems = (
       </ListItemIcon>
       <ListItemText primary="Dashboard" />
     </ListItem>
-    <ListItem button>
+    <ListItem button component="a" href="/Survey">
       <ListItemIcon>
         <ReceiptIcon />
       </ListItemIcon>
-      <ListItemText href="/SurveyBlog" primary="Surveys" />
+      <ListItemText primary="Survey" />
     </ListItem>
     <ListItem button>
       <ListItemIcon>
@@ -31,11 +31,11 @@ export const mainListItems = (
       </ListItemIcon>
       <ListItemText primary="Participants" />
     </ListItem>
-    <ListItem button>
+    <ListItem button component="a" href="/SurveyBlog">
       <ListItemIcon>
         <BarChartIcon />
       </ListItemIcon>
-      <ListItemText primary="Reports" />
+      <ListItemText primary="Survey Reports" />
     </ListItem>
     <ListItem button>
       <ListItemIcon>
