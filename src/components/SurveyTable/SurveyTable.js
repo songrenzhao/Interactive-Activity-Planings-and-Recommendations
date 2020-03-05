@@ -1,5 +1,5 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import { withStyles, makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -8,11 +8,23 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 
-const useStyles = makeStyles({
-  table: {
-    minWidth: 650,
+const StyledTableCell = withStyles((theme) => ({
+  head: {
+    backgroundColor: theme.palette.common.black,
+    color: theme.palette.common.white,
   },
-});
+  body: {
+    fontSize: 14,
+  },
+}))(TableCell);
+
+const StyledTableRow = withStyles((theme) => ({
+  root: {
+    '&:nth-of-type(odd)': {
+      backgroundColor: theme.palette.background.default,
+    },
+  },
+}))(TableRow);
 
 function createData(Questions, Answer1, Answer2, Answer3, Answer4) {
   return {
@@ -29,34 +41,38 @@ const rows = [
   createData('Performing_Art', 'Dancing'),
 ];
 
+const useStyles = makeStyles({
+  table: {
+    minWidth: 700,
+  },
+});
+
 export const SurveyTable = () => {
   const classes = useStyles();
 
   return (
     <TableContainer component={Paper}>
-      <Table className={classes.table} aria-label="table">
+      <Table className={classes.table} aria-label="customized table">
         <TableHead>
           <TableRow>
-            <TableCell align="left">Questions and Answers</TableCell>
-            <TableCell align="left">Questions</TableCell>
-            <TableCell align="left">Answer1</TableCell>
-            <TableCell align="left">Answer2</TableCell>
-            <TableCell align="left">Answer3</TableCell>
-            <TableCell align="left">Answer4</TableCell>
+            <StyledTableCell>Questions (By Category)</StyledTableCell>
+            <StyledTableCell align="left">Answer1</StyledTableCell>
+            <StyledTableCell align="left">Answer2</StyledTableCell>
+            <StyledTableCell align="left">Answer3</StyledTableCell>
+            <StyledTableCell align="left">Answer4</StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {rows.map((row) => (
-            <TableRow key={row.name}>
-              <TableCell component="th" scope="row">
-                {row.name}
-              </TableCell>
-              <TableCell align="Left">{row.Questions}</TableCell>
-              <TableCell align="left">{row.Answer1}</TableCell>
-              <TableCell align="left">{row.Answer2}</TableCell>
-              <TableCell align="left">{row.Answer3}</TableCell>
-              <TableCell align="left">{row.Answer4}</TableCell>
-            </TableRow>
+            <StyledTableRow key={row.Questions}>
+              <StyledTableCell component="th" scope="row">
+                {row.Questions}
+              </StyledTableCell>
+              <StyledTableCell align="left">{row.Answer1}</StyledTableCell>
+              <StyledTableCell align="left">{row.Answer2}</StyledTableCell>
+              <StyledTableCell align="left">{row.Answer3}</StyledTableCell>
+              <StyledTableCell align="left">{row.Answer4}</StyledTableCell>
+            </StyledTableRow>
           ))}
         </TableBody>
       </Table>

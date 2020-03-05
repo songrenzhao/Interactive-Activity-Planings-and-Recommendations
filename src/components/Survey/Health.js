@@ -15,17 +15,19 @@ export default function Health() {
           <FormControlLabel
             control={<Checkbox color="secondary" name="health" value="yes" />}
             label={(
-              <>
-                <img
-                  alt="Exercising"
-                  src="/images/health_fitness/exercising.jpg"
-                  className="profile-img"
-                  width="100px"
-                  height="100px"
-                  style={{ marginRight: '5px' }}
-                />
+              <Grid container direction="row" alignItems="center">
+                <Grid item>
+                  <img
+                    alt="Exercising"
+                    src="/images/health_fitness/exercising.jpg"
+                    className="profile-img"
+                    width="150px"
+                    height="150px"
+                    style={{ marginRight: '5px' }}
+                  />
+                </Grid>
                 Exercising
-              </>
+              </Grid>
             )}
           />
         </Grid>
@@ -34,17 +36,19 @@ export default function Health() {
           <FormControlLabel
             control={<Checkbox color="secondary" name="health" value="yes" />}
             label={(
-              <>
-                <img
-                  alt="Health Cooking Class"
-                  src="/images/health_fitness/health_cooking_class.jpg"
-                  className="profile-img"
-                  width="100px"
-                  height="100px"
-                  style={{ marginRight: '5px' }}
-                />
+              <Grid container direction="row" alignItems="center">
+                <Grid item>
+                  <img
+                    alt="Health Cooking Class"
+                    src="/images/health_fitness/health_cooking_class.jpg"
+                    className="profile-img"
+                    width="150px"
+                    height="150px"
+                    style={{ marginRight: '5px' }}
+                  />
+                </Grid>
                 Health Cooking Class
-              </>
+              </Grid>
             )}
           />
         </Grid>
@@ -53,17 +57,19 @@ export default function Health() {
           <FormControlLabel
             control={<Checkbox color="secondary" name="health" value="yes" />}
             label={(
-              <>
-                <img
-                  alt="Meditation"
-                  src="/images/health_fitness/Meditation.jpg"
-                  className="profile-img"
-                  width="100px"
-                  height="100px"
-                  style={{ marginRight: '5px' }}
-                />
+              <Grid container direction="row" alignItems="center">
+                <Grid item>
+                  <img
+                    alt="Meditation"
+                    src="/images/health_fitness/Meditation.jpg"
+                    className="profile-img"
+                    width="150px"
+                    height="150px"
+                    style={{ marginRight: '5px' }}
+                  />
+                </Grid>
                 Meditation
-              </>
+              </Grid>
             )}
           />
         </Grid>
@@ -72,17 +78,19 @@ export default function Health() {
           <FormControlLabel
             control={<Checkbox color="secondary" name="health" value="yes" />}
             label={(
-              <>
-                <img
-                  alt="yoga_zumba"
-                  src="/images/health_fitness/yoga_zumba.jpg"
-                  className="profile-img"
-                  width="100px"
-                  height="100px"
-                  style={{ marginRight: '5px' }}
-                />
+              <Grid container direction="row" alignItems="center">
+                <Grid item>
+                  <img
+                    alt="yoga_zumba"
+                    src="/images/health_fitness/yoga_zumba.jpg"
+                    className="profile-img"
+                    width="150px"
+                    height="150px"
+                    style={{ marginRight: '5px' }}
+                  />
+                </Grid>
                 Yoga/Zumba
-              </>
+              </Grid>
             )}
           />
         </Grid>

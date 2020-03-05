@@ -3,6 +3,7 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
+import './style.css';
 
 export default function Food() {
   return (
@@ -15,17 +16,19 @@ export default function Food() {
           <FormControlLabel
             control={<Checkbox color="secondary" name="food" value="yes" />}
             label={(
-              <>
-                <img
-                  alt="Subway"
-                  src="/images/Food/subway.jpg"
-                  className="profile-img"
-                  width="100px"
-                  height="100px"
-                  style={{ marginRight: '5px' }}
-                />
+              <Grid container direction="row" alignItems="center">
+                <Grid item>
+                  <img
+                    alt="Subway"
+                    src="/images/Food/subway.jpg"
+                    className="profile-img"
+                    width="150px"
+                    height="150px"
+                    style={{ marginRight: '5px' }}
+                  />
+                </Grid>
                 Subway
-              </>
+              </Grid>
             )}
           />
         </Grid>
@@ -34,17 +37,19 @@ export default function Food() {
           <FormControlLabel
             control={<Checkbox color="secondary" name="food" value="yes" />}
             label={(
-              <>
-                <img
-                  alt="Mcdonalds"
-                  src="/images/Food/mcdonalds.jpg"
-                  className="profile-img"
-                  width="100px"
-                  height="100px"
-                  style={{ marginRight: '5px' }}
-                />
+              <Grid container direction="row" alignItems="center">
+                <Grid item>
+                  <img
+                    alt="Mcdonalds"
+                    src="/images/Food/mcdonalds.jpg"
+                    className="profile-img"
+                    width="150px"
+                    height="150px"
+                    style={{ marginRight: '5px' }}
+                  />
+                </Grid>
                 Mcdonalds
-              </>
+              </Grid>
             )}
           />
         </Grid>
@@ -53,17 +58,19 @@ export default function Food() {
           <FormControlLabel
             control={<Checkbox color="secondary" name="food" value="yes" />}
             label={(
-              <>
-                <img
-                  alt="Popeyes"
-                  src="/images/Food/popeyes.png"
-                  className="profile-img"
-                  width="100px"
-                  height="100px"
-                  style={{ marginRight: '5px' }}
-                />
+              <Grid container direction="row" alignItems="center">
+                <Grid item>
+                  <img
+                    alt="Popeyes"
+                    src="/images/Food/popeyes.png"
+                    className="profile-img"
+                    width="150px"
+                    height="150px"
+                    style={{ marginRight: '5px' }}
+                  />
+                </Grid>
                 Popeyes
-              </>
+              </Grid>
             )}
           />
         </Grid>
@@ -72,17 +79,19 @@ export default function Food() {
           <FormControlLabel
             control={<Checkbox color="secondary" name="food" value="yes" />}
             label={(
-              <>
-                <img
-                  alt="wendys"
-                  src="/images/Food/wendys.jpg"
-                  className="profile-img"
-                  width="100px"
-                  height="100px"
-                  style={{ marginRight: '5px' }}
-                />
+              <Grid container direction="row" alignItems="center">
+                <Grid item>
+                  <img
+                    alt="wendys"
+                    src="/images/Food/wendys.jpg"
+                    className="profile-img"
+                    width="150px"
+                    height="150px"
+                    style={{ marginRight: '5px' }}
+                  />
+                </Grid>
                 wendys
-              </>
+              </Grid>
             )}
           />
         </Grid>
@@ -91,17 +100,19 @@ export default function Food() {
           <FormControlLabel
             control={<Checkbox color="secondary" name="food" value="yes" />}
             label={(
-              <>
-                <img
-                  alt="burgerking"
-                  src="/images/Food/burgerking.jpg"
-                  className="profile-img"
-                  width="100px"
-                  height="100px"
-                  style={{ marginRight: '5px' }}
-                />
+              <Grid container direction="row" alignItems="center">
+                <Grid item>
+                  <img
+                    alt="burgerking"
+                    src="/images/Food/burgerking.jpg"
+                    className="profile-img"
+                    width="150px"
+                    height="150px"
+                    style={{ marginRight: '5px' }}
+                  />
+                </Grid>
                 Burger King
-              </>
+              </Grid>
             )}
           />
         </Grid>
@@ -110,17 +121,19 @@ export default function Food() {
           <FormControlLabel
             control={<Checkbox color="secondary" name="food" value="yes" />}
             label={(
-              <>
-                <img
-                  alt="Pizza"
-                  src="/images/Food/pizza.jpg"
-                  className="profile-img"
-                  width="100px"
-                  height="100px"
-                  style={{ marginRight: '5px' }}
-                />
+              <Grid container direction="row" alignItems="center">
+                <Grid item>
+                  <img
+                    alt="Pizza"
+                    src="/images/Food/pizza.jpg"
+                    className="profile-img"
+                    width="150px"
+                    height="150px"
+                    style={{ marginRight: '5px' }}
+                  />
+                </Grid>
                 Pizza
-              </>
+              </Grid>
             )}
           />
         </Grid>

@@ -21,8 +21,8 @@ export default function Performing() {
                   alt="dancing"
                   src="/images/performing_art/dancing.gif"
                   className="profile-img"
-                  width="100px"
-                  height="100px"
+                  width="150px"
+                  height="150px"
                   style={{ marginRight: '5px' }}
                 />
                 Dancing
@@ -40,8 +40,8 @@ export default function Performing() {
                   alt="theater"
                   src="/images/performing_art/theater.gif"
                   className="profile-img"
-                  width="100px"
-                  height="100px"
+                  width="150px"
+                  height="150px"
                   style={{ marginRight: '5px' }}
                 />
                 Theater
@@ -59,8 +59,8 @@ export default function Performing() {
                   alt="music"
                   src="/images/performing_art/music.png"
                   className="profile-img"
-                  width="100px"
-                  height="100px"
+                  width="150px"
+                  height="150px"
                   style={{ marginRight: '5px' }}
                 />
                 Music

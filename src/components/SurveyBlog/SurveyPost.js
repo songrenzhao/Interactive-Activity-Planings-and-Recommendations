@@ -28,16 +28,16 @@ export default function SurveyPost() {
         <Card className={classes.card}>
           <div className={classes.cardDetails}>
             <CardContent>
-              <Typography component="h2" variant="h5">
+              <Typography component="h2" variant="Participant Name">
                 Participant A
               </Typography>
-              <Typography variant="subtitle1" color="textSecondary">
+              <Typography variant="Survey Report" color="textSecondary">
                 Survey Report
               </Typography>
-              <Typography variant="subtitle1" paragraph>
+              <Typography variant="Date" paragraph>
                 3/3/2020
               </Typography>
-              <Typography variant="subtitle1" color="primary" button component="a" href="/SurveyTable">
+              <Typography variant="Detail" color="primary" button component="a" href="/SurveyTable">
                 Continue reading...
               </Typography>
             </CardContent>
