@@ -1,4 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+import { useQuery } from '@apollo/react-hooks';
+import { gql } from 'apollo-boost';
 import Typography from '@material-ui/core/Typography';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
@@ -7,47 +9,29 @@ import Paper from '@material-ui/core/Paper';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardContent from '@material-ui/core/CardContent';
 import cookie from 'react-cookies';
-import axios from 'axios';
+import CardMedia from '@material-ui/core/CardMedia';
 import useStyles from './style';
 
 const expiredTime = 60 * 60 * 2; // 24hours
 
-const preprarePayload = () => {
-  const payload = {
-    url: 'https://iapr.herokuapp.com/graphql',
-    method: 'post',
-    data: {
-      query: `
-          {
-            participants {
-              name
-            }
-          }
-      `,
-    },
-  };
-  return payload;
-};
+const SIGNIN = gql`
+  {
+    participants {
+      name
+    }
+  }
+`;
 
 export const SignInParticipantForm = () => {
   const classes = useStyles();
-  const [data, setData] = useState({
-    participants: [],
-  });
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const reqInfo = preprarePayload();
-      const response = await axios(reqInfo);
-      setData({ participants: response.data.data.participants });
-    };
-    fetchData();
-  }, []);
+  const { loading, error, data } = useQuery(SIGNIN);
 
   const handleChange = (name) => () => {
     cookie.save('name', name, { path: '/', maxAge: expiredTime });
   };
 
+  if (loading) { return <div>Loading…</div>; }
+  if (error) { return <div>Error</div>; }
   return (
     <Grid container component="main" className={classes.root}>
       <CssBaseline />
@@ -57,7 +41,7 @@ export const SignInParticipantForm = () => {
         xs={12}
         sm={8}
         md={5}
-        spacing={1}
+        spacing={2}
         component={Paper}
         justify="space-evenly"
         alignItems="center"
@@ -66,19 +50,17 @@ export const SignInParticipantForm = () => {
         className={classes.signInContainer}
       >
         {data.participants.map((value) => (
-          <Grid item xs={3}>
+          <Grid item xs={4}>
             <CardActionArea component="a" href="/survey" onClick={handleChange(value.name)}>
               <Card className={classes.card}>
                 <div className={classes.cardDetails}>
+                  <CardMedia
+                    className={classes.cardMedia}
+                    image="https://cdn1.iconfinder.com/data/icons/user-pictures/101/malecostume-512.png"
+                  />
                   <CardContent>
                     <Typography component="h2" variant="h5">
                       {value.name}
-                    </Typography>
-                    <Typography variant="subtitle1" color="textSecondary">
-                      {/* Date */}
-                    </Typography>
-                    <Typography variant="subtitle1" color="primary">
-                      {/* Continue reading... */}
                     </Typography>
                   </CardContent>
                 </div>

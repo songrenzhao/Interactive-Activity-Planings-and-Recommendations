@@ -26,9 +26,12 @@ const useStyles = makeStyles((theme) => ({
   },
   cardDetails: {
     flex: 1,
+    width: theme.spacing(11),
+    textAlign: 'center',
   },
   cardMedia: {
-    width: 160,
+    height: theme.spacing(25),
+    width: theme.spacing(23),
   },
 }));
 
