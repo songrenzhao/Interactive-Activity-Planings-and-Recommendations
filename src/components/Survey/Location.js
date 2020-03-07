@@ -4,7 +4,7 @@ import Typography from '@material-ui/core/Typography';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 
-export default function Location() {
+export default function Location(prop) {
   return (
     <>
       <Typography variant="h6" gutterBottom>
@@ -13,7 +13,8 @@ export default function Location() {
       <Grid container spacing={3}>
         <Grid item xs={12}>
           <FormControlLabel
-            control={<Checkbox color="secondary" name="location" value="yes" />}
+            control={<Checkbox color="secondary" name="location" value="Gamestop" />}
+            onChange={prop.onChange}
             label={(
               <>
                 <img
@@ -32,7 +33,8 @@ export default function Location() {
 
         <Grid item xs={12}>
           <FormControlLabel
-            control={<Checkbox color="secondary" name="location" value="yes" />}
+            control={<Checkbox color="secondary" name="location" value="Target" />}
+            onChange={prop.onChange}
             label={(
               <>
                 <img
@@ -51,7 +53,8 @@ export default function Location() {
 
         <Grid item xs={12}>
           <FormControlLabel
-            control={<Checkbox color="secondary" name="location" value="yes" />}
+            control={<Checkbox color="secondary" name="location" value="BestBuy" />}
+            onChange={prop.onChange}
             label={(
               <>
                 <img
@@ -70,7 +73,8 @@ export default function Location() {
 
         <Grid item xs={12}>
           <FormControlLabel
-            control={<Checkbox color="secondary" name="location" value="yes" />}
+            control={<Checkbox color="secondary" name="location" value="Walmart" />}
+            onChange={prop.onChange}
             label={(
               <>
                 <img
@@ -89,7 +93,8 @@ export default function Location() {
 
         <Grid item xs={12}>
           <FormControlLabel
-            control={<Checkbox color="secondary" name="location" value="yes" />}
+            control={<Checkbox color="secondary" name="location" value="samsung" />}
+            onChange={prop.onChange}
             label={(
               <>
                 <img
@@ -108,7 +113,8 @@ export default function Location() {
 
         <Grid item xs={12}>
           <FormControlLabel
-            control={<Checkbox color="secondary" name="location" value="yes" />}
+            control={<Checkbox color="secondary" name="location" value="AppleStore" />}
+            onChange={prop.onChange}
             label={(
               <>
                 <img

@@ -4,7 +4,7 @@ import Typography from '@material-ui/core/Typography';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 
-export default function Food() {
+export default function Food(prop) {
   return (
     <>
       <Typography variant="h6" gutterBottom>
@@ -13,7 +13,8 @@ export default function Food() {
       <Grid container spacing={3}>
         <Grid item xs={12}>
           <FormControlLabel
-            control={<Checkbox color="secondary" name="food" value="yes" />}
+            control={<Checkbox color="secondary" name="food" value="Subway" />}
+            onChange={prop.onChange}
             label={(
               <>
                 <img
@@ -32,7 +33,8 @@ export default function Food() {
 
         <Grid item xs={12}>
           <FormControlLabel
-            control={<Checkbox color="secondary" name="food" value="yes" />}
+            control={<Checkbox color="secondary" name="food" value="Mcdonalds" />}
+            onChange={prop.onChange}
             label={(
               <>
                 <img
@@ -51,7 +53,8 @@ export default function Food() {
 
         <Grid item xs={12}>
           <FormControlLabel
-            control={<Checkbox color="secondary" name="food" value="yes" />}
+            control={<Checkbox color="secondary" name="food" value="Popeyes" />}
+            onChange={prop.onChange}
             label={(
               <>
                 <img
@@ -70,7 +73,8 @@ export default function Food() {
 
         <Grid item xs={12}>
           <FormControlLabel
-            control={<Checkbox color="secondary" name="food" value="yes" />}
+            control={<Checkbox color="secondary" name="food" value="wendys" />}
+            onChange={prop.onChange}
             label={(
               <>
                 <img
@@ -89,7 +93,8 @@ export default function Food() {
 
         <Grid item xs={12}>
           <FormControlLabel
-            control={<Checkbox color="secondary" name="food" value="yes" />}
+            control={<Checkbox color="secondary" name="food" value="burgerking" />}
+            onChange={prop.onChange}
             label={(
               <>
                 <img
@@ -108,7 +113,8 @@ export default function Food() {
 
         <Grid item xs={12}>
           <FormControlLabel
-            control={<Checkbox color="secondary" name="food" value="yes" />}
+            control={<Checkbox color="secondary" name="food" value="Pizza" />}
+            onChange={prop.onChange}
             label={(
               <>
                 <img

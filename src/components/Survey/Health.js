@@ -4,7 +4,7 @@ import Typography from '@material-ui/core/Typography';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 
-export default function Health() {
+export default function Health(prop) {
   return (
     <>
       <Typography variant="h6" gutterBottom>
@@ -13,7 +13,8 @@ export default function Health() {
       <Grid container spacing={3}>
         <Grid item xs={12}>
           <FormControlLabel
-            control={<Checkbox color="secondary" name="health" value="yes" />}
+            control={<Checkbox color="secondary" name="health" value="Exercising" />}
+            onChange={prop.onChange}
             label={(
               <>
                 <img
@@ -32,7 +33,8 @@ export default function Health() {
 
         <Grid item xs={12}>
           <FormControlLabel
-            control={<Checkbox color="secondary" name="health" value="yes" />}
+            control={<Checkbox color="secondary" name="health" value="Health Cooking Class" />}
+            onChange={prop.onChange}
             label={(
               <>
                 <img
@@ -51,7 +53,8 @@ export default function Health() {
 
         <Grid item xs={12}>
           <FormControlLabel
-            control={<Checkbox color="secondary" name="health" value="yes" />}
+            control={<Checkbox color="secondary" name="health" value="Meditation" />}
+            onChange={prop.onChange}
             label={(
               <>
                 <img
@@ -70,7 +73,8 @@ export default function Health() {
 
         <Grid item xs={12}>
           <FormControlLabel
-            control={<Checkbox color="secondary" name="health" value="yes" />}
+            control={<Checkbox color="secondary" name="health" value="yoga zumba" />}
+            onChange={prop.onChange}
             label={(
               <>
                 <img
