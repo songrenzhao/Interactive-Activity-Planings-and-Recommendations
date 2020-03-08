@@ -18,7 +18,7 @@ export const mainListItems = (
       </ListItemIcon>
       <ListItemText primary="Dashboard" />
     </ListItem>
-    <ListItem button component="a" href="/Survey">
+    <ListItem button>
       <ListItemIcon>
         <AssignmentIcon />
       </ListItemIcon>
