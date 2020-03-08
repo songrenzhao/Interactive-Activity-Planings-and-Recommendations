@@ -50,7 +50,7 @@ export const SignInParticipantForm = () => {
         className={classes.signInContainer}
       >
         {data.participants.map((value) => (
-          <Grid item xs={4}>
+          <Grid item xs={3} md={3}>
             <CardActionArea component="a" href="/survey" onClick={handleChange(value.name)}>
               <Card className={classes.card}>
                 <div className={classes.cardDetails}>
