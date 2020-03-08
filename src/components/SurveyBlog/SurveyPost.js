@@ -19,9 +19,10 @@ const useStyles = makeStyles({
   },
 });
 
-export default function SurveyPost() {
+export default function SurveyPost(prop) {
+  const { name, date } = prop;
+  const displayDate = new Date(parseInt(date, 10)).toString();
   const classes = useStyles();
-
   return (
     <Grid item xs={12} md={6}>
       <CardActionArea component="a" href="#">
@@ -29,13 +30,10 @@ export default function SurveyPost() {
           <div className={classes.cardDetails}>
             <CardContent>
               <Typography component="h2" variant="Participant Name">
-                Participant A
-              </Typography>
-              <Typography variant="Survey Report" color="textSecondary">
-                Survey Report
+                {name}
               </Typography>
               <Typography variant="Date" paragraph>
-                3/3/2020
+                {displayDate}
               </Typography>
               <Typography variant="Detail" color="primary" button component="a" href="/SurveyTable">
                 Continue reading...
