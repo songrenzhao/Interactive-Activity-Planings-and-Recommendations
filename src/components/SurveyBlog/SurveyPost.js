@@ -25,7 +25,7 @@ export default function SurveyPost(prop) {
   const classes = useStyles();
   return (
     <Grid item xs={12} md={6}>
-      <CardActionArea component="a" href="#">
+      <CardActionArea component="a" href="/SurveyTable">
         <Card className={classes.card}>
           <div className={classes.cardDetails}>
             <CardContent>
