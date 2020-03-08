@@ -18,6 +18,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import { mainListItems, secondaryListItems } from '../Lists';
 import useStyles from './style';
+// eslint-disable-next-line no-unused-vars
 import { SurveyList } from '../SurveyBlog/SurveyList';
 
 function Copyright() {
