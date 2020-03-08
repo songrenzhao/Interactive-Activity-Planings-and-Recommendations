@@ -16,17 +16,19 @@ export default function Sport(prop) {
             control={<Checkbox color="secondary" name="sport" value="baseball" />}
             onChange={prop.onChange}
             label={(
-              <>
-                <img
-                  alt="baseball"
-                  src="/images/Sport/baseball.png"
-                  className="profile-img"
-                  width="100px"
-                  height="100px"
-                  style={{ marginRight: '5px' }}
-                />
+              <Grid container direction="row" alignItems="center">
+                <Grid item>
+                  <img
+                    alt="baseball"
+                    src="/images/Sport/baseball.png"
+                    className="profile-img"
+                    width="150px"
+                    height="150px"
+                    style={{ marginRight: '5px' }}
+                  />
+                </Grid>
                 Baseball
-              </>
+              </Grid>
             )}
           />
         </Grid>
@@ -36,17 +38,19 @@ export default function Sport(prop) {
             control={<Checkbox color="secondary" name="sport" value="Basketball" />}
             onChange={prop.onChange}
             label={(
-              <>
-                <img
-                  alt="Basketball"
-                  src="/images/Sport/Basketball.gif"
-                  className="profile-img"
-                  width="100px"
-                  height="100px"
-                  style={{ marginRight: '5px' }}
-                />
+              <Grid container direction="row" alignItems="center">
+                <Grid item>
+                  <img
+                    alt="Basketball"
+                    src="/images/Sport/Basketball.gif"
+                    className="profile-img"
+                    width="150px"
+                    height="150px"
+                    style={{ marginRight: '5px' }}
+                  />
+                </Grid>
                 Basketball
-              </>
+              </Grid>
             )}
           />
         </Grid>
@@ -56,17 +60,19 @@ export default function Sport(prop) {
             control={<Checkbox color="secondary" name="sport" value="Football" />}
             onChange={prop.onChange}
             label={(
-              <>
-                <img
-                  alt="Football"
-                  src="/images/Sport/Football.png"
-                  className="profile-img"
-                  width="100px"
-                  height="100px"
-                  style={{ marginRight: '5px' }}
-                />
+              <Grid container direction="row" alignItems="center">
+                <Grid item>
+                  <img
+                    alt="Football"
+                    src="/images/Sport/Football.png"
+                    className="profile-img"
+                    width="150px"
+                    height="150px"
+                    style={{ marginRight: '5px' }}
+                  />
+                </Grid>
                 Football
-              </>
+              </Grid>
             )}
           />
         </Grid>
@@ -76,17 +82,19 @@ export default function Sport(prop) {
             control={<Checkbox color="secondary" name="sport" value="Hockey" />}
             onChange={prop.onChange}
             label={(
-              <>
-                <img
-                  alt="Hockey"
-                  src="/images/Sport/Hockey.jpg"
-                  className="profile-img"
-                  width="100px"
-                  height="100px"
-                  style={{ marginRight: '5px' }}
-                />
+              <Grid container direction="row" alignItems="center">
+                <Grid item>
+                  <img
+                    alt="Hockey"
+                    src="/images/Sport/Hockey.jpg"
+                    className="profile-img"
+                    width="150px"
+                    height="150px"
+                    style={{ marginRight: '5px' }}
+                  />
+                </Grid>
                 Hockey
-              </>
+              </Grid>
             )}
           />
         </Grid>
@@ -96,17 +104,19 @@ export default function Sport(prop) {
             control={<Checkbox color="secondary" name="sport" value="skateboarding" />}
             onChange={prop.onChange}
             label={(
-              <>
-                <img
-                  alt="skateboarding"
-                  src="/images/Sport/skateboarding.png"
-                  className="profile-img"
-                  width="100px"
-                  height="100px"
-                  style={{ marginRight: '5px' }}
-                />
-                skateboarding
-              </>
+              <Grid container direction="row" alignItems="center">
+                <Grid item>
+                  <img
+                    alt="skateboarding"
+                    src="/images/Sport/skateboarding.png"
+                    className="profile-img"
+                    width="150px"
+                    height="150px"
+                    style={{ marginRight: '5px' }}
+                  />
+                </Grid>
+                Skateboarding
+              </Grid>
             )}
           />
         </Grid>
@@ -116,17 +126,19 @@ export default function Sport(prop) {
             control={<Checkbox color="secondary" name="sport" value="Soccer" />}
             onChange={prop.onChange}
             label={(
-              <>
-                <img
-                  alt="Soccer"
-                  src="/images/Sport/Soccer.jpg"
-                  className="profile-img"
-                  width="100px"
-                  height="100px"
-                  style={{ marginRight: '5px' }}
-                />
+              <Grid container direction="row" alignItems="center">
+                <Grid item>
+                  <img
+                    alt="Soccer"
+                    src="/images/Sport/Soccer.jpg"
+                    className="profile-img"
+                    width="150px"
+                    height="150px"
+                    style={{ marginRight: '5px' }}
+                  />
+                </Grid>
                 Soccer
-              </>
+              </Grid>
             )}
           />
         </Grid>
@@ -136,17 +148,19 @@ export default function Sport(prop) {
             control={<Checkbox color="secondary" name="sport" value="Swimming" />}
             onChange={prop.onChange}
             label={(
-              <>
-                <img
-                  alt="Swimming"
-                  src="/images/Sport/Swimming.jpg"
-                  className="profile-img"
-                  width="100px"
-                  height="100px"
-                  style={{ marginRight: '5px' }}
-                />
+              <Grid container direction="row" alignItems="center">
+                <Grid item>
+                  <img
+                    alt="Swimming"
+                    src="/images/Sport/Swimming.jpg"
+                    className="profile-img"
+                    width="150px"
+                    height="150px"
+                    style={{ marginRight: '5px' }}
+                  />
+                </Grid>
                 Swimming
-              </>
+              </Grid>
             )}
           />
         </Grid>
@@ -156,17 +170,19 @@ export default function Sport(prop) {
             control={<Checkbox color="secondary" name="sport" value="Tennis" />}
             onChange={prop.onChange}
             label={(
-              <>
-                <img
-                  alt="Tennis"
-                  src="/images/Sport/Tennis.jpg"
-                  className="profile-img"
-                  width="100px"
-                  height="100px"
-                  style={{ marginRight: '5px' }}
-                />
+              <Grid container direction="row" alignItems="center">
+                <Grid item>
+                  <img
+                    alt="Tennis"
+                    src="/images/Sport/Tennis.jpg"
+                    className="profile-img"
+                    width="150px"
+                    height="150px"
+                    style={{ marginRight: '5px' }}
+                  />
+                </Grid>
                 Tennis
-              </>
+              </Grid>
             )}
           />
         </Grid>
@@ -177,17 +193,19 @@ export default function Sport(prop) {
             control={<Checkbox color="secondary" name="sport" value="Track Filed" />}
             onChange={prop.onChange}
             label={(
-              <>
-                <img
-                  alt="Track_filed"
-                  src="/images/Sport/Track_filed.jpg"
-                  className="profile-img"
-                  width="100px"
-                  height="100px"
-                  style={{ marginRight: '5px' }}
-                />
-                Track&filed
-              </>
+              <Grid container direction="row" alignItems="center">
+                <Grid item>
+                  <img
+                    alt="Track_field"
+                    src="/images/Sport/Track_filed.jpg"
+                    className="profile-img"
+                    width="150px"
+                    height="150px"
+                    style={{ marginRight: '5px' }}
+                  />
+                </Grid>
+                Track&Field
+              </Grid>
             )}
           />
         </Grid>

@@ -4,7 +4,6 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListSubheader from '@material-ui/core/ListSubheader';
 import DashboardIcon from '@material-ui/icons/Dashboard';
-import ReceiptIcon from '@material-ui/icons/Receipt';
 import PeopleIcon from '@material-ui/icons/People';
 import BarChartIcon from '@material-ui/icons/BarChart';
 import LayersIcon from '@material-ui/icons/Layers';
@@ -21,9 +20,9 @@ export const mainListItems = (
     </ListItem>
     <ListItem button>
       <ListItemIcon>
-        <ReceiptIcon />
+        <AssignmentIcon />
       </ListItemIcon>
-      <ListItemText href="/SurveyBlog" primary="Surveys" />
+      <ListItemText primary="Survey" />
     </ListItem>
     <ListItem button>
       <ListItemIcon>
@@ -31,11 +30,11 @@ export const mainListItems = (
       </ListItemIcon>
       <ListItemText primary="Participants" />
     </ListItem>
-    <ListItem button>
+    <ListItem button component="a" href="/SurveyBlog">
       <ListItemIcon>
         <BarChartIcon />
       </ListItemIcon>
-      <ListItemText primary="Reports" />
+      <ListItemText primary="Survey Reports" />
     </ListItem>
     <ListItem button>
       <ListItemIcon>

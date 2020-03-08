@@ -16,17 +16,19 @@ export default function Art(prop) {
             control={<Checkbox color="secondary" name="art" value="Beading" />}
             onChange={prop.onChange}
             label={(
-              <>
-                <img
-                  alt="beading"
-                  src="/images/art_craft/beading.jpg"
-                  className="profile-img"
-                  width="100px"
-                  height="100px"
-                  style={{ marginRight: '5px' }}
-                />
+              <Grid container direction="row" alignItems="center">
+                <Grid item>
+                  <img
+                    alt="beading"
+                    src="/images/art_craft/beading.jpg"
+                    className="profile-img"
+                    width="150px"
+                    height="150px"
+                    style={{ marginRight: '5px' }}
+                  />
+                </Grid>
                 Beading
-              </>
+              </Grid>
             )}
           />
         </Grid>
@@ -36,17 +38,19 @@ export default function Art(prop) {
             control={<Checkbox color="secondary" name="art" value="clay modeling" />}
             onChange={prop.onChange}
             label={(
-              <>
-                <img
-                  alt="clay modeling"
-                  src="/images/art_craft/clay_modeling.jpg"
-                  className="profile-img"
-                  width="100px"
-                  height="100px"
-                  style={{ marginRight: '5px' }}
-                />
+              <Grid container direction="row" alignItems="center">
+                <Grid item>
+                  <img
+                    alt="clay modeling"
+                    src="/images/art_craft/clay_modeling.jpg"
+                    className="profile-img"
+                    width="150px"
+                    height="150px"
+                    style={{ marginRight: '5px' }}
+                  />
+                </Grid>
                 Clay Modeling
-              </>
+              </Grid>
             )}
           />
         </Grid>
@@ -56,17 +60,19 @@ export default function Art(prop) {
             control={<Checkbox color="secondary" name="art" value="coloring" />}
             onChange={prop.onChange}
             label={(
-              <>
-                <img
-                  alt="coloring"
-                  src="/images/art_craft/coloring.jpg"
-                  className="profile-img"
-                  width="100px"
-                  height="100px"
-                  style={{ marginRight: '5px' }}
-                />
+              <Grid container direction="row" alignItems="center">
+                <Grid item>
+                  <img
+                    alt="coloring"
+                    src="/images/art_craft/coloring.jpg"
+                    className="profile-img"
+                    width="150px"
+                    height="150px"
+                    style={{ marginRight: '5px' }}
+                  />
+                </Grid>
                 Coloring
-              </>
+              </Grid>
             )}
           />
         </Grid>
@@ -76,17 +82,19 @@ export default function Art(prop) {
             control={<Checkbox color="secondary" name="art" value="Crochet" />}
             onChange={prop.onChange}
             label={(
-              <>
-                <img
-                  alt="Crochet"
-                  src="/images/art_craft/crochet.png"
-                  className="profile-img"
-                  width="100px"
-                  height="100px"
-                  style={{ marginRight: '5px' }}
-                />
+              <Grid container direction="row" alignItems="center">
+                <Grid item>
+                  <img
+                    alt="Crochet"
+                    src="/images/art_craft/crochet.png"
+                    className="profile-img"
+                    width="150px"
+                    height="150px"
+                    style={{ marginRight: '5px' }}
+                  />
+                </Grid>
                 Crochet
-              </>
+              </Grid>
             )}
           />
         </Grid>
@@ -96,17 +104,19 @@ export default function Art(prop) {
             control={<Checkbox color="secondary" name="art" value="drawing" />}
             onChange={prop.onChange}
             label={(
-              <>
-                <img
-                  alt="drawing"
-                  src="/images/art_craft/drawing.png"
-                  className="profile-img"
-                  width="100px"
-                  height="100px"
-                  style={{ marginRight: '5px' }}
-                />
+              <Grid container direction="row" alignItems="center">
+                <Grid item>
+                  <img
+                    alt="drawing"
+                    src="/images/art_craft/drawing.png"
+                    className="profile-img"
+                    width="150px"
+                    heightDrawing="150px"
+                    style={{ marginRight: '5px' }}
+                  />
+                </Grid>
                 Drawing
-              </>
+              </Grid>
             )}
           />
         </Grid>
@@ -116,17 +126,19 @@ export default function Art(prop) {
             control={<Checkbox color="secondary" name="art" value="Painting" />}
             onChange={prop.onChange}
             label={(
-              <>
-                <img
-                  alt="Painting"
-                  src="/images/art_craft/Painting.jpg"
-                  className="profile-img"
-                  width="100px"
-                  height="100px"
-                  style={{ marginRight: '5px' }}
-                />
+              <Grid container direction="row" alignItems="center">
+                <Grid item>
+                  <img
+                    alt="Painting"
+                    src="/images/art_craft/Painting.jpg"
+                    className="profile-img"
+                    width="150px"
+                    height="150px"
+                    style={{ marginRight: '5px' }}
+                  />
+                </Grid>
                 Painting
-              </>
+              </Grid>
             )}
           />
         </Grid>

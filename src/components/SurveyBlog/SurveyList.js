@@ -2,57 +2,76 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
+import { useQuery } from '@apollo/react-hooks';
+import { gql } from 'apollo-boost';
 import Container from '@material-ui/core/Container';
 import Header from './Header';
 import SurveyPost from './SurveyPost';
-import Footer from './Footer';
 
-
-// eslint-disable-next-line no-unused-vars
 const useStyles = makeStyles((theme) => ({
   mainGrid: {
+    marginTop: theme.spacing(5),
+  },
+
+  appBar: {
+    position: 'relative',
+  },
+
+  layout: {
+    width: 'auto',
+    marginLeft: theme.spacing(4),
+    marginRight: theme.spacing(0),
+    [theme.breakpoints.up(600 + theme.spacing(2) * 2)]: {
+      width: 800,
+      marginLeft: 'auto',
+      marginRight: 'auto',
+    },
+  },
+  paper: {
     marginTop: theme.spacing(3),
+    marginBottom: theme.spacing(3),
+    padding: theme.spacing(2),
+    [theme.breakpoints.up(600 + theme.spacing(3) * 2)]: {
+      marginTop: theme.spacing(6),
+      marginBottom: theme.spacing(6),
+      padding: theme.spacing(3),
+    },
   },
 }));
 
-// eslint-disable-next-line no-unused-vars
-const surveyPost = [
-  {
-    title: 'A Survey Form',
-    date: 'Nov 12',
-    description:
-      'This is a wider card with supporting text below as a natural lead-in to additional content.',
-    image: 'https://source.unsplash.com/random',
-    imageText: 'Image Text',
-  },
-  {
-    title: 'B Survey Form',
-    date: 'Nov 11',
-    description:
-      'This is a wider card with supporting text below as a natural lead-in to additional content.',
-    image: 'https://source.unsplash.com/random',
-    imageText: 'Image Text',
-  },
-];
+const ThirtyDaysAgo = new Date(new Date() - 1000 * 60 * 60 * 24 * 30);
 
+const viewSurveys = gql`
+    query surveys($date: String!) {
+      surveys(date: $date) {
+        name
+        createdAt
+      }
+    }
+`;
 
-// eslint-disable-next-line arrow-body-style
 export const SurveyList = () => {
-  // eslint-disable-next-line no-unused-expressions
+  const classes = useStyles();
+  const { loading, error, data } = useQuery(viewSurveys, {
+    variables: {
+      date: ThirtyDaysAgo,
+    },
+  });
+  if (loading) { return <div>Loading…</div>; }
+  if (error) { return <div>Error</div>; }
   return (
     <>
       <CssBaseline />
       <Container maxWidth="lg">
-        <Header title="Blog" />
+        <Header title="Survey Report" />
         <main>
-          <Grid container spacing={4}>
-            {surveyPost.map((post) => (
-              <SurveyPost key={post.title} post={post} />
+          <Grid container spacing={4} className={classes.mainGrid}>
+            {data.surveys.map((post) => (
+              <SurveyPost name={post.name} date={post.createdAt} href="/SurveyTable" />
             ))}
           </Grid>
         </main>
       </Container>
-      <Footer title="Footer" description="Something here to give the footer a purpose!" />
     </>
   );
 };
