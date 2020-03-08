@@ -4,7 +4,7 @@ import Typography from '@material-ui/core/Typography';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 
-export default function Art() {
+export default function Art(prop) {
   return (
     <>
       <Typography variant="h6" gutterBottom>
@@ -13,7 +13,8 @@ export default function Art() {
       <Grid container spacing={3}>
         <Grid item xs={12}>
           <FormControlLabel
-            control={<Checkbox color="secondary" name="art" value="yes" />}
+            control={<Checkbox color="secondary" name="art" value="Beading" />}
+            onChange={prop.onChange}
             label={(
               <Grid container direction="row" alignItems="center">
                 <Grid item>
@@ -34,7 +35,8 @@ export default function Art() {
 
         <Grid item xs={12}>
           <FormControlLabel
-            control={<Checkbox color="secondary" name="art" value="yes" />}
+            control={<Checkbox color="secondary" name="art" value="clay modeling" />}
+            onChange={prop.onChange}
             label={(
               <Grid container direction="row" alignItems="center">
                 <Grid item>
@@ -55,7 +57,8 @@ export default function Art() {
 
         <Grid item xs={12}>
           <FormControlLabel
-            control={<Checkbox color="secondary" name="art" value="yes" />}
+            control={<Checkbox color="secondary" name="art" value="coloring" />}
+            onChange={prop.onChange}
             label={(
               <Grid container direction="row" alignItems="center">
                 <Grid item>
@@ -76,7 +79,8 @@ export default function Art() {
 
         <Grid item xs={12}>
           <FormControlLabel
-            control={<Checkbox color="secondary" name="art" value="yes" />}
+            control={<Checkbox color="secondary" name="art" value="Crochet" />}
+            onChange={prop.onChange}
             label={(
               <Grid container direction="row" alignItems="center">
                 <Grid item>
@@ -97,7 +101,8 @@ export default function Art() {
 
         <Grid item xs={12}>
           <FormControlLabel
-            control={<Checkbox color="secondary" name="art" value="yes" />}
+            control={<Checkbox color="secondary" name="art" value="drawing" />}
+            onChange={prop.onChange}
             label={(
               <Grid container direction="row" alignItems="center">
                 <Grid item>
@@ -118,7 +123,8 @@ export default function Art() {
 
         <Grid item xs={12}>
           <FormControlLabel
-            control={<Checkbox color="secondary" name="art" value="yes" />}
+            control={<Checkbox color="secondary" name="art" value="Painting" />}
+            onChange={prop.onChange}
             label={(
               <Grid container direction="row" alignItems="center">
                 <Grid item>
