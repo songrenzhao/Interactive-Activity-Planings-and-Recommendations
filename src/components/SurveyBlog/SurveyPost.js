@@ -6,7 +6,6 @@ import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardContent from '@material-ui/core/CardContent';
 
-
 const useStyles = makeStyles({
   card: {
     display: 'flex',
@@ -25,7 +24,7 @@ export default function SurveyPost(prop) {
   const classes = useStyles();
   return (
     <Grid item xs={12} md={6}>
-      <CardActionArea component="a" href="/SurveyTable">
+      <CardActionArea component="a" href={`/SurveyTable?query=${name}&createdAt=${parseInt(date, 10) - 1}`}>
         <Card className={classes.card}>
           <div className={classes.cardDetails}>
             <CardContent>

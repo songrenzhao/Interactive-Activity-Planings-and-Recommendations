@@ -8,6 +8,8 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
+import { useQuery } from '@apollo/react-hooks';
+import { gql } from 'apollo-boost';
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
@@ -27,20 +29,20 @@ const StyledTableRow = withStyles((theme) => ({
   },
 }))(TableRow);
 
-function createData(Questions, Answer1, Answer2, Answer3, Answer4) {
-  return {
-    Questions, Answer1, Answer2, Answer3, Answer4,
-  };
-}
+// function createData(Questions, Answer1, Answer2, Answer3, Answer4) {
+//   return {
+//     Questions, Answer1, Answer2, Answer3, Answer4,
+//   };
+// }
 
-const rows = [
-  createData('Locations', 'Apple', 'Samsung', 'GameStop', 'Mcdonalds'),
-  createData('Food', 'Popeyes', 'Burger King', 'Pizza', 'Wendys'),
-  createData('Sport', 'Basketball', 'FootBall', 'Skateboard', 'Swimming'),
-  createData('Art&craft', 'Drawing', 'Clay Modeling', 'Painting', 'Beading'),
-  createData('Health&Fitness', 'Exercising', 'Health Cooking Class', 'Meditation', 'Yoga'),
-  createData('Performing_Art', 'Dancing'),
-];
+// const rows = [
+//   createData('Locations', 'Apple', 'Samsung', 'GameStop', 'Mcdonalds'),
+//   createData('Food', 'Popeyes', 'Burger King', 'Pizza', 'Wendys'),
+//   createData('Sport', 'Basketball', 'FootBall', 'Skateboard', 'Swimming'),
+//   createData('Art&craft', 'Drawing', 'Clay Modeling', 'Painting', 'Beading'),
+//   createData('Health&Fitness', 'Exercising', 'Health Cooking Class', 'Meditation', 'Yoga'),
+//   createData('Performing_Art', 'Dancing'),
+// ];
 
 const useStyles = makeStyles((theme) => ({
   table: {
@@ -52,7 +54,7 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: theme.spacing(4),
     marginRight: theme.spacing(0),
     [theme.breakpoints.up(600 + theme.spacing(2) * 2)]: {
-      width: 800,
+      width: 1000,
       marginLeft: 'auto',
       marginRight: 'auto',
     },
@@ -67,12 +69,36 @@ const useStyles = makeStyles((theme) => ({
       padding: theme.spacing(3),
     },
   },
-
 }));
+
+const viewSurveys = gql`
+  query surveys($name: String, $date: String!) {
+      surveys(name: $name, date: $date) {
+        results {
+          question
+          answer
+        }
+      }
+  }
+`;
 
 export const SurveyTable = () => {
   const classes = useStyles();
+  const { search } = window.location;
+  const params = new URLSearchParams(search);
+  const name = params.get('query');
+  const createdAt = params.get('createdAt');
+  const { loading, error, data } = useQuery(viewSurveys, {
+    variables: {
+      name,
+      date: new Date(parseInt(createdAt, 10) - 1),
+    },
+  });
 
+  if (loading) { return <div>Loading…</div>; }
+  if (error) { return <div>Error</div>; }
+  const [surveys] = data.surveys;
+  const { results } = surveys;
   return (
     <main className={classes.layout}>
       <Paper className={classes.paper}>
@@ -88,18 +114,28 @@ export const SurveyTable = () => {
                 <StyledTableCell align="left">Answer2</StyledTableCell>
                 <StyledTableCell align="left">Answer3</StyledTableCell>
                 <StyledTableCell align="left">Answer4</StyledTableCell>
+                <StyledTableCell align="left">Answer5</StyledTableCell>
+                <StyledTableCell align="left">Answer6</StyledTableCell>
+                <StyledTableCell align="left">Answer7</StyledTableCell>
+                <StyledTableCell align="left">Answer8</StyledTableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-              {rows.map((row) => (
-                <StyledTableRow key={row.Questions}>
+              {results.map((result) => (
+                <StyledTableRow key={results.question}>
                   <StyledTableCell component="th" scope="row">
-                    {row.Questions}
+                    {result.question}
                   </StyledTableCell>
-                  <StyledTableCell align="left">{row.Answer1}</StyledTableCell>
-                  <StyledTableCell align="left">{row.Answer2}</StyledTableCell>
+                  {result.answer.map((answer) => (
+                    <StyledTableCell align="left">{answer}</StyledTableCell>
+                  ))}
+                  {/* <StyledTableCell align="left">{row.Answer2}</StyledTableCell>
                   <StyledTableCell align="left">{row.Answer3}</StyledTableCell>
                   <StyledTableCell align="left">{row.Answer4}</StyledTableCell>
+                  <StyledTableCell align="left">{row.Answer5}</StyledTableCell>
+                  <StyledTableCell align="left">{row.Answer6}</StyledTableCell>
+                  <StyledTableCell align="left">{row.Answer7}</StyledTableCell>
+                  <StyledTableCell align="left">{row.Answer8}</StyledTableCell> */}
                 </StyledTableRow>
               ))}
             </TableBody>
