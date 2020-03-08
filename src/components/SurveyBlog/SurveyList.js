@@ -67,7 +67,7 @@ export const SurveyList = () => {
         <main>
           <Grid container spacing={4} className={classes.mainGrid}>
             {data.surveys.map((post) => (
-              <SurveyPost name={post.name} date={post.createdAt} href="/SurveyTable" />
+              <SurveyPost name={post.name} date={post.createdAt} href={`/SurveyTable?name=${post.name}`} />
             ))}
           </Grid>
         </main>
