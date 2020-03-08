@@ -18,6 +18,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import { mainListItems, secondaryListItems } from '../Lists';
 import useStyles from './style';
+import { SurveyList } from '../SurveyBlog/SurveyList';
 
 function Copyright() {
   return (
@@ -39,7 +40,7 @@ export const NavBar = () => {
   const handleDrawer = () => {
     setOpen(!open);
   };
-  const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
+
 
   return (
     <div className={classes.root}>
@@ -82,14 +83,10 @@ export const NavBar = () => {
         <div className={classes.appBarSpacer} />
         <Container maxWidth="lg" className={classes.container}>
           <Grid container spacing={3}>
-            <Grid item xs={12} md={8} lg={9}>
-              <Paper className={fixedHeightPaper}> asdf </Paper>
-            </Grid>
-            <Grid item xs={12} md={4} lg={3}>
-              <Paper className={fixedHeightPaper} />
-            </Grid>
-            <Grid item xs={12}>
-              <Paper className={classes.paper} />
+            <Grid item xs={12} md={12} lg={12}>
+              <Paper className={Paper}>
+                <SurveyList />
+              </Paper>
             </Grid>
           </Grid>
           <Box pt={4}>
