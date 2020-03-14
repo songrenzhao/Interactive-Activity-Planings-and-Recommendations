@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
-import axios from 'axios';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import Link from '@material-ui/core/Link';
@@ -10,6 +9,8 @@ import Paper from '@material-ui/core/Paper';
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
+import { useMutation } from '@apollo/react-hooks';
+import { gql } from 'apollo-boost';
 import useStyles from './style';
 
 const Copyright = () => (
@@ -24,35 +25,24 @@ const Copyright = () => (
   </Typography>
 );
 
-const preprarePayload = (formData) => {
-  const {
-    name, username, email, password,
-  } = formData;
-  const payload = {
-    url: 'https://iapr.herokuapp.com/graphql',
-    method: 'post',
-    data: {
-      query: `
-        mutation {
-          signUp(name: "${name}", username: "${username}", email: "${email}", password: "${password}") {
-            status
-          }
-        }
-      `,
-    },
-  };
-  return payload;
-};
+const SIGNUP = gql`
+  mutation signUp($name: String!, $username: String!, $email: String!, $password: String!) {
+    signUp(name: $name, username: $username, email: $email, password: $password) {
+      status
+    }
+  }
+`;
 
 export const SignUpForm = () => {
   const classes = useStyles();
+  const [isSignedUp, setIsSignedUp] = useState(false);
+  const [signUp] = useMutation(SIGNUP);
   const [formData, setFormData] = useState({
     name: '',
     username: '',
     email: '',
     password: '',
   });
-  const [isSignedUp, setIsSignedUp] = useState(false);
 
   const handleChange = (event) => {
     const updatedForm = { ...formData };
@@ -62,10 +52,16 @@ export const SignUpForm = () => {
 
   const signUpRequest = async () => {
     try {
-      const reqInfo = preprarePayload(formData);
-      const response = await axios(reqInfo);
-      const isSignUpSuccess = response.status === 200;
-      if (isSignUpSuccess) {
+      const { data } = await signUp({
+        variables: {
+          name: formData.name,
+          username: formData.username,
+          email: formData.email,
+          password: formData.password,
+        },
+      });
+      const { status } = data.signUp;
+      if (status) {
         setIsSignedUp(true);
       }
     } catch (error) {
