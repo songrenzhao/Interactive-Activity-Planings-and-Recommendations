@@ -15,20 +15,9 @@ export const Dashboard = () => {
       <div className={classes.root}>
         <NavBar />
         <main className={classes.content}>
-          <div className={classes.appBarSpacer} />
-          <Container maxWidth="lg" className={classes.container}>
-            <Grid container spacing={3}>
-              <Grid item xs={12} md={12} lg={12}>
-                <Paper className={Paper}>
-                  <DashboardRouter />
-                  {/* <SurveyList /> */}
-                </Paper>
-              </Grid>
-            </Grid>
-            <Box pt={4}>
-              {/* <Copyright /> */}
-            </Box>
-          </Container>
+          <Paper className={Paper}>
+            <DashboardRouter />
+          </Paper>
         </main>
       </div>
     </Grid>
