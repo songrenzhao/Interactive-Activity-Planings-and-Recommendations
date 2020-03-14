@@ -22,9 +22,6 @@ const App = () => (
       <Route path="/signinparticipant" component={SignInParticipant} />
       <Route path="/signup" component={SignUp} />
       <Route path="/dashboard" component={Dashboard} />
-      <Route path="/Survey" component={Survey} />
-      <Route path="/SurveyBlog" component={SurveyBlog} />
-      <Route path="/SurveyTable" component={SurveyTable} />
     </Router>
   </ApolloProvider>
 );
