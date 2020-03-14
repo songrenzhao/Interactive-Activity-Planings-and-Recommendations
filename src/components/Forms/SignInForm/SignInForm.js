@@ -38,12 +38,13 @@ const SIGNIN = gql`
 
 export const SignInForm = () => {
   const classes = useStyles();
+  const [isSignedIn, setIsSignedIn] = useState(false);
+  const [signIn] = useMutation(SIGNIN);
   const [formData, setFormData] = useState({
     username: '',
     password: '',
   });
-  const [isSignedIn, setIsSignedIn] = useState(false);
-  const [signIn] = useMutation(SIGNIN);
+
   const handleChange = (event) => {
     const updatedForm = { ...formData };
     updatedForm[event.target.name] = event.target.value;

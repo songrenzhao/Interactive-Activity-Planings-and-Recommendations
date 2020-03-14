@@ -35,21 +35,20 @@ const SIGNUP = gql`
 
 export const SignUpForm = () => {
   const classes = useStyles();
+  const [isSignedUp, setIsSignedUp] = useState(false);
+  const [signUp] = useMutation(SIGNUP);
   const [formData, setFormData] = useState({
     name: '',
     username: '',
     email: '',
     password: '',
   });
-  const [isSignedUp, setIsSignedUp] = useState(false);
 
   const handleChange = (event) => {
     const updatedForm = { ...formData };
     updatedForm[event.target.name] = event.target.value;
     setFormData(updatedForm);
   };
-
-  const [signUp] = useMutation(SIGNUP);
 
   const signUpRequest = async () => {
     try {
