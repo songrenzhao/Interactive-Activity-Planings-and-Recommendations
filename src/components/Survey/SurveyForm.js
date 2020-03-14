@@ -10,8 +10,9 @@ import StepLabel from '@material-ui/core/StepLabel';
 import Button from '@material-ui/core/Button';
 import Link from '@material-ui/core/Link';
 import cookie from 'react-cookies';
-import axios from 'axios';
 import Typography from '@material-ui/core/Typography';
+import { useMutation } from '@apollo/react-hooks';
+import { gql } from 'apollo-boost';
 import Location from './Location';
 import Sport from './Sport';
 import Food from './Food';
@@ -70,60 +71,26 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const preprarePayload = (data) => {
-  const { name, ...surveyCategories } = data;
-  const surveyCategoriesArray = Object.entries(surveyCategories);
-  const userFeedback = [];
-  surveyCategoriesArray.forEach((element) => {
-    userFeedback.push({
-      question: element[0],
-      results: Object.keys(element[1]),
-    });
-  });
-  const payload = {
-    url: 'https://iapr.herokuapp.com/graphql',
-    method: 'post',
-    data: {
-      query: `
-        mutation {
-          createSurvey(name: "${name}", results: [{
-            question: "${userFeedback[0].question}"
-            answer: ${JSON.stringify(userFeedback[0].results)}
-          }, {
-            question: "${userFeedback[1].question}"
-            answer: ${JSON.stringify(userFeedback[1].results)}
-          }, {
-            question: "${userFeedback[2].question}"
-            answer: ${JSON.stringify(userFeedback[2].results)}
-          }, {
-            question: "${userFeedback[3].question}"
-            answer: ${JSON.stringify(userFeedback[3].results)}
-          }, {
-            question: "${userFeedback[4].question}"
-            answer: ${JSON.stringify(userFeedback[4].results)}
-          }, {
-            question: "${userFeedback[5].question}"
-            answer: ${JSON.stringify(userFeedback[5].results)}
-          }]) {
-            name
-            results {
-                question
-                answer
-            }
-          }
-        }
-      `,
-    },
-  };
-  return payload;
-};
+const CREATESURVEY = gql`
+  mutation createSurvey($name: String!, $results: [resultsInput!]!) {
+    createSurvey(name: $name, results: $results) {
+      name
+      results {
+          question
+          answer
+      }
+    }
+  }
+`;
 
 const steps = ['Location', 'Food', 'Sport', 'Art&craft', 'Health&fitness', 'Performing art'];
 
 export const SurveyForm = () => {
   const classes = useStyles();
+  const [createSurvey] = useMutation(CREATESURVEY);
+  const [activeStep, setActiveStep] = React.useState(0);
   const [dataForm, setDataForm] = React.useState({
-    name: cookie.load('name'),
+    name: cookie.load('name') || 'song',
     Location: {},
     Food: {},
     Sport: {},
@@ -131,7 +98,6 @@ export const SurveyForm = () => {
     Health: {},
     Performing: {},
   });
-  const [activeStep, setActiveStep] = React.useState(0);
 
   const handleChangeForQuestion = (question) => (event) => {
     const updatedForm = { ...dataForm };
@@ -141,8 +107,21 @@ export const SurveyForm = () => {
 
   const SubmitRequest = async () => {
     try {
-      const reqInfo = preprarePayload(dataForm);
-      const response = await axios(reqInfo);
+      const { name, ...surveyCategories } = dataForm;
+      const surveyCategoriesArray = Object.entries(surveyCategories);
+      const userFeedback = [];
+      surveyCategoriesArray.forEach((element) => {
+        userFeedback.push({
+          question: element[0],
+          answer: Object.keys(element[1]),
+        });
+      });
+      const response = await createSurvey({
+        variables: {
+          name,
+          results: userFeedback,
+        },
+      });
       return response;
     } catch (error) {
       throw error;
