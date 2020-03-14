@@ -6,9 +6,6 @@ import { Home } from '../pages/home';
 import { SignIn, SignInParticipant } from '../pages/signIn';
 import { SignUp } from '../pages/signUp';
 import { Dashboard } from '../pages/dashboard';
-import { Survey } from '../pages/Survey';
-import { SurveyBlog } from '../pages/SurveyBlog';
-import { SurveyTable } from '../components/SurveyTable';
 
 const client = new ApolloClient({
   uri: 'https://iapr.herokuapp.com/graphql',
