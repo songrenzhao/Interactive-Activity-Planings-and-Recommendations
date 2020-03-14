@@ -12,7 +12,8 @@ import Paper from '@material-ui/core/Paper';
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
-import axios from 'axios';
+import { useMutation } from '@apollo/react-hooks';
+import { gql } from 'apollo-boost';
 import useStyles from './style';
 
 const Copyright = () => (
@@ -27,23 +28,13 @@ const Copyright = () => (
   </Typography>
 );
 
-const preprarePayload = (formData) => {
-  const { username, password } = formData;
-  const payload = {
-    url: 'https://iapr.herokuapp.com/graphql',
-    method: 'post',
-    data: {
-      query: `
-        mutation {
-          signIn(username: "${username}", password: "${password}") {
-            status
-          }
-        }
-      `,
-    },
-  };
-  return payload;
-};
+const SIGNIN = gql`
+  mutation signIn($username: String!, $password: String!) {
+    signIn(username: $username, password: $password) {
+      status
+    }
+  }
+`;
 
 export const SignInForm = () => {
   const classes = useStyles();
@@ -52,7 +43,7 @@ export const SignInForm = () => {
     password: '',
   });
   const [isSignedIn, setIsSignedIn] = useState(false);
-
+  const [signIn] = useMutation(SIGNIN);
   const handleChange = (event) => {
     const updatedForm = { ...formData };
     updatedForm[event.target.name] = event.target.value;
@@ -61,10 +52,15 @@ export const SignInForm = () => {
 
   const signUpRequest = async () => {
     try {
-      const reqInfo = preprarePayload(formData);
-      const response = await axios(reqInfo);
-      const isSignInSuccess = response.status === 200;
-      if (isSignInSuccess) {
+      const { data } = await signIn({
+        variables: {
+          username: formData.username,
+          password: formData.password,
+        },
+      });
+      const { status } = data.signIn;
+      console.log(status);
+      if (status) {
         setIsSignedIn(true);
       }
     } catch (error) {
