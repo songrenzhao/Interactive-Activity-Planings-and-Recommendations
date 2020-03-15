@@ -19,6 +19,6 @@ const DashboardRouter = () => {
       </Route>
     </Switch>
   );
-}
+};
 
 export default DashboardRouter;

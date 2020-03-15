@@ -34,5 +34,5 @@ export const mainListItems = (
 );
 
 export const secondaryListItems = (
-<></>
+  <></>
 );
