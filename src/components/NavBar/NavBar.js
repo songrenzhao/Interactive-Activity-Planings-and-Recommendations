@@ -12,7 +12,7 @@ import Badge from '@material-ui/core/Badge';
 // import Link from '@material-ui/core/Link';
 import MenuIcon from '@material-ui/icons/Menu';
 import NotificationsIcon from '@material-ui/icons/Notifications';
-import { mainListItems, secondaryListItems } from '../Lists';
+import { mainListItems } from '../Lists';
 import useStyles from './style';
 
 // function Copyright() {
@@ -72,7 +72,6 @@ export const NavBar = () => {
         <Divider />
         <List>{mainListItems}</List>
         <Divider />
-        <List>{secondaryListItems}</List>
       </Drawer>
     </>
   );
