@@ -166,7 +166,7 @@ export const SurveyForm = () => {
   };
 
   const handleNext = async () => {
-    if (activeStep === steps.length - 1) {
+    if (activeStep === stepsDataForm.length - 1) {
       await handleSubmit();
     }
     setActiveStep(activeStep + 1);
