@@ -6,6 +6,7 @@ import { Home } from '../pages/home';
 import { SignIn, SignInParticipant } from '../pages/signIn';
 import { SignUp } from '../pages/signUp';
 import { Dashboard } from '../pages/dashboard';
+import { Survey } from '../pages/Survey';
 
 const client = new ApolloClient({
   uri: 'https://iapr.herokuapp.com/graphql',
@@ -19,6 +20,7 @@ const App = () => (
       <Route path="/signinparticipant" component={SignInParticipant} />
       <Route path="/signup" component={SignUp} />
       <Route path="/dashboard" component={Dashboard} />
+      <Route path="/survey" component={Survey} />
     </Router>
   </ApolloProvider>
 );
