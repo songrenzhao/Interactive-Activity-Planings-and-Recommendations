@@ -81,6 +81,21 @@ export const CreateSurvey = () => {
     setFormData(updatedFormData);
   };
 
+  const handleMoreTab = () => {
+    const updatedFormData = formData;
+    updatedFormData.push({
+      title: '',
+      description: '',
+      limit: '',
+      question: '',
+      selections: [{
+        choice: '',
+        url: '',
+      }],
+    });
+    setFormData(updatedFormData);
+  };
+
   const TabPanel = ({ data, index }) => {
     const {
       title, description, limit, question, selections,
@@ -180,10 +195,10 @@ export const CreateSurvey = () => {
             value={activeIndex}
             onChange={handleTabChange}
           >
-            <Tab label="Item One" />
-            <Tab label="Item Two" />
-            <Tab label="Item Three" />
-            <Fab size="small" color="primary" aria-label="add">
+            {formData.map((_, index) => (
+              <Tab label={`Category ${index}`} />
+            ))}
+            <Fab size="small" color="primary" aria-label="add" onClick={handleMoreTab}>
               <AddIcon />
             </Fab>
           </Tabs>
