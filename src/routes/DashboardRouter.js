@@ -1,27 +1,35 @@
 import React from 'react';
+import { ApolloProvider } from '@apollo/react-hooks';
+import ApolloClient from 'apollo-boost';
 import { Route, Switch, useRouteMatch } from 'react-router-dom';
-import { SurveyForm } from '../components/Survey';
 import { SurveyList } from '../components/SurveyBlog';
 import { SurveyTable } from '../components/SurveyTable';
 import { CreateParticipant } from '../components/CreateParticipant';
+import { CreateSurvey } from '../components/Forms/CreateSurveyForm';
+
+const client = new ApolloClient({
+  uri: 'https://iapr.herokuapp.com/graphql',
+});
 
 const DashboardRouter = () => {
   const { path } = useRouteMatch();
   return (
-    <Switch>
-      <Route exact path={path}>
-        <SurveyList />
-      </Route>
-      <Route path={`${path}/form`}>
-        <SurveyForm />
-      </Route>
-      <Route path={`${path}/table`}>
-        <SurveyTable />
-      </Route>
-      <Route path={`${path}/participant`}>
-        <CreateParticipant />
-      </Route>
-    </Switch>
+    <ApolloProvider client={client}>
+      <Switch>
+        <Route exact path={path}>
+          <SurveyList />
+        </Route>
+        <Route path={`${path}/form`}>
+          <CreateSurvey />
+        </Route>
+        <Route path={`${path}/table`}>
+          <SurveyTable />
+        </Route>
+        <Route path={`${path}/participant`}>
+          <CreateParticipant />
+        </Route>
+      </Switch>
+    </ApolloProvider>
   );
 };
 
