@@ -35,12 +35,12 @@ export const SignInParticipantForm = () => {
   return (
     <Grid container component="main" className={classes.root}>
       <CssBaseline />
-      <Grid item xs={false} sm={4} md={7} className={classes.image} />
+      <Grid item xs={false} sm={4} md={6} className={classes.image} />
       <Grid
         container
         xs={12}
         sm={8}
-        md={5}
+        md={6}
         spacing={2}
         component={Paper}
         justify="space-evenly"
@@ -50,7 +50,7 @@ export const SignInParticipantForm = () => {
         className={classes.signInContainer}
       >
         {data.participants.map((value) => (
-          <Grid item xs={3} md={3}>
+          <Grid item xs={6} md={6}>
             <CardActionArea component="a" href="/survey" onClick={handleChange(value.name)}>
               <Card className={classes.card}>
                 <div className={classes.cardDetails}>

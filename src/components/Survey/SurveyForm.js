@@ -1,4 +1,5 @@
-import React from 'react';
+/* eslint-disable react/no-array-index-key */
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import AppBar from '@material-ui/core/AppBar';
@@ -11,14 +12,9 @@ import Button from '@material-ui/core/Button';
 import Link from '@material-ui/core/Link';
 import cookie from 'react-cookies';
 import Typography from '@material-ui/core/Typography';
-import { useMutation } from '@apollo/react-hooks';
+import { useMutation, useQuery } from '@apollo/react-hooks';
 import { gql } from 'apollo-boost';
-import Location from './Location';
-import Sport from './Sport';
-import Food from './Food';
-import Health from './Health';
-import Art from './Art';
-import Performing from './Performing';
+import { SurveyFormSteps } from './SurveyFormSteps';
 
 function Copyright() {
   return (
@@ -71,74 +67,82 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const CREATESURVEY = gql`
-  mutation createSurvey($name: String!, $results: [resultsInput!]!) {
-    createSurvey(name: $name, results: $results) {
+const CREATESURVEYRESPONSE = gql`
+  mutation createSurveyResponse($name: String!, $results: [resultsInput!]!) {
+    createSurveyResponse(name: $name, results: $results) {
       name
       results {
-          question
-          answer
+        question
+        answer
       }
     }
   }
 `;
 
-const steps = ['Location', 'Food', 'Sport', 'Art&craft', 'Health&fitness', 'Performing art'];
+const VIEWSURVEYFORM = gql`
+  {
+    viewSurveyForm {
+      title
+      description
+      limit
+      question
+      selections {
+          choice
+          url
+      }
+    }
+  }
+`;
 
 export const SurveyForm = () => {
   const classes = useStyles();
-  const [createSurvey] = useMutation(CREATESURVEY);
-  const [activeStep, setActiveStep] = React.useState(0);
-  const [dataForm, setDataForm] = React.useState({
-    name: cookie.load('name') || 'song',
-    Location: {},
-    Food: {},
-    Sport: {},
-    Art: {},
-    Health: {},
-    Performing: {},
+  const [activeStep, setActiveStep] = useState(0);
+  const [stepsDataForm, setStepsDataForm] = useState([]);
+  const [createSurveyResponse] = useMutation(CREATESURVEYRESPONSE);
+  const { error, loading } = useQuery(VIEWSURVEYFORM, {
+    onCompleted: (data) => {
+      setStepsDataForm(data.viewSurveyForm);
+    },
   });
 
-  const handleChangeForQuestion = (question) => (event) => {
-    const updatedForm = { ...dataForm };
-    updatedForm[question][event.target.value] = event.target.checked;
-    setDataForm(updatedForm);
+  const handleChangeSelections = (selectionIndex) => (event) => {
+    const updatedForm = [...stepsDataForm];
+    updatedForm[activeStep].selections[selectionIndex].selected = event.target.checked;
+    console.log(updatedForm);
+    setStepsDataForm(updatedForm);
   };
 
   const SubmitRequest = async () => {
     try {
-      const { name, ...surveyCategories } = dataForm;
-      const surveyCategoriesArray = Object.entries(surveyCategories);
-      const userFeedback = [];
-      surveyCategoriesArray.forEach((element) => {
-        userFeedback.push({
-          question: element[0],
-          answer: Object.keys(element[1]),
-        });
+      const filteredResponse = stepsDataForm.map((step) => {
+        const filteredAnswers = step.selections.filter((selection) => !!selection.selected)
+          .map((answers) => answers.choice);
+        const output = { question: step.title, answer: filteredAnswers };
+        return output;
       });
-      const response = await createSurvey({
+      const { data } = await createSurveyResponse({
         variables: {
-          name,
-          results: userFeedback,
+          name: cookie.load('name'),
+          results: filteredResponse,
         },
       });
-      return response;
-    } catch (error) {
-      throw error;
+      console.log(data.createSurveyResponse);
+    } catch (e) {
+      throw e;
     }
   };
 
   const handleSubmit = async () => {
     try {
       await SubmitRequest();
-    } catch (error) {
+    } catch (e) {
       const newError = { isError: true, errorMsg: 'Internal Service Error' };
       console.log(newError);
     }
   };
 
   const handleNext = async () => {
-    if (activeStep === steps.length - 1) {
+    if (activeStep === stepsDataForm.length - 1) {
       await handleSubmit();
     }
     setActiveStep(activeStep + 1);
@@ -148,25 +152,8 @@ export const SurveyForm = () => {
     setActiveStep(activeStep - 1);
   };
 
-  const getStepContent = (step) => {
-    switch (step) {
-    case 0:
-      return <Location onChange={handleChangeForQuestion('Location')} />;
-    case 1:
-      return <Food onChange={handleChangeForQuestion('Food')} />;
-    case 2:
-      return <Sport onChange={handleChangeForQuestion('Sport')} />;
-    case 3:
-      return <Art onChange={handleChangeForQuestion('Art')} />;
-    case 4:
-      return <Health onChange={handleChangeForQuestion('Health')} />;
-    case 5:
-      return <Performing onChange={handleChangeForQuestion('Performing')} />;
-    default:
-      throw new Error('Unknown step');
-    }
-  };
-
+  if (loading) { return <div>Loading…</div>; }
+  if (error) { return <div>Error</div>; }
   return (
     <>
       <CssBaseline />
@@ -192,23 +179,29 @@ export const SurveyForm = () => {
             Survey
           </Typography>
           <Stepper activeStep={activeStep} className={classes.stepper}>
-            {steps.map((label) => (
-              <Step key={label}>
-                <StepLabel>{label}</StepLabel>
+            {stepsDataForm.map(({ title }, index) => (
+              <Step key={index}>
+                <StepLabel>{title}</StepLabel>
               </Step>
             ))}
           </Stepper>
           <>
-            {activeStep === steps.length ? (
+            {activeStep === stepsDataForm.length ? (
               <>
                 <Typography variant="h5" gutterBottom>
                   Thank you for the survey.
                 </Typography>
-
               </>
             ) : (
               <>
-                {getStepContent(activeStep)}
+                {
+                  stepsDataForm.length ? (
+                    <SurveyFormSteps
+                      dataForm={stepsDataForm[activeStep]}
+                      onChange={handleChangeSelections}
+                    />
+                  ) : 'Form not set up yet!'
+                }
                 <div className={classes.buttons}>
                   {activeStep !== 0 && (
                     <Button onClick={handleBack} className={classes.button}>
@@ -221,7 +214,7 @@ export const SurveyForm = () => {
                     onClick={handleNext}
                     className={classes.button}
                   >
-                    {activeStep === steps.length - 1 ? 'Submit Survey' : 'Next'}
+                    {activeStep === stepsDataForm.length - 1 ? 'Submit Survey' : 'Next'}
                   </Button>
                 </div>
               </>
