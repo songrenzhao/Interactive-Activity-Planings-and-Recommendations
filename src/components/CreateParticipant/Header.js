@@ -4,6 +4,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import PersonAddIcon from '@material-ui/icons/PersonAdd';
 import Typography from '@material-ui/core/Typography';
+import CreateModal from '../CreateModal/CreateModal';
 
 const useStyles = makeStyles((theme) => ({
   toolbar: {
@@ -38,7 +39,7 @@ export default function Header() {
         >
           Participants
         </Typography>
-        <IconButton>
+        <IconButton onClick={CreateModal}>
           <PersonAddIcon />
         </IconButton>
       </Toolbar>
