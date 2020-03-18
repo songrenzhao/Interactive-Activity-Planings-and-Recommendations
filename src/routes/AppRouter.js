@@ -9,7 +9,7 @@ import { Dashboard } from '../pages/dashboard';
 import { Survey } from '../pages/Survey';
 
 const client = new ApolloClient({
-  uri: 'http://iapr.herokuapp.com/graphql',
+  uri: 'https://iapr.herokuapp.com/graphql',
 });
 
 const App = () => (
