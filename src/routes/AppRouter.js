@@ -8,7 +8,7 @@ import { SignUp } from '../pages/signUp';
 import { Dashboard } from '../pages/dashboard';
 
 const client = new ApolloClient({
-  uri: 'https://iapr.herokuapp.com/graphql',
+  uri: 'http://iapr.herokuapp.com/graphql',
 });
 
 const App = () => (

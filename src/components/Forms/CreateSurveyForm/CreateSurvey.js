@@ -11,12 +11,23 @@ import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
 import { Grid } from '@material-ui/core';
 import CardMedia from '@material-ui/core/CardMedia';
+import { useMutation } from '@apollo/react-hooks';
+import { gql } from 'apollo-boost';
 import useStyles from './style';
+
+const CREATESURVEYFORM = gql`
+  mutation createSurveyForm($formData: [formData!]!, $createdAt: String) {
+    createSurveyForm(formData: $formData, createdAt: $createdAt) {
+      status
+    }
+  }
+`;
 
 export const CreateSurvey = () => {
   const classes = useStyles();
   const [activeIndex, setActiveIndex] = React.useState(0);
   const [isLoading, setIsLoading] = React.useState(false);
+  const [createSurveyForm] = useMutation(CREATESURVEYFORM);
   const [formData, setFormData] = React.useState([
     {
       title: '',
@@ -57,7 +68,11 @@ export const CreateSurvey = () => {
 
   const handleFormDataChange = (category) => (event) => {
     const updatedFormData = formData;
-    updatedFormData[activeIndex][category] = event.target.value;
+    if (category === 'limit') {
+      updatedFormData[activeIndex][category] = parseInt(event.target.value, 10);
+    } else {
+      updatedFormData[activeIndex][category] = event.target.value;
+    }
     setFormData(updatedFormData);
   };
 
@@ -119,9 +134,17 @@ export const CreateSurvey = () => {
     setIsLoading(false);
   };
 
-  const submitSurvey = (e) => {
+  const submitSurvey = async (e) => {
     e.preventDefault();
     console.log(formData);
+    const { data } = await createSurveyForm({
+      variables: {
+        formData,
+        createdAt: new Date(),
+      },
+    });
+    const { status } = data.createSurveyForm;
+    console.log(status);
   };
 
   const TabPanel = ({ data, index }) => {
