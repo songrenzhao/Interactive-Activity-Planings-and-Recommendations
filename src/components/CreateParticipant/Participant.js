@@ -5,6 +5,8 @@ import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardContent from '@material-ui/core/CardContent';
+import { IconButton } from '@material-ui/core';
+import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 
 const useStyles = makeStyles({
   card: {
@@ -32,6 +34,9 @@ export default function SurveyPost(prop) {
               </Typography>
             </CardContent>
           </div>
+          <IconButton color="secondary">
+            <HighlightOffIcon />
+          </IconButton>
         </Card>
       </CardActionArea>
     </Grid>

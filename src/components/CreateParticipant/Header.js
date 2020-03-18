@@ -1,10 +1,8 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Toolbar from '@material-ui/core/Toolbar';
-import IconButton from '@material-ui/core/IconButton';
-import PersonAddIcon from '@material-ui/icons/PersonAdd';
 import Typography from '@material-ui/core/Typography';
-import CreateModal from '../CreateModal/CreateModal';
+import FormDialog from '../FormDialog/FormDialog';
 
 const useStyles = makeStyles((theme) => ({
   toolbar: {
@@ -39,9 +37,7 @@ export default function Header() {
         >
           Participants
         </Typography>
-        <IconButton onClick={CreateModal}>
-          <PersonAddIcon />
-        </IconButton>
+        <FormDialog />
       </Toolbar>
     </>
   );
