@@ -23,6 +23,7 @@ const useStyles = makeStyles((theme) => ({
   },
   card: {
     display: 'flex',
+    justifyContent: 'center',
   },
   cardDetails: {
     flex: 1,
@@ -30,8 +31,9 @@ const useStyles = makeStyles((theme) => ({
     textAlign: 'center',
   },
   cardMedia: {
+    margin: 'auto',
     height: theme.spacing(25),
-    width: theme.spacing(23),
+    width: theme.spacing(25),
   },
 }));
 

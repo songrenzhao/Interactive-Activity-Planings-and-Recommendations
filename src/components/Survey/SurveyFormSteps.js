@@ -1,29 +1,37 @@
-import React, { useState } from 'react';
+/* eslint-disable jsx-a11y/alt-text */
+/* eslint-disable react/prop-types */
+import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 
 
-export const SurveyFormSteps = ({dataForm, onChange}) => {
-
-  const { description, selections } = dataForm
+export const SurveyFormSteps = ({ dataForm, onChange }) => {
+  const { description, selections } = dataForm;
 
   return (
     <>
       <Typography variant="h6" gutterBottom>
         {description}
       </Typography>
-      {selections.map((selection, index) => 
+      {selections.map((selection, index) => (
         <Grid container spacing={3}>
           <Grid item xs={12}>
             <FormControlLabel
-              control={<Checkbox checked={selection.selected} onChange={onChange(index)} color="secondary" name="art" value="Beading" />}
+              control={(
+                <Checkbox
+                  checked={selection.selected || false}
+                  onChange={onChange(index)}
+                  color="secondary"
+                  name="art"
+                  value="Beading"
+                />
+              )}
               label={(
                 <Grid container direction="row" alignItems="center">
                   <Grid item>
                     <img
-                      alt="beading"
                       src={selection.url}
                       className="profile-img"
                       width="150px"
@@ -31,13 +39,13 @@ export const SurveyFormSteps = ({dataForm, onChange}) => {
                       style={{ marginRight: '5px' }}
                     />
                   </Grid>
-                  {selection.name}
+                  {selection.choice}
                 </Grid>
               )}
             />
           </Grid>
         </Grid>
-      )}
+      ))}
     </>
   );
-}
+};

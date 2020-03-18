@@ -1,4 +1,5 @@
-import React, {useState, useEffect} from 'react';
+/* eslint-disable react/no-array-index-key */
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import AppBar from '@material-ui/core/AppBar';
@@ -11,43 +12,9 @@ import Button from '@material-ui/core/Button';
 import Link from '@material-ui/core/Link';
 import cookie from 'react-cookies';
 import Typography from '@material-ui/core/Typography';
-import { useMutation } from '@apollo/react-hooks';
+import { useMutation, useQuery } from '@apollo/react-hooks';
 import { gql } from 'apollo-boost';
-
 import { SurveyFormSteps } from './SurveyFormSteps';
-
-const data = [
-  {
-    title: '1',
-    description: '1',
-    limit: '1',
-    selections: [{
-      name: '111',
-      url: '',
-      selected: false,
-    }],
-  },
-  {
-    title: '2',
-    description: '2',
-    limit: '2',
-    selections: [{
-      name: '2',
-      url: '2222',
-      selected: false,
-    }],
-  },
-  {
-    title: '3',
-    description: '3',
-    limit: '3',
-    selections: [{
-      name: '3',
-      url: '3333',
-      selected: false,
-    }],
-  },
-]
 
 function Copyright() {
   return (
@@ -100,66 +67,75 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const CREATESURVEY = gql`
-  mutation createSurvey($name: String!, $results: [resultsInput!]!) {
-    createSurvey(name: $name, results: $results) {
+const CREATESURVEYRESPONSE = gql`
+  mutation createSurveyResponse($name: String!, $results: [resultsInput!]!) {
+    createSurveyResponse(name: $name, results: $results) {
       name
       results {
-          question
-          answer
+        question
+        answer
       }
     }
   }
 `;
 
-const steps = ['Location', 'Food', 'Sport', 'Art&craft', 'Health&fitness', 'Performing art'];
+const VIEWSURVEYFORM = gql`
+  {
+    viewSurveyForm {
+      title
+      description
+      limit
+      question
+      selections {
+          choice
+          url
+      }
+    }
+  }
+`;
 
 export const SurveyForm = () => {
   const classes = useStyles();
-
-  const [createSurvey] = useMutation(CREATESURVEY);
-  
-  const [activeStep, setActiveStep] = useState(0)
-  const [stepsDataForm, setStepsDataForm] = useState([])
-
-  useEffect(() => {
-    setStepsDataForm(data)
-  })
+  const [activeStep, setActiveStep] = useState(0);
+  const [stepsDataForm, setStepsDataForm] = useState([]);
+  const [createSurveyResponse] = useMutation(CREATESURVEYRESPONSE);
+  const { error, loading } = useQuery(VIEWSURVEYFORM, {
+    onCompleted: (data) => {
+      setStepsDataForm(data.viewSurveyForm);
+    },
+  });
 
   const handleChangeSelections = (selectionIndex) => (event) => {
-    console.log(event)
-    const updatedForm = [ ...stepsDataForm ]
+    const updatedForm = [...stepsDataForm];
     updatedForm[activeStep].selections[selectionIndex].selected = event.target.checked;
+    console.log(updatedForm);
     setStepsDataForm(updatedForm);
   };
 
   const SubmitRequest = async () => {
-    // try {
-    //   const { name, ...surveyCategories } = stepsdAT;
-    //   const surveyCategoriesArray = Object.entries(surveyCategories);
-    //   const userFeedback = [];
-    //   surveyCategoriesArray.forEach((element) => {
-    //     userFeedback.push({
-    //       question: element[0],
-    //       answer: Object.keys(element[1]),
-    //     });
-    //   });
-    //   const response = await createSurvey({
-    //     variables: {
-    //       name,
-    //       results: userFeedback,
-    //     },
-    //   });
-    //   return response;
-    // } catch (error) {
-    //   throw error;
-    // }
+    try {
+      const filteredResponse = stepsDataForm.map((step) => {
+        const filteredAnswers = step.selections.filter((selection) => !!selection.selected)
+          .map((answers) => answers.choice);
+        const output = { question: step.title, answer: filteredAnswers };
+        return output;
+      });
+      const { data } = await createSurveyResponse({
+        variables: {
+          name: cookie.load('name'),
+          results: filteredResponse,
+        },
+      });
+      console.log(data.createSurveyResponse);
+    } catch (e) {
+      throw e;
+    }
   };
 
   const handleSubmit = async () => {
     try {
       await SubmitRequest();
-    } catch (error) {
+    } catch (e) {
       const newError = { isError: true, errorMsg: 'Internal Service Error' };
       console.log(newError);
     }
@@ -176,6 +152,8 @@ export const SurveyForm = () => {
     setActiveStep(activeStep - 1);
   };
 
+  if (loading) { return <div>Loading…</div>; }
+  if (error) { return <div>Error</div>; }
   return (
     <>
       <CssBaseline />
@@ -201,14 +179,14 @@ export const SurveyForm = () => {
             Survey
           </Typography>
           <Stepper activeStep={activeStep} className={classes.stepper}>
-            {stepsDataForm.map(({title}, index) => (
+            {stepsDataForm.map(({ title }, index) => (
               <Step key={index}>
                 <StepLabel>{title}</StepLabel>
               </Step>
             ))}
           </Stepper>
           <>
-            {activeStep === steps.length ? (
+            {activeStep === stepsDataForm.length ? (
               <>
                 <Typography variant="h5" gutterBottom>
                   Thank you for the survey.
@@ -217,7 +195,12 @@ export const SurveyForm = () => {
             ) : (
               <>
                 {
-                  stepsDataForm.length ? <SurveyFormSteps dataForm={stepsDataForm[activeStep]} onChange={handleChangeSelections} /> : 'Form not set up yet!'
+                  stepsDataForm.length ? (
+                    <SurveyFormSteps
+                      dataForm={stepsDataForm[activeStep]}
+                      onChange={handleChangeSelections}
+                    />
+                  ) : 'Form not set up yet!'
                 }
                 <div className={classes.buttons}>
                   {activeStep !== 0 && (
@@ -231,7 +214,7 @@ export const SurveyForm = () => {
                     onClick={handleNext}
                     className={classes.button}
                   >
-                    {activeStep === steps.length - 1 ? 'Submit Survey' : 'Next'}
+                    {activeStep === stepsDataForm.length - 1 ? 'Submit Survey' : 'Next'}
                   </Button>
                 </div>
               </>
