@@ -27,7 +27,7 @@ export default function FormDialog() {
         <PersonAddIcon />
       </IconButton>
       <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
-        <DialogTitle id="form-dialog-title">Participant Forms</DialogTitle>
+        <DialogTitle id="form-dialog-title">Add new participant</DialogTitle>
         <DialogContent>
           <TextField
             autoFocus

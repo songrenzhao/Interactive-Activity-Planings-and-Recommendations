@@ -21,11 +21,11 @@ const useStyles = makeStyles({
 });
 
 export default function SurveyPost(prop) {
-  const { name, date } = prop;
+  const { name } = prop;
   const classes = useStyles();
   return (
     <Grid item xs={12} md={6}>
-      <CardActionArea component="a" href={`/SurveyTable?query=${name}&createdAt=${parseInt(date, 10) - 1}`}>
+      <CardActionArea component="a">
         <Card className={classes.card}>
           <div className={classes.cardDetails}>
             <CardContent>

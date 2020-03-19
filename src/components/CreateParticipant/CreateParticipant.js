@@ -39,24 +39,17 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const ThirtyDaysAgo = new Date(new Date() - 1000 * 60 * 60 * 24 * 30);
-
-const viewSurveys = gql`
-    query surveys($date: String!) {
-      surveys(date: $date) {
-        name
-        createdAt
-      }
+const SIGNIN = gql`
+  {
+    participants {
+      name
     }
+  }
 `;
 
 export const CreateParticipant = () => {
   const classes = useStyles();
-  const { loading, error, data } = useQuery(viewSurveys, {
-    variables: {
-      date: ThirtyDaysAgo,
-    },
-  });
+  const { loading, error, data } = useQuery(SIGNIN);
   if (loading) { return <div>Loading…</div>; }
   if (error) { return <div>Error</div>; }
   return (
@@ -66,8 +59,8 @@ export const CreateParticipant = () => {
         <Header title="Survey Report" />
         <main>
           <Grid container spacing={4} className={classes.mainGrid}>
-            {data.surveys.map((post) => (
-              <Participant name={post.name} date={post.createdAt} href={`/SurveyTable?name=${post.name}`} />
+            {data.participants.map((post) => (
+              <Participant name={post.name} date={post.createdAt} />
             ))}
           </Grid>
         </main>
