@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const SIGNIN = gql`
+const PARTICIPANT = gql`
   {
     participants {
       name
@@ -49,14 +49,14 @@ const SIGNIN = gql`
 
 export const CreateParticipant = () => {
   const classes = useStyles();
-  const { loading, error, data } = useQuery(SIGNIN);
+  const { loading, error, data } = useQuery(PARTICIPANT);
   if (loading) { return <div>Loading…</div>; }
   if (error) { return <div>Error</div>; }
   return (
     <>
       <CssBaseline />
       <Container maxWidth="lg">
-        <Header title="Survey Report" />
+        <Header />
         <main>
           <Grid container spacing={4} className={classes.mainGrid}>
             {data.participants.map((post) => (

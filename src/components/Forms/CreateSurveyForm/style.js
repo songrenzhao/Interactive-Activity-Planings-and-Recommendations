@@ -1,5 +1,5 @@
 import { makeStyles } from '@material-ui/core/styles';
-
+import { green, red } from '@material-ui/core/colors';
 
 const useStyles = makeStyles((theme) => ({
   margin: {
@@ -31,6 +31,41 @@ const useStyles = makeStyles((theme) => ({
   media: {
     height: theme.spacing(15),
     width: theme.spacing(15),
+  },
+  defaultButton: {
+    marginTop: '20px',
+    marginLeft: '40%',
+    width: '20%',
+  },
+  buttonSuccess: {
+    marginTop: '20px',
+    marginLeft: '40%',
+    width: '20%',
+    backgroundColor: green[500],
+    '&:hover': {
+      backgroundColor: green[700],
+    },
+  },
+  buttonFail: {
+    marginTop: '20px',
+    marginLeft: '40%',
+    width: '20%',
+    backgroundColor: red[500],
+    '&:hover': {
+      backgroundColor: red[700],
+    },
+  },
+  buttonProgress: {
+    color: green[500],
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    marginTop: -4,
+    marginLeft: -12,
+  },
+  wrapper: {
+    margin: theme.spacing(1),
+    position: 'relative',
   },
 }));
 

@@ -4,7 +4,7 @@ import ApolloClient from 'apollo-boost';
 import { Route, Switch, useRouteMatch } from 'react-router-dom';
 import { SurveyList } from '../components/SurveyBlog';
 import { SurveyTable } from '../components/SurveyTable';
-import { CreateParticipant } from '../components/CreateParticipant';
+import { CreateParticipant } from '../components/Forms/CreateParticipant';
 import { CreateSurvey } from '../components/Forms/CreateSurveyForm';
 
 const client = new ApolloClient({

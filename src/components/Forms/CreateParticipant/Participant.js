@@ -7,6 +7,8 @@ import CardActionArea from '@material-ui/core/CardActionArea';
 import CardContent from '@material-ui/core/CardContent';
 import { IconButton } from '@material-ui/core';
 import HighlightOffIcon from '@material-ui/icons/HighlightOff';
+import { useMutation } from '@apollo/react-hooks';
+import { gql } from 'apollo-boost';
 
 const useStyles = makeStyles({
   card: {
@@ -20,9 +22,34 @@ const useStyles = makeStyles({
   },
 });
 
+const REMOVE_PARTICIPANT = gql`
+  mutation removeParticipant($name: String!) {
+    removeParticipant(name: $name) {
+      status
+    }
+  }
+`;
+
 export default function SurveyPost(prop) {
   const { name } = prop;
+  const [removeParticipant] = useMutation(REMOVE_PARTICIPANT);
   const classes = useStyles();
+
+  const handleRemoveParticipant = async () => {
+    try {
+      const { data } = await removeParticipant({
+        variables: {
+          name,
+        },
+      });
+      const { status } = data.removeParticipant;
+      console.log(status);
+      window.location.reload();
+    } catch (err) {
+      throw err;
+    }
+  };
+
   return (
     <Grid item xs={12} md={6}>
       <CardActionArea component="a">
@@ -34,7 +61,7 @@ export default function SurveyPost(prop) {
               </Typography>
             </CardContent>
           </div>
-          <IconButton color="secondary">
+          <IconButton color="secondary" onClick={handleRemoveParticipant}>
             <HighlightOffIcon />
           </IconButton>
         </Card>

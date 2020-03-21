@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Redirect } from 'react-router-dom';
+import clsx from 'clsx';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -10,6 +11,7 @@ import Checkbox from '@material-ui/core/Checkbox';
 import Link from '@material-ui/core/Link';
 import Paper from '@material-ui/core/Paper';
 import Box from '@material-ui/core/Box';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { useMutation } from '@apollo/react-hooks';
@@ -39,10 +41,18 @@ const SIGNIN = gql`
 export const SignInForm = () => {
   const classes = useStyles();
   const [isSignedIn, setIsSignedIn] = useState(false);
+  const [successButton, setSuccessButton] = useState(false);
+  const [failButton, setFailButton] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [signIn] = useMutation(SIGNIN);
+  const timer = useRef();
   const [formData, setFormData] = useState({
     username: '',
     password: '',
+  });
+  const buttonClassname = clsx({
+    [classes.buttonSuccess]: successButton,
+    [classes.buttonFail]: failButton,
   });
 
   const handleChange = (event) => {
@@ -50,6 +60,10 @@ export const SignInForm = () => {
     updatedForm[event.target.name] = event.target.value;
     setFormData(updatedForm);
   };
+
+  useEffect(() => () => {
+    clearTimeout(timer.current);
+  }, []);
 
   const signUpRequest = async () => {
     try {
@@ -60,10 +74,15 @@ export const SignInForm = () => {
         },
       });
       const { status } = data.signIn;
-      console.log(status);
-      if (status) {
-        setIsSignedIn(true);
-      }
+      timer.current = setTimeout(() => {
+        setLoading(false);
+        if (status) {
+          setSuccessButton(true);
+          setIsSignedIn(true);
+        } else {
+          setFailButton(true);
+        }
+      }, 1000);
     } catch (error) {
       throw error;
     }
@@ -72,6 +91,7 @@ export const SignInForm = () => {
   async function handleSubmit(e) {
     try {
       e.preventDefault();
+      setLoading(true);
       await signUpRequest();
     } catch (error) {
       const newError = { isError: true, errorMsg: 'Internal Service Error' };
@@ -121,15 +141,19 @@ export const SignInForm = () => {
               control={<Checkbox value="remember" color="primary" />}
               label="Remember me"
             />
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              color="primary"
-              className={classes.submit}
-            >
-              Sign In
-            </Button>
+            <div className={classes.wrapper}>
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                color="primary"
+                disabled={loading}
+                className={buttonClassname}
+              >
+                Sign In
+              </Button>
+              {loading && <CircularProgress size={24} className={classes.buttonProgress} />}
+            </div>
             <Grid container>
               <Grid item xs>
                 <Link href="#" variant="body2">
