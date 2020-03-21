@@ -1,7 +1,8 @@
 /* eslint-disable camelcase */
 /* eslint-disable react/prop-types */
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Button from '@material-ui/core/Button';
+import clsx from 'clsx';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import Paper from '@material-ui/core/Paper';
@@ -11,6 +12,7 @@ import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
 import { Grid } from '@material-ui/core';
 import CardMedia from '@material-ui/core/CardMedia';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import { useMutation } from '@apollo/react-hooks';
 import { gql } from 'apollo-boost';
 import useStyles from './style';
@@ -23,43 +25,59 @@ const CREATESURVEYFORM = gql`
   }
 `;
 
+const formDataTemplate = [
+  {
+    title: '',
+    description: '',
+    limit: '',
+    question: '',
+    selections: [{
+      choice: '',
+      url: '',
+    }],
+  },
+  {
+    title: '',
+    description: '',
+    limit: '',
+    question: '',
+    selections: [{
+      choice: '',
+      url: '',
+    }],
+  },
+  {
+    title: '',
+    description: '',
+    limit: '',
+    question: '',
+    selections: [{
+      choice: '',
+      url: '',
+    }],
+  },
+];
+
 export const CreateSurvey = () => {
   const classes = useStyles();
-  const [activeIndex, setActiveIndex] = React.useState(0);
-  const [isLoading, setIsLoading] = React.useState(false);
+  const timer = useRef();
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [isPicLoading, setIsPicLoading] = useState(false);
+  const [successButton, setSuccessButton] = useState(false);
+  const [failButton, setFailButton] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [createSurveyForm] = useMutation(CREATESURVEYFORM);
-  const [formData, setFormData] = React.useState([
-    {
-      title: '',
-      description: '',
-      limit: '',
-      question: '',
-      selections: [{
-        choice: '',
-        url: '',
-      }],
-    },
-    {
-      title: '',
-      description: '',
-      limit: '',
-      question: '',
-      selections: [{
-        choice: '',
-        url: '',
-      }],
-    },
-    {
-      title: '',
-      description: '',
-      limit: '',
-      question: '',
-      selections: [{
-        choice: '',
-        url: '',
-      }],
-    },
-  ]);
+  const [formData, setFormData] = React.useState(formDataTemplate);
+
+  const buttonClassname = clsx({
+    [classes.buttonSuccess]: successButton,
+    [classes.buttonFail]: failButton,
+    [classes.defaultButton]: !successButton,
+  });
+
+  useEffect(() => () => {
+    clearTimeout(timer.current);
+  }, []);
 
   const handleTabChange = (event, newValue) => {
     setActiveIndex(newValue);
@@ -119,7 +137,7 @@ export const CreateSurvey = () => {
     const data = new FormData();
     data.append('file', files[0]);
     data.append('upload_preset', 'IAPRLIVE');
-    setIsLoading(true);
+    setIsPicLoading(true);
     const res = await fetch(
       'https://api.cloudinary.com/v1_1/iapr/image/upload',
       {
@@ -131,20 +149,37 @@ export const CreateSurvey = () => {
     const updatedFormData = [...formData];
     updatedFormData[activeIndex].selections[selectionIndex].url = secure_url;
     setFormData(updatedFormData);
-    setIsLoading(false);
+    setIsPicLoading(false);
   };
 
   const submitSurvey = async (e) => {
     e.preventDefault();
-    console.log(formData);
-    const { data } = await createSurveyForm({
-      variables: {
-        formData,
-        createdAt: new Date(),
-      },
-    });
-    const { status } = data.createSurveyForm;
-    console.log(status);
+    try {
+      setLoading(true);
+      setSuccessButton(false);
+      setFailButton(false);
+      console.log(formData);
+      const { data } = await createSurveyForm({
+        variables: {
+          formData,
+          createdAt: new Date(),
+        },
+      });
+      const { status } = data.createSurveyForm;
+      console.log(status);
+      timer.current = setTimeout(() => {
+        setLoading(false);
+        if (status) {
+          setSuccessButton(true);
+        } else {
+          setFailButton(true);
+        }
+      }, 1000);
+    } catch (err) {
+      console.log(err);
+      setLoading(false);
+      setFailButton(true);
+    }
   };
 
   const TabPanel = ({ data, index }) => {
@@ -222,7 +257,7 @@ export const CreateSurvey = () => {
                         onChange={uploadImage(selectionIndex)}
                       />
                     </Button>
-                    {isLoading ? (
+                    {isPicLoading ? (
                       <h3>Loading</h3>
                     ) : (
                       <CardMedia
@@ -272,20 +307,25 @@ export const CreateSurvey = () => {
             <TabPanel data={data} index={index} />
           ))}
           <Button
-            style={{ marginLeft: '25%', width: '50%' }}
+            style={{ marginLeft: '90%' }}
             color="primary"
+            variant="contained"
             onClick={handleNext}
           >
             Next
           </Button>
-          <Button
-            type="submit"
-            style={{ marginTop: '20px', marginLeft: '30%', width: '40%' }}
-            variant="contained"
-            color="primary"
-          >
-            Submit
-          </Button>
+          <div className={classes.wrapper}>
+            <Button
+              type="submit"
+              variant="contained"
+              color="primary"
+              disabled={loading}
+              className={buttonClassname}
+            >
+              Submit
+            </Button>
+            {loading && <CircularProgress size={24} className={classes.buttonProgress} />}
+          </div>
         </form>
       </Grid>
     </Grid>

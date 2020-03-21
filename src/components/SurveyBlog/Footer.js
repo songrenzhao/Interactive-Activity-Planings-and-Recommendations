@@ -1,4 +1,4 @@
-/* eslint-disable react/require-default-props */
+/* eslint-disable react/prop-types */
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
