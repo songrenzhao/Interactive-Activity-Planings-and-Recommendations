@@ -163,7 +163,7 @@ export const SurveyForm = () => {
             <a href="/src/pages/home">
               <img
                 alt="logo"
-                src="/images/IAPR_logo.png"
+                src="https://i.imgur.com/VaIhVnS.png"
                 className="profile-img"
                 width="60px"
                 height="60px"
