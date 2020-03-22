@@ -96,7 +96,7 @@ export const Homepage = () => {
 
           <Grid container spacing={5}>
             {IAPR.map((card) => (
-              <Grid item key={card} xs={12} sm={6} md={4}>
+              <Grid item key={card} xs={12} sm={6} md={6}>
                 <Card className={classes.card}>
                   <CardMedia
                     className={classes.cardMedia}
@@ -128,10 +128,9 @@ export const Homepage = () => {
 
                 </Card>
               </Grid>
-
             ))}
             {CCNY.map((card) => (
-              <Grid item key={card} xs={12} sm={6} md={4}>
+              <Grid item key={card} xs={12} sm={6} md={6}>
                 <Card className={classes.card}>
                   <CardMedia
                     className={classes.cardMedia}
@@ -158,10 +157,8 @@ export const Homepage = () => {
                       outline for IAPR.
                     </Typography>
                   </CardContent>
-
                 </Card>
               </Grid>
-
             ))}
             {GoodWill.map((card) => (
               <Grid item key={card} xs={12} sm={6} md={4}>
