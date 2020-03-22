@@ -177,7 +177,7 @@ export const Homepage = () => {
                   />
                   <CardContent className={classes.cardContent}>
                     <Typography gutterBottom variant="h2" component="h2">
-                      What is GoodWill?
+                      Who is GoodWill?
                     </Typography>
                     <Typography>
                       Goodwill Industries International Inc., or shortened to Goodwill,
