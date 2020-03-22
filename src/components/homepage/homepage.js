@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable react/no-unescaped-entities */
 /* eslint-disable max-len */
 import React from 'react';
@@ -39,8 +40,8 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(4),
   },
   cardGrid: {
-    paddingTop: theme.spacing(8),
-    paddingBottom: theme.spacing(8),
+    paddingTop: theme.spacing(0),
+    paddingBottom: theme.spacing(0),
   },
   card: {
     height: '100%',
@@ -48,7 +49,7 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: 'column',
   },
   cardMedia: {
-    paddingTop: '56.25%', // 16:9
+    paddingTop: '10%', // 16:9
   },
   cardContent: {
     flexGrow: 1,
@@ -61,8 +62,9 @@ const useStyles = makeStyles((theme) => ({
 
 const IAPR = [1];
 const CCNY = [1];
+const GoodWill = [1];
 
-export const homepage = () => {
+export const Homepage = () => {
   const classes = useStyles();
 
   return (
@@ -98,8 +100,15 @@ export const homepage = () => {
                 <Card className={classes.card}>
                   <CardMedia
                     className={classes.cardMedia}
-                    image="\public\images\IAPRLogo.png"
                     title="IAPR's mission statement"
+                  />
+                  <img
+                    alt="logo"
+                    src="/images/IAPR_logo.png"
+                    className="profile-img"
+                    width="300px"
+                    height="300px"
+                    position="center"
                   />
                   <CardContent className={classes.cardContent}>
                     <Typography gutterBottom variant="h2" component="h2">
@@ -126,8 +135,15 @@ export const homepage = () => {
                 <Card className={classes.card}>
                   <CardMedia
                     className={classes.cardMedia}
-                    image="\public\images\ccny-logo.jpeg"
                     title="Our background"
+                  />
+                  <img
+                    alt="logo"
+                    src="/images/ccny-logo.jpg"
+                    className="profile-img"
+                    width="260px"
+                    height="260px"
+                    position="center"
                   />
                   <CardContent className={classes.cardContent}>
                     <Typography gutterBottom variant="h2" component="h2">
@@ -140,6 +156,37 @@ export const homepage = () => {
                       with finding a way to help those who need it the most. When we visited the Harlem Goodwill, we saw all the good the staff were doing in helping people with
                       autism to take control of their lives, find jobs, and be self-sustaining and we decided that we wanted to help in our way. That is when we drew up our first
                       outline for IAPR.
+                    </Typography>
+                  </CardContent>
+
+                </Card>
+              </Grid>
+
+            ))}
+            {GoodWill.map((card) => (
+              <Grid item key={card} xs={12} sm={6} md={4}>
+                <Card className={classes.card}>
+                  <CardMedia
+                    className={classes.cardMedia}
+                    title="Our background"
+                  />
+                  <img
+                    alt="logo"
+                    src="/images/goodwilllogo.png"
+                    className="profile-img"
+                    width="400px"
+                    height="260px"
+                    position="center"
+                  />
+                  <CardContent className={classes.cardContent}>
+                    <Typography gutterBottom variant="h2" component="h2">
+                      What is GoodWill?
+                    </Typography>
+                    <Typography>
+                      Goodwill Industries International Inc., or shortened to Goodwill,
+                      is an American nonprofit 501 organization that provides job training,
+                      employment placement services, and other community-based programs for people who have barriers
+                      preventing them from otherwise obtaining a job.
                     </Typography>
                   </CardContent>
 
