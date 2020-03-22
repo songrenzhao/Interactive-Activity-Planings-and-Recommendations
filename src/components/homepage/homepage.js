@@ -62,7 +62,7 @@ const useStyles = makeStyles((theme) => ({
 const IAPR = [1];
 const CCNY = [1];
 
-export const homepage = () => {
+export const Homepage = () => {
   const classes = useStyles();
 
   return (
@@ -94,7 +94,7 @@ export const homepage = () => {
 
           <Grid container spacing={5}>
             {IAPR.map((card) => (
-              <Grid item key={card} xs={12} sm={6} md={4}>
+              <Grid item key={card} xs={12} sm={6} md={6}>
                 <Card className={classes.card}>
                   <CardMedia
                     className={classes.cardMedia}
@@ -119,10 +119,9 @@ export const homepage = () => {
 
                 </Card>
               </Grid>
-
             ))}
             {CCNY.map((card) => (
-              <Grid item key={card} xs={12} sm={6} md={4}>
+              <Grid item key={card} xs={12} sm={6} md={6}>
                 <Card className={classes.card}>
                   <CardMedia
                     className={classes.cardMedia}
@@ -142,10 +141,8 @@ export const homepage = () => {
                       outline for IAPR.
                     </Typography>
                   </CardContent>
-
                 </Card>
               </Grid>
-
             ))}
           </Grid>
 
