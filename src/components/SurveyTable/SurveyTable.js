@@ -29,21 +29,6 @@ const StyledTableRow = withStyles((theme) => ({
   },
 }))(TableRow);
 
-// function createData(Questions, Answer1, Answer2, Answer3, Answer4) {
-//   return {
-//     Questions, Answer1, Answer2, Answer3, Answer4,
-//   };
-// }
-
-// const rows = [
-//   createData('Locations', 'Apple', 'Samsung', 'GameStop', 'Mcdonalds'),
-//   createData('Food', 'Popeyes', 'Burger King', 'Pizza', 'Wendys'),
-//   createData('Sport', 'Basketball', 'FootBall', 'Skateboard', 'Swimming'),
-//   createData('Art&craft', 'Drawing', 'Clay Modeling', 'Painting', 'Beading'),
-//   createData('Health&Fitness', 'Exercising', 'Health Cooking Class', 'Meditation', 'Yoga'),
-//   createData('Performing_Art', 'Dancing'),
-// ];
-
 const useStyles = makeStyles((theme) => ({
   table: {
     minWidth: 700,
@@ -91,12 +76,13 @@ export const SurveyTable = () => {
   const { loading, error, data } = useQuery(viewSurveys, {
     variables: {
       name,
-      date: new Date(parseInt(createdAt, 10) - 1),
+      date: createdAt,
     },
   });
 
   if (loading) { return <div>Loading…</div>; }
   if (error) { return <div>Error</div>; }
+  console.log(data);
   const [surveys] = data.surveys;
   const { results } = surveys;
   return (
