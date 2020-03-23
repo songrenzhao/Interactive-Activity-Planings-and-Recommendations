@@ -160,7 +160,7 @@ export const SurveyForm = () => {
       <AppBar position="absolute" color="default" className={classes.appBar}>
         <Toolbar>
           <Typography variant="h6" color="inherit" noWrap>
-            <a href="/src/pages/home">
+            <a href="/signinparticipant">
               <img
                 alt="logo"
                 src="https://i.imgur.com/VaIhVnS.png"

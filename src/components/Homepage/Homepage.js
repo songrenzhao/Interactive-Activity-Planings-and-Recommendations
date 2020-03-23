@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable react/no-unescaped-entities */
 /* eslint-disable max-len */
 import React from 'react';
@@ -72,13 +71,19 @@ export const Homepage = () => {
       <CssBaseline />
       <AppBar position="relative">
         <Toolbar>
-          <Typography variant="h6" color="inherit" noWrap>
-            IAPR
-          </Typography>
+          <a href="/signin">
+            <img
+              alt="logo"
+              src="https://i.imgur.com/VaIhVnS.png"
+              className="profile-img"
+              width="60px"
+              height="60px"
+              style={{ marginRight: '5px' }}
+            />
+          </a>
         </Toolbar>
       </AppBar>
       <main>
-        {/* Hero unit */}
         <div className={classes.heroContent}>
           <Container maxWidth="sm">
             <Typography component="h1" variant="h2" align="left" color="textPrimary" gutterBottom>
@@ -104,7 +109,7 @@ export const Homepage = () => {
                   />
                   <img
                     alt="logo"
-                    src="/images/IAPR_logo.png"
+                    src="https://i.imgur.com/VaIhVnS.png"
                     className="profile-img"
                     width="300px"
                     height="300px"
