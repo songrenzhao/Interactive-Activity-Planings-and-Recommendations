@@ -1,8 +1,11 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-const drawerWidth = 220;
+const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
+  root: {
+    display: 'flex',
+  },
   toolbar: {
     paddingRight: 24, // keep right padding when drawer closed
   },
@@ -14,17 +17,30 @@ const useStyles = makeStyles((theme) => ({
     ...theme.mixins.toolbar,
   },
   appBar: {
-    background: 'linear-gradient(45deg, #62B1FF, #7CBEFF )',
     zIndex: theme.zIndex.drawer + 1,
+    transition: theme.transitions.create(['width', 'margin'], {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.leavingScreen,
+    }),
+  },
+  appBarShift: {
+    marginLeft: drawerWidth,
+    width: `calc(100% - ${drawerWidth}px)`,
+    transition: theme.transitions.create(['width', 'margin'], {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.enteringScreen,
+    }),
   },
   menuButton: {
     marginRight: 36,
+  },
+  menuButtonHidden: {
+    display: 'none',
   },
   title: {
     flexGrow: 1,
   },
   drawerPaper: {
-    marginTop: '10px',
     position: 'relative',
     whiteSpace: 'nowrap',
     width: drawerWidth,
@@ -55,20 +71,13 @@ const useStyles = makeStyles((theme) => ({
     paddingBottom: theme.spacing(4),
   },
   paper: {
-    marginTop: theme.spacing(3),
-    marginBottom: theme.spacing(3),
     padding: theme.spacing(2),
-    [theme.breakpoints.up(600 + theme.spacing(3) * 2)]: {
-      marginTop: theme.spacing(6),
-      marginBottom: theme.spacing(6),
-      padding: theme.spacing(3),
-    },
+    display: 'flex',
+    overflow: 'auto',
+    flexDirection: 'column',
   },
   fixedHeight: {
-    height: 240,
-  },
-  sideBar: {
-    marginTop: theme.spacing(6),
+    height: '100%',
   },
 }));
 
