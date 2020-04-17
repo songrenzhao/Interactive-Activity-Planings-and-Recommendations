@@ -1,3 +1,4 @@
+/* eslint-disable import/no-unresolved */
 /* eslint-disable no-undefined */
 /* eslint-disable react/prop-types */
 import React, { useState } from 'react';
