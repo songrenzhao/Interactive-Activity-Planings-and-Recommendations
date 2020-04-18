@@ -1,20 +1,10 @@
-/* eslint-disable no-use-before-define */
-/* eslint-disable import/no-unresolved */
-/* eslint-disable no-unused-vars */
-/* eslint-disable jsx-a11y/label-has-associated-control */
-/* eslint-disable camelcase */
 /* eslint-disable react/prop-types */
 import React, { useState, useEffect, useRef } from 'react';
 import Button from '@material-ui/core/Button';
 import clsx from 'clsx';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-import Dialog from '@material-ui/core/Dialog';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogActions from '@material-ui/core/DialogActions';
-import Autocomplete, { createFilterOptions } from '@material-ui/lab/Autocomplete';
+import Autocomplete from '@material-ui/lab/Autocomplete';
 import Paper from '@material-ui/core/Paper';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
@@ -131,8 +121,10 @@ export const WeeklySurveyForm = () => {
         body: data,
       },
     );
+    // eslint-disable-next-line camelcase
     const { secure_url } = await res.json();
     const updatedFormData = [...formData];
+    // eslint-disable-next-line camelcase
     updatedFormData[activeIndex].selections[selectionIndex].url = secure_url;
     setFormData(updatedFormData);
     setIsPicLoading(false);
@@ -173,9 +165,9 @@ export const WeeklySurveyForm = () => {
       selections,
     } = data;
 
-    const handleSubmit = (event) => {
-      event.preventDefault();
-    };
+    // const handleSubmit = (event) => {
+    //   event.preventDefault();
+    // };
 
     const handleAutoFilledActivity = (selectionIndex) => (event, value) => {
       const updatedFormData = formData;
