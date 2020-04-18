@@ -35,31 +35,29 @@ const CREATESURVEYFORM = gql`
   }
 `;
 
+const Activity = [
+  { title: 'Exercise' },
+  { title: 'Cooking Class' },
+  { title: 'Movie Thether' },
+  { title: 'Park' },
+];
+
 const formDataTemplate = [
   {
-    title: '',
-    limit: '',
-    question: '',
     selections: [{
-      choice: '',
+      activity: '',
       url: '',
     }],
   },
   {
-    title: '',
-    limit: '',
-    question: '',
     selections: [{
-      choice: '',
+      activity: '',
       url: '',
     }],
   },
   {
-    title: '',
-    limit: '',
-    question: '',
     selections: [{
-      choice: '',
+      activity: '',
       url: '',
     }],
   },
@@ -75,9 +73,6 @@ export const WeeklySurveyForm = () => {
   const [loading, setLoading] = useState(false);
   const [createSurveyForm] = useMutation(CREATESURVEYFORM);
   const [formData, setFormData] = React.useState(formDataTemplate);
-  const [value, setValue] = React.useState(null);
-  const [open, toggleOpen] = React.useState(false);
-  const filter = createFilterOptions();
 
   const buttonClassname = clsx({
     [classes.buttonSuccess]: successButton,
@@ -95,12 +90,6 @@ export const WeeklySurveyForm = () => {
   };
 
 
-  const handleSelectionChange = (selectionIndex) => (event) => {
-    const updatedFormData = formData;
-    updatedFormData[activeIndex].selections[selectionIndex].choice = event.target.value;
-    setFormData(updatedFormData);
-  };
-
   const handleNext = () => {
     if (activeIndex === formData.length - 1) {
       setActiveIndex(0);
@@ -112,7 +101,7 @@ export const WeeklySurveyForm = () => {
   const handleMoreSelection = () => {
     const updatedFormData = formData;
     updatedFormData[activeIndex].selections.push({
-      choice: '',
+      activity: '',
       url: '',
     });
     setFormData(updatedFormData);
@@ -121,12 +110,8 @@ export const WeeklySurveyForm = () => {
   const handleMoreTab = () => {
     const updatedFormData = [...formData];
     updatedFormData.push({
-      title: '',
-      description: '',
-      limit: '',
-      question: '',
       selections: [{
-        choice: '',
+        activity: '',
         url: '',
       }],
     });
@@ -188,32 +173,24 @@ export const WeeklySurveyForm = () => {
       selections,
     } = data;
 
-    const Activity = [
-      { title: 'Exercise' },
-      { title: 'Cooking Class' },
-      { title: 'Movie Thether' },
-      { title: 'Park' },
-    ];
-    const handleClose = () => {
-      setDialogValue({
-        title: '',
-      });
-
-      toggleOpen(false);
-    };
-
-    const [dialogValue, setDialogValue] = React.useState({
-      title: '',
-    });
-
     const handleSubmit = (event) => {
       event.preventDefault();
-      setValue({
-        title: dialogValue.title,
-      });
-
-      handleClose();
     };
+
+    const handleAutoFilledActivity = (selectionIndex) => (event, value) => {
+      const updatedFormData = formData;
+      updatedFormData[activeIndex].selections[selectionIndex].activity = value;
+      setFormData(updatedFormData);
+      console.log(formData);
+    };
+
+    const handleActivity = (selectionIndex) => (event) => {
+      const updatedFormData = formData;
+      updatedFormData[activeIndex].selections[selectionIndex].activity = event.target.value;
+      setFormData(updatedFormData);
+      console.log(formData);
+    };
+
     return (
       <>
         {
@@ -224,92 +201,22 @@ export const WeeklySurveyForm = () => {
                 {selections.map((selection, selectionIndex) => (
                   <Grid item component={Paper} spacing={0} xs={12} sm={12} className={classes.selectionFormGrid}>
                     <>
-                      <div>
-                        <Autocomplete
-                          disableClearable
-                          value={value}
-                          onChange={(_event, newValue) => {
-                            if (typeof newValue === 'string') {
-                              // timeout to avoid instant validation of the dialog's form.
-                              setTimeout(() => {
-                                toggleOpen(true);
-                                setDialogValue({
-                                  title: newValue,
-                                });
-                              });
-                              return;
-                            }
-
-                            if (newValue && newValue.inputValue) {
-                              toggleOpen(true);
-                              setDialogValue({
-                                title: newValue.inputValue,
-                              });
-
-                              return;
-                            }
-
-                            setValue(newValue);
-                          }}
-                          filterOptions={(options, params) => {
-                            const filtered = filter(options, params);
-
-                            if (params.inputValue !== '') {
-                              filtered.push({
-                                inputValue: params.inputValue,
-                                title: `Add "${params.inputValue}"`,
-                              });
-                            }
-
-                            return filtered;
-                          }}
-                          id="Activity"
-                          options={Activity}
-                          getOptionLabel={(option) => {
-                            // e.g value selected with enter, right from the input
-                            if (typeof option === 'string') {
-                              return option;
-                            }
-                            if (option.inputValue) {
-                              return option.inputValue;
-                            }
-                            return option.title;
-                          }}
-                          renderOption={(option) => option.title}
-                          style={{ width: 410 }}
-                          Activity
-                          renderInput={(params) => (
-                            <TextField {...params} label="Activity" variant="outlined" />
-                          )}
-                        />
-                      </div>
-                      <Dialog open={open} onClose={handleClose} aria-labelledby="Activity-title">
-                        <form onSubmit={handleSubmit}>
-                          <DialogTitle id="Activity-title">Add a Activity</DialogTitle>
-                          <DialogContent>
-                            <DialogContentText>
-                              Want to add any new activities? add it!
-                            </DialogContentText>
-                            <TextField
-                              autoFocus
-                              margin="dense"
-                              id="name"
-                              value={dialogValue.title}
-                              onChange={(event) => setDialogValue({ ...dialogValue, title: event.target.value })}
-                              label="title"
-                              type="text"
-                            />
-                          </DialogContent>
-                          <DialogActions>
-                            <Button onClick={handleClose} color="primary">
-                              Cancel
-                            </Button>
-                            <Button type="submit" color="primary">
-                              Add
-                            </Button>
-                          </DialogActions>
-                        </form>
-                      </Dialog>
+                      <Autocomplete
+                        id="activity"
+                        freeSolo
+                        style={{ width: '75%' }}
+                        options={Activity.map((option) => option.title)}
+                        defaultValue={selection.activity}
+                        onChange={handleAutoFilledActivity(selectionIndex)}
+                        renderInput={(params) => (
+                          <TextField
+                            {...params}
+                            onChange={handleActivity(selectionIndex)}
+                            margin="normal"
+                            variant="outlined"
+                          />
+                        )}
+                      />
                     </>
                     <Button variant="outlined" color="primary" component="label" className="button">
                       Upload File
