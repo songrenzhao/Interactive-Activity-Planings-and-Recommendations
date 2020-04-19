@@ -33,7 +33,7 @@ export const Week = ({ dataForm, onChange }) => {
                   )}
                   label={(
                     <Grid container direction="row" alignItems="center">
-                      <Grid item>
+                      <Grid item style={{ textAlign: 'center' }}>
                         <img
                           src={selection.url}
                           className="profile-img"
@@ -41,13 +41,14 @@ export const Week = ({ dataForm, onChange }) => {
                           height="150px"
                           style={{ marginRight: '5px' }}
                         />
+                        <p>{selection.activity}</p>
                       </Grid>
-                      {selection.choice}
                     </Grid>
                   )}
                 />
                 <FormControlLabel
                   value="happy"
+                  style={{ marginBottom: '3em' }}
                   control={(
                     <Radio
                       color="primary"
@@ -63,13 +64,13 @@ export const Week = ({ dataForm, onChange }) => {
                           style={{ fontSize: '70px' }}
                         />
                       </Grid>
-                      {selection.choice}
                     </Grid>
                   )}
                   labelPlacement="top"
                 />
                 <FormControlLabel
                   value="ok"
+                  style={{ marginBottom: '3em' }}
                   control={(
                     <Radio
                       color="primary"
@@ -85,13 +86,13 @@ export const Week = ({ dataForm, onChange }) => {
                           style={{ fontSize: '70px' }}
                         />
                       </Grid>
-                      {selection.choice}
                     </Grid>
                   )}
                   labelPlacement="top"
                 />
                 <FormControlLabel
                   value="sad"
+                  style={{ marginBottom: '3em' }}
                   control={(
                     <Radio
                       color="primary"
@@ -107,7 +108,6 @@ export const Week = ({ dataForm, onChange }) => {
                           style={{ fontSize: '70px' }}
                         />
                       </Grid>
-                      {selection.choice}
                     </Grid>
                   )}
                   labelPlacement="top"
