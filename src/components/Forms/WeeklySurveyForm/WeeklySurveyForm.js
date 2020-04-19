@@ -226,7 +226,6 @@ export const WeeklySurveyForm = () => {
                     <>
                       <div>
                         <Autocomplete
-                          disableClearable
                           value={value}
                           onChange={(_event, newValue) => {
                             if (typeof newValue === 'string') {
