@@ -18,7 +18,7 @@ export const ParticipantChoice = () => {
       <Button variant="contained" color="primary" component="a" href="/survey">
         Survey Form
       </Button>
-      <Button variant="contained" color="secondary">
+      <Button variant="contained" color="secondary" component="a" href="/WeeklyPlan">
         Weekly Plan
       </Button>
     </div>
