@@ -51,6 +51,7 @@ export const Week = ({ dataForm, onChange }) => {
                   control={(
                     <Radio
                       color="primary"
+                      checked={selection.reaction === 'happy'}
                       onChange={onChange(index)}
                     />
                   )}
@@ -72,6 +73,7 @@ export const Week = ({ dataForm, onChange }) => {
                   control={(
                     <Radio
                       color="primary"
+                      checked={selection.reaction === 'ok'}
                       onChange={onChange(index)}
                     />
                   )}
@@ -93,6 +95,7 @@ export const Week = ({ dataForm, onChange }) => {
                   control={(
                     <Radio
                       color="primary"
+                      checked={selection.reaction === 'sad'}
                       onChange={onChange(index)}
                     />
                   )}
