@@ -1,20 +1,10 @@
-/* eslint-disable no-use-before-define */
-/* eslint-disable import/no-unresolved */
-/* eslint-disable no-unused-vars */
-/* eslint-disable jsx-a11y/label-has-associated-control */
-/* eslint-disable camelcase */
 /* eslint-disable react/prop-types */
 import React, { useState, useEffect, useRef } from 'react';
 import Button from '@material-ui/core/Button';
 import clsx from 'clsx';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-import Dialog from '@material-ui/core/Dialog';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogActions from '@material-ui/core/DialogActions';
-import Autocomplete, { createFilterOptions } from '@material-ui/lab/Autocomplete';
+import Autocomplete from '@material-ui/lab/Autocomplete';
 import Paper from '@material-ui/core/Paper';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
@@ -27,39 +17,25 @@ import { useMutation } from '@apollo/react-hooks';
 import { gql } from 'apollo-boost';
 import useStyles from './style';
 
-const CREATESURVEYFORM = gql`
-  mutation createSurveyForm($formData: [formData!]!, $createdAt: String) {
-    createSurveyForm(formData: $formData, createdAt: $createdAt) {
+const CREATEWEEKLYPLANNING = gql`
+  mutation createWeeklyPlanning($weeklyPlanningData: [weeklyPlannings!]!) {
+    createWeeklyPlanning(weeklyPlanningData: $weeklyPlanningData) {
       status
     }
   }
 `;
 
+const Activity = [
+  { title: 'Exercise' },
+  { title: 'Cooking Class' },
+  { title: 'Movie Thether' },
+  { title: 'Park' },
+];
+
 const formDataTemplate = [
   {
-    title: '',
-    limit: '',
-    question: '',
     selections: [{
-      choice: '',
-      url: '',
-    }],
-  },
-  {
-    title: '',
-    limit: '',
-    question: '',
-    selections: [{
-      choice: '',
-      url: '',
-    }],
-  },
-  {
-    title: '',
-    limit: '',
-    question: '',
-    selections: [{
-      choice: '',
+      activity: '',
       url: '',
     }],
   },
@@ -73,11 +49,8 @@ export const WeeklySurveyForm = () => {
   const [successButton, setSuccessButton] = useState(false);
   const [failButton, setFailButton] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [createSurveyForm] = useMutation(CREATESURVEYFORM);
+  const [createWeeklyPlanning] = useMutation(CREATEWEEKLYPLANNING);
   const [formData, setFormData] = React.useState(formDataTemplate);
-  const [value, setValue] = React.useState(null);
-  const [open, toggleOpen] = React.useState(false);
-  const filter = createFilterOptions();
 
   const buttonClassname = clsx({
     [classes.buttonSuccess]: successButton,
@@ -95,12 +68,6 @@ export const WeeklySurveyForm = () => {
   };
 
 
-  const handleSelectionChange = (selectionIndex) => (event) => {
-    const updatedFormData = formData;
-    updatedFormData[activeIndex].selections[selectionIndex].choice = event.target.value;
-    setFormData(updatedFormData);
-  };
-
   const handleNext = () => {
     if (activeIndex === formData.length - 1) {
       setActiveIndex(0);
@@ -112,7 +79,7 @@ export const WeeklySurveyForm = () => {
   const handleMoreSelection = () => {
     const updatedFormData = formData;
     updatedFormData[activeIndex].selections.push({
-      choice: '',
+      activity: '',
       url: '',
     });
     setFormData(updatedFormData);
@@ -121,12 +88,8 @@ export const WeeklySurveyForm = () => {
   const handleMoreTab = () => {
     const updatedFormData = [...formData];
     updatedFormData.push({
-      title: '',
-      description: '',
-      limit: '',
-      question: '',
       selections: [{
-        choice: '',
+        activity: '',
         url: '',
       }],
     });
@@ -146,8 +109,10 @@ export const WeeklySurveyForm = () => {
         body: data,
       },
     );
+    // eslint-disable-next-line camelcase
     const { secure_url } = await res.json();
     const updatedFormData = [...formData];
+    // eslint-disable-next-line camelcase
     updatedFormData[activeIndex].selections[selectionIndex].url = secure_url;
     setFormData(updatedFormData);
     setIsPicLoading(false);
@@ -160,13 +125,12 @@ export const WeeklySurveyForm = () => {
       setSuccessButton(false);
       setFailButton(false);
       console.log(formData);
-      const { data } = await createSurveyForm({
+      const { data } = await createWeeklyPlanning({
         variables: {
-          formData,
-          createdAt: new Date(),
+          weeklyPlanningData: formData,
         },
       });
-      const { status } = data.createSurveyForm;
+      const { status } = data.createWeeklyPlanning;
       console.log(status);
       timer.current = setTimeout(() => {
         setLoading(false);
@@ -188,32 +152,20 @@ export const WeeklySurveyForm = () => {
       selections,
     } = data;
 
-    const Activity = [
-      { title: 'Exercise' },
-      { title: 'Cooking Class' },
-      { title: 'Movie Thether' },
-      { title: 'Park' },
-    ];
-    const handleClose = () => {
-      setDialogValue({
-        title: '',
-      });
-
-      toggleOpen(false);
+    const handleAutoFilledActivity = (selectionIndex) => (event, value) => {
+      const updatedFormData = formData;
+      updatedFormData[activeIndex].selections[selectionIndex].activity = value;
+      setFormData(updatedFormData);
+      console.log(formData);
     };
 
-    const [dialogValue, setDialogValue] = React.useState({
-      title: '',
-    });
-
-    const handleSubmit = (event) => {
-      event.preventDefault();
-      setValue({
-        title: dialogValue.title,
-      });
-
-      handleClose();
+    const handleActivity = (selectionIndex) => (event) => {
+      const updatedFormData = formData;
+      updatedFormData[activeIndex].selections[selectionIndex].activity = event.target.value;
+      setFormData(updatedFormData);
+      console.log(formData);
     };
+
     return (
       <>
         {
@@ -224,91 +176,22 @@ export const WeeklySurveyForm = () => {
                 {selections.map((selection, selectionIndex) => (
                   <Grid item component={Paper} spacing={0} xs={12} sm={12} className={classes.selectionFormGrid}>
                     <>
-                      <div>
-                        <Autocomplete
-                          value={value}
-                          onChange={(_event, newValue) => {
-                            if (typeof newValue === 'string') {
-                              // timeout to avoid instant validation of the dialog's form.
-                              setTimeout(() => {
-                                toggleOpen(true);
-                                setDialogValue({
-                                  title: newValue,
-                                });
-                              });
-                              return;
-                            }
-
-                            if (newValue && newValue.inputValue) {
-                              toggleOpen(true);
-                              setDialogValue({
-                                title: newValue.inputValue,
-                              });
-
-                              return;
-                            }
-
-                            setValue(newValue);
-                          }}
-                          filterOptions={(options, params) => {
-                            const filtered = filter(options, params);
-
-                            if (params.inputValue !== '') {
-                              filtered.push({
-                                inputValue: params.inputValue,
-                                title: `Add "${params.inputValue}"`,
-                              });
-                            }
-
-                            return filtered;
-                          }}
-                          id="Activity"
-                          options={Activity}
-                          getOptionLabel={(option) => {
-                            // e.g value selected with enter, right from the input
-                            if (typeof option === 'string') {
-                              return option;
-                            }
-                            if (option.inputValue) {
-                              return option.inputValue;
-                            }
-                            return option.title;
-                          }}
-                          renderOption={(option) => option.title}
-                          style={{ width: 410 }}
-                          Activity
-                          renderInput={(params) => (
-                            <TextField {...params} label="Activity" variant="outlined" />
-                          )}
-                        />
-                      </div>
-                      <Dialog open={open} onClose={handleClose} aria-labelledby="Activity-title">
-                        <form onSubmit={handleSubmit}>
-                          <DialogTitle id="Activity-title">Add a Activity</DialogTitle>
-                          <DialogContent>
-                            <DialogContentText>
-                              Want to add any new activities? add it!
-                            </DialogContentText>
-                            <TextField
-                              autoFocus
-                              margin="dense"
-                              id="name"
-                              value={dialogValue.title}
-                              onChange={(event) => setDialogValue({ ...dialogValue, title: event.target.value })}
-                              label="title"
-                              type="text"
-                            />
-                          </DialogContent>
-                          <DialogActions>
-                            <Button onClick={handleClose} color="primary">
-                              Cancel
-                            </Button>
-                            <Button type="submit" color="primary">
-                              Add
-                            </Button>
-                          </DialogActions>
-                        </form>
-                      </Dialog>
+                      <Autocomplete
+                        id="activity"
+                        freeSolo
+                        style={{ width: '75%' }}
+                        options={Activity.map((option) => option.title)}
+                        defaultValue={selection.activity}
+                        onChange={handleAutoFilledActivity(selectionIndex)}
+                        renderInput={(params) => (
+                          <TextField
+                            {...params}
+                            onChange={handleActivity(selectionIndex)}
+                            margin="normal"
+                            variant="outlined"
+                          />
+                        )}
+                      />
                     </>
                     <Button variant="outlined" color="primary" component="label" className="button">
                       Upload File
@@ -357,7 +240,7 @@ export const WeeklySurveyForm = () => {
             onChange={handleTabChange}
           >
             {formData.map((_, index) => (
-              <Tab label={`Week ${index}`} />
+              <Tab label={`Week ${index + 1}`} />
             ))}
             <Fab size="small" color="primary" aria-label="add" onClick={handleMoreTab}>
               <AddIcon />
