@@ -51,7 +51,7 @@ export const SignInParticipantForm = () => {
       >
         {data.participants.map((value) => (
           <Grid item xs={6} md={6}>
-            <CardActionArea component="a" href="/survey" onClick={handleChange(value.name)}>
+            <CardActionArea component="a" href="/choices" onClick={handleChange(value.name)}>
               <Card className={classes.card}>
                 <div className={classes.cardDetails}>
                   <CardMedia

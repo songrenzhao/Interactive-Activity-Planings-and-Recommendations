@@ -240,7 +240,7 @@ export const WeeklySurveyForm = () => {
             onChange={handleTabChange}
           >
             {formData.map((_, index) => (
-              <Tab label={`Week ${index + 1}`} />
+              <Tab label={`Day ${index + 1}`} />
             ))}
             <Fab size="small" color="primary" aria-label="add" onClick={handleMoreTab}>
               <AddIcon />
