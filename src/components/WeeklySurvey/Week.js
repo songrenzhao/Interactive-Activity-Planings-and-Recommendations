@@ -23,9 +23,9 @@ export const Week = ({ dataForm, onChange }) => {
             <FormControlLabel
               control={(
                 <InsertEmoticonIcon
+                  color="secondary"
                   checked={selection.selected || false}
                   onChange={onChange(index)}
-                  color="secondary"
                 />
               )}
             />

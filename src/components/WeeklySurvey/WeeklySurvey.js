@@ -10,9 +10,9 @@ import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
 import Button from '@material-ui/core/Button';
 import Link from '@material-ui/core/Link';
-import cookie from 'react-cookies';
+// import cookie from 'react-cookies';
 import Typography from '@material-ui/core/Typography';
-import { useMutation, useQuery } from '@apollo/react-hooks';
+import { useQuery } from '@apollo/react-hooks';
 import { gql } from 'apollo-boost';
 import { Week } from './Week';
 
@@ -67,58 +67,61 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const CREATEWEEKLYPLANNING = gql`
-  mutation createWeeklyPlanning($weeklyPlanningData: [weeklyPlannings!]!) {
-    createWeeklyPlanning(weeklyPlanningData: $weeklyPlanningData) {
-        status
-    }
-  }
-`;
+// const CREATEWEEKLYPLANNING = gql`
+//   mutation createWeeklyPlanning($weeklyPlanningData: [weeklyPlannings!]!) {
+//     createWeeklyPlanning(weeklyPlanningData: $weeklyPlanningData) {
+//         status
+//     }
+//   }
+// `;
 
 const VIEWWEEKLYPLANNING = gql`
   {
     viewWeeklyPlanning {
-        formData {
+        selections {
             activity
             url
         }
     }
-  }
+}
 `;
 
 export const WeeklySurvey = () => {
   const classes = useStyles();
   const [activeStep, setActiveStep] = useState(0);
   const [stepsDataForm, setStepsDataForm] = useState([]);
-  const [createWeeklyPlanning] = useMutation(CREATEWEEKLYPLANNING);
+  // const [createWeeklyPlanning] = useMutation(CREATEWEEKLYPLANNING);
   const { error, loading } = useQuery(VIEWWEEKLYPLANNING, {
     onCompleted: (data) => {
       setStepsDataForm(data.viewWeeklyPlanning);
+      console.log(stepsDataForm);
     },
   });
 
+  console.log('My data is', stepsDataForm);
+
   const handleChangeSelections = (selectionIndex) => (event) => {
     const updatedForm = [...stepsDataForm];
-    updatedForm[activeStep].selections[selectionIndex].selected = event.target.checked;
+    updatedForm[activeStep].selections[selectionIndex].reaction = event.target.value;
     console.log(updatedForm);
     setStepsDataForm(updatedForm);
   };
 
   const SubmitRequest = async () => {
     try {
-      const filteredResponse = stepsDataForm.map((step) => {
-        const filteredAnswers = step.selections.filter((selection) => !!selection.selected)
-          .map((answers) => answers.choice);
-        const output = { question: step.title, answer: filteredAnswers };
-        return output;
-      });
-      const { data } = await createWeeklyPlanning({
-        variables: {
-          name: cookie.load('name'),
-          results: filteredResponse,
-        },
-      });
-      console.log(data.createWeeklyPlanning);
+      // const filteredResponse = stepsDataForm.map((step) => {
+      //   const filteredAnswers = step.selections.filter((selection) => !!selection.selected)
+      //     .map((answers) => answers.choice);
+      //   const output = { question: step.title, answer: filteredAnswers };
+      //   return output;
+      // });
+      // const { data } = await createWeeklyPlanning({
+      //   variables: {
+      //     name: cookie.load('name'),
+      //     results: filteredResponse,
+      //   },
+      // });
+      // console.log(data.createWeeklyPlanning);
     } catch (e) {
       throw e;
     }
