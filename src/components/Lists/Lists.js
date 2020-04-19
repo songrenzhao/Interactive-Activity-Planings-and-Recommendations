@@ -6,6 +6,7 @@ import DashboardIcon from '@material-ui/icons/Dashboard';
 import ScheduleIcon from '@material-ui/icons/Schedule';
 import PeopleIcon from '@material-ui/icons/People';
 import AssignmentIcon from '@material-ui/icons/Assignment';
+import ViewWeekIcon from '@material-ui/icons/ViewWeek';
 import { Link } from 'react-router-dom';
 
 export const mainListItems = (
@@ -33,6 +34,12 @@ export const mainListItems = (
         <ScheduleIcon />
       </ListItemIcon>
       <ListItemText primary="Schedule" />
+    </ListItem>
+    <ListItem button component={Link} to="/dashboard/planning">
+      <ListItemIcon>
+        <ViewWeekIcon />
+      </ListItemIcon>
+      <ListItemText primary="Planning" />
     </ListItem>
   </div>
 );

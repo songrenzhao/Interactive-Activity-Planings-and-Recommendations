@@ -1,10 +1,10 @@
-/* eslint-disable camelcase */
 /* eslint-disable react/prop-types */
 import React, { useState, useEffect, useRef } from 'react';
 import Button from '@material-ui/core/Button';
 import clsx from 'clsx';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
+import Autocomplete from '@material-ui/lab/Autocomplete';
 import Paper from '@material-ui/core/Paper';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
@@ -17,48 +17,31 @@ import { useMutation } from '@apollo/react-hooks';
 import { gql } from 'apollo-boost';
 import useStyles from './style';
 
-const CREATESURVEYFORM = gql`
-  mutation createSurveyForm($formData: [formData!]!, $createdAt: String) {
-    createSurveyForm(formData: $formData, createdAt: $createdAt) {
+const CREATEWEEKLYPLANNING = gql`
+  mutation createWeeklyPlanning($weeklyPlanningData: [weeklyPlannings!]!) {
+    createWeeklyPlanning(weeklyPlanningData: $weeklyPlanningData) {
       status
     }
   }
 `;
 
+const Activity = [
+  { title: 'Exercise' },
+  { title: 'Cooking Class' },
+  { title: 'Movie Thether' },
+  { title: 'Park' },
+];
+
 const formDataTemplate = [
   {
-    title: '',
-    description: '',
-    limit: '',
-    question: '',
     selections: [{
-      choice: '',
-      url: '',
-    }],
-  },
-  {
-    title: '',
-    description: '',
-    limit: '',
-    question: '',
-    selections: [{
-      choice: '',
-      url: '',
-    }],
-  },
-  {
-    title: '',
-    description: '',
-    limit: '',
-    question: '',
-    selections: [{
-      choice: '',
+      activity: '',
       url: '',
     }],
   },
 ];
 
-export const CreateSurvey = () => {
+export const WeeklySurveyForm = () => {
   const classes = useStyles();
   const timer = useRef();
   const [activeIndex, setActiveIndex] = useState(0);
@@ -66,7 +49,7 @@ export const CreateSurvey = () => {
   const [successButton, setSuccessButton] = useState(false);
   const [failButton, setFailButton] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [createSurveyForm] = useMutation(CREATESURVEYFORM);
+  const [createWeeklyPlanning] = useMutation(CREATEWEEKLYPLANNING);
   const [formData, setFormData] = React.useState(formDataTemplate);
 
   const buttonClassname = clsx({
@@ -79,26 +62,11 @@ export const CreateSurvey = () => {
     clearTimeout(timer.current);
   }, []);
 
-  const handleTabChange = (event, newValue) => {
+  const handleTabChange = (_event, newValue) => {
     setActiveIndex(newValue);
     console.log(formData);
   };
 
-  const handleFormDataChange = (category) => (event) => {
-    const updatedFormData = formData;
-    if (category === 'limit') {
-      updatedFormData[activeIndex][category] = parseInt(event.target.value, 10);
-    } else {
-      updatedFormData[activeIndex][category] = event.target.value;
-    }
-    setFormData(updatedFormData);
-  };
-
-  const handleSelectionChange = (selectionIndex) => (event) => {
-    const updatedFormData = formData;
-    updatedFormData[activeIndex].selections[selectionIndex].choice = event.target.value;
-    setFormData(updatedFormData);
-  };
 
   const handleNext = () => {
     if (activeIndex === formData.length - 1) {
@@ -111,7 +79,7 @@ export const CreateSurvey = () => {
   const handleMoreSelection = () => {
     const updatedFormData = formData;
     updatedFormData[activeIndex].selections.push({
-      choice: '',
+      activity: '',
       url: '',
     });
     setFormData(updatedFormData);
@@ -120,12 +88,8 @@ export const CreateSurvey = () => {
   const handleMoreTab = () => {
     const updatedFormData = [...formData];
     updatedFormData.push({
-      title: '',
-      description: '',
-      limit: '',
-      question: '',
       selections: [{
-        choice: '',
+        activity: '',
         url: '',
       }],
     });
@@ -145,8 +109,10 @@ export const CreateSurvey = () => {
         body: data,
       },
     );
+    // eslint-disable-next-line camelcase
     const { secure_url } = await res.json();
     const updatedFormData = [...formData];
+    // eslint-disable-next-line camelcase
     updatedFormData[activeIndex].selections[selectionIndex].url = secure_url;
     setFormData(updatedFormData);
     setIsPicLoading(false);
@@ -159,13 +125,12 @@ export const CreateSurvey = () => {
       setSuccessButton(false);
       setFailButton(false);
       console.log(formData);
-      const { data } = await createSurveyForm({
+      const { data } = await createWeeklyPlanning({
         variables: {
-          formData,
-          createdAt: new Date(),
+          weeklyPlanningData: formData,
         },
       });
-      const { status } = data.createSurveyForm;
+      const { status } = data.createWeeklyPlanning;
       console.log(status);
       timer.current = setTimeout(() => {
         setLoading(false);
@@ -184,71 +149,51 @@ export const CreateSurvey = () => {
 
   const TabPanel = ({ data, index }) => {
     const {
-      title, description, limit, question, selections,
+      selections,
     } = data;
+
+    const handleAutoFilledActivity = (selectionIndex) => (event, value) => {
+      const updatedFormData = formData;
+      updatedFormData[activeIndex].selections[selectionIndex].activity = value;
+      setFormData(updatedFormData);
+      console.log(formData);
+    };
+
+    const handleActivity = (selectionIndex) => (event) => {
+      const updatedFormData = formData;
+      updatedFormData[activeIndex].selections[selectionIndex].activity = event.target.value;
+      setFormData(updatedFormData);
+      console.log(formData);
+    };
+
     return (
       <>
         {
           activeIndex === index
           && (
             <>
-              <TextField
-                variant="outlined"
-                margin="normal"
-                required
-                fullWidth
-                id={`title-${index}`}
-                label="Title"
-                name={`title-${index}`}
-                defaultValue={title}
-                onChange={handleFormDataChange('title')}
-              />
-              <TextField
-                variant="outlined"
-                margin="normal"
-                required
-                fullWidth
-                name={`description-${index}`}
-                label="Description"
-                id={`description-${index}`}
-                onChange={handleFormDataChange('description')}
-                defaultValue={description}
-              />
-              <TextField
-                variant="outlined"
-                margin="normal"
-                required
-                fullWidth
-                type="number"
-                name={`limit-${index}`}
-                label="Limit"
-                id={`limit-${index}`}
-                onChange={handleFormDataChange('limit')}
-                defaultValue={limit}
-              />
-              <TextField
-                variant="outlined"
-                margin="normal"
-                required
-                fullWidth
-                name={`question-${index}`}
-                label="Question"
-                onChange={handleFormDataChange('question')}
-                defaultValue={question}
-                id={`question-${index}`}
-              />
               <Grid container className={classes.FormGrid}>
                 {selections.map((selection, selectionIndex) => (
-                  <Grid item component={Paper} spacing={2} xs={12} sm={12} className={classes.selectionFormGrid}>
-                    <TextField
-                      required
-                      id={`selection-${index}-${selectionIndex}`}
-                      name={`selection-${index}-${selectionIndex}`}
-                      label="Selection"
-                      onChange={handleSelectionChange(selectionIndex)}
-                      defaultValue={selection.choice}
-                    />
-                    <Button variant="outlined" color="primary" component="label">
+                  <Grid item component={Paper} spacing={0} xs={12} sm={12} className={classes.selectionFormGrid}>
+                    <>
+                      <Autocomplete
+                        id="activity"
+                        freeSolo
+                        style={{ width: '75%' }}
+                        options={Activity.map((option) => option.title)}
+                        defaultValue={selection.activity}
+                        onChange={handleAutoFilledActivity(selectionIndex)}
+                        renderInput={(params) => (
+                          <TextField
+                            {...params}
+                            onChange={handleActivity(selectionIndex)}
+                            margin="normal"
+                            variant="outlined"
+                          />
+                        )}
+                      />
+                    </>
+                    <Button variant="outlined" color="primary" component="label" className="button">
                       Upload File
                       <input
                         type="file"
@@ -295,7 +240,7 @@ export const CreateSurvey = () => {
             onChange={handleTabChange}
           >
             {formData.map((_, index) => (
-              <Tab label={`Category ${index + 1}`} />
+              <Tab label={`Week ${index + 1}`} />
             ))}
             <Fab size="small" color="primary" aria-label="add" onClick={handleMoreTab}>
               <AddIcon />
