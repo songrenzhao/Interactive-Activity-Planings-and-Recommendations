@@ -171,7 +171,7 @@ export const WeeklySurvey = () => {
       <main className={classes.layout}>
         <Paper className={classes.paper}>
           <Typography component="h1" variant="h4" align="center">
-            Survey
+            Weekly Planning
           </Typography>
           <Stepper activeStep={activeStep} className={classes.stepper}>
             {stepsDataForm.map(({ title }, index) => (
