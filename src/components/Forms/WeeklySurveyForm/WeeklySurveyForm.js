@@ -17,9 +17,9 @@ import { useMutation } from '@apollo/react-hooks';
 import { gql } from 'apollo-boost';
 import useStyles from './style';
 
-const CREATESURVEYFORM = gql`
-  mutation createSurveyForm($formData: [formData!]!, $createdAt: String) {
-    createSurveyForm(formData: $formData, createdAt: $createdAt) {
+const CREATEWEEKLYPLANNING = gql`
+  mutation createWeeklyPlanning($weeklyPlanningData: [weeklyPlannings!]!) {
+    createWeeklyPlanning(weeklyPlanningData: $weeklyPlanningData) {
       status
     }
   }
@@ -39,18 +39,6 @@ const formDataTemplate = [
       url: '',
     }],
   },
-  {
-    selections: [{
-      activity: '',
-      url: '',
-    }],
-  },
-  {
-    selections: [{
-      activity: '',
-      url: '',
-    }],
-  },
 ];
 
 export const WeeklySurveyForm = () => {
@@ -61,7 +49,7 @@ export const WeeklySurveyForm = () => {
   const [successButton, setSuccessButton] = useState(false);
   const [failButton, setFailButton] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [createSurveyForm] = useMutation(CREATESURVEYFORM);
+  const [createWeeklyPlanning] = useMutation(CREATEWEEKLYPLANNING);
   const [formData, setFormData] = React.useState(formDataTemplate);
 
   const buttonClassname = clsx({
@@ -137,13 +125,12 @@ export const WeeklySurveyForm = () => {
       setSuccessButton(false);
       setFailButton(false);
       console.log(formData);
-      const { data } = await createSurveyForm({
+      const { data } = await createWeeklyPlanning({
         variables: {
-          formData,
-          createdAt: new Date(),
+          weeklyPlanningData: formData,
         },
       });
-      const { status } = data.createSurveyForm;
+      const { status } = data.createWeeklyPlanning;
       console.log(status);
       timer.current = setTimeout(() => {
         setLoading(false);
@@ -164,10 +151,6 @@ export const WeeklySurveyForm = () => {
     const {
       selections,
     } = data;
-
-    // const handleSubmit = (event) => {
-    //   event.preventDefault();
-    // };
 
     const handleAutoFilledActivity = (selectionIndex) => (event, value) => {
       const updatedFormData = formData;
@@ -257,7 +240,7 @@ export const WeeklySurveyForm = () => {
             onChange={handleTabChange}
           >
             {formData.map((_, index) => (
-              <Tab label={`Week ${index}`} />
+              <Tab label={`Week ${index + 1}`} />
             ))}
             <Fab size="small" color="primary" aria-label="add" onClick={handleMoreTab}>
               <AddIcon />

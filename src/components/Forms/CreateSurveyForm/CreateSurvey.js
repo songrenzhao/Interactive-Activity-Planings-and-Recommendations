@@ -295,7 +295,7 @@ export const CreateSurvey = () => {
             onChange={handleTabChange}
           >
             {formData.map((_, index) => (
-              <Tab label={`Category ${index}`} />
+              <Tab label={`Category ${index + 1}`} />
             ))}
             <Fab size="small" color="primary" aria-label="add" onClick={handleMoreTab}>
               <AddIcon />
