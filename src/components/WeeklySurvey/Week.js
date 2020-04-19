@@ -3,10 +3,13 @@
 import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
+import Radio from '@material-ui/core/Radio';
+import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import InsertEmoticonIcon from '@material-ui/icons/InsertEmoticon';
 import SentimentSatisfiedIcon from '@material-ui/icons/SentimentSatisfied';
 import SentimentVeryDissatisfiedIcon from '@material-ui/icons/SentimentVeryDissatisfied';
+import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
 
 
 export const Week = ({ dataForm, onChange }) => {
@@ -22,29 +25,7 @@ export const Week = ({ dataForm, onChange }) => {
           <Grid item xs={12}>
             <FormControlLabel
               control={(
-                <InsertEmoticonIcon
-                  color="secondary"
-                  checked={selection.selected || false}
-                  onChange={onChange(index)}
-                />
-              )}
-            />
-            <FormControlLabel
-              control={(
-                <SentimentSatisfiedIcon
-                  checked={selection.selected || false}
-                  onChange={onChange(index)}
-                  color="secondary"
-                />
-              )}
-            />
-            <FormControlLabel
-              control={(
-                <SentimentVeryDissatisfiedIcon
-                  checked={selection.selected || false}
-                  onChange={onChange(index)}
-                  color="secondary"
-                />
+                <KeyboardArrowRightIcon />
               )}
               label={(
                 <Grid container direction="row" alignItems="center">
@@ -61,6 +42,62 @@ export const Week = ({ dataForm, onChange }) => {
                 </Grid>
               )}
             />
+            <RadioGroup row aria-label="position" name="position" defaultValue="top">
+              <FormControlLabel
+                value="happy"
+                control={(
+                  <Radio
+                    color="primary"
+                    onChange={onChange(index)}
+                  />
+                )}
+                label={(
+                  <Grid container direction="row" alignItems="center">
+                    <Grid item>
+                      <InsertEmoticonIcon />
+                    </Grid>
+                    {selection.choice}
+                  </Grid>
+                )}
+                labelPlacement="top"
+              />
+              <FormControlLabel
+                value="OK"
+                control={(
+                  <Radio
+                    color="primary"
+                    onChange={onChange(index)}
+                  />
+                )}
+                label={(
+                  <Grid container direction="row" alignItems="center">
+                    <Grid item>
+                      <SentimentSatisfiedIcon />
+                    </Grid>
+                    {selection.choice}
+                  </Grid>
+                )}
+                labelPlacement="top"
+              />
+              <FormControlLabel
+                value="sad"
+                control={(
+                  <Radio
+                    color="primary"
+                    onChange={onChange(index)}
+                  />
+                )}
+                label={(
+                  <Grid container direction="row" alignItems="center">
+                    <Grid item>
+                      <SentimentVeryDissatisfiedIcon />
+                    </Grid>
+                    {selection.choice}
+                  </Grid>
+                )}
+                labelPlacement="top"
+              />
+            </RadioGroup>
           </Grid>
         </Grid>
       ))}
