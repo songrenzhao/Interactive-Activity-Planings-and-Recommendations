@@ -13,7 +13,7 @@ import AddIcon from '@material-ui/icons/Add';
 import { Grid } from '@material-ui/core';
 import CardMedia from '@material-ui/core/CardMedia';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import { useMutation } from '@apollo/react-hooks';
+import { useMutation, useQuery } from '@apollo/react-hooks';
 import { gql } from 'apollo-boost';
 import useStyles from './style';
 
@@ -25,12 +25,20 @@ const CREATEWEEKLYPLANNING = gql`
   }
 `;
 
-const Activity = [
-  { title: 'Exercise' },
-  { title: 'Cooking Class' },
-  { title: 'Movie Thether' },
-  { title: 'Park' },
-];
+const VIEWSURVEYFORM = gql`
+  {
+    viewSurveyForm {
+      title
+      description
+      limit
+      question
+      selections {
+          choice
+          url
+      }
+    }
+  }
+`;
 
 const formDataTemplate = [
   {
@@ -50,7 +58,20 @@ export const WeeklySurveyForm = () => {
   const [failButton, setFailButton] = useState(false);
   const [loading, setLoading] = useState(false);
   const [createWeeklyPlanning] = useMutation(CREATEWEEKLYPLANNING);
-  const [formData, setFormData] = React.useState(formDataTemplate);
+  const [formData, setFormData] = useState(formDataTemplate);
+  const [recommendations, setRecommendations] = useState([]);
+  const { error, loading: graphqlLoading } = useQuery(VIEWSURVEYFORM, {
+    onCompleted: (data) => {
+      const { viewSurveyForm } = data;
+      const recommendedActivities = [];
+      viewSurveyForm.forEach(({ selections }) => {
+        selections.forEach(({ choice }) => {
+          recommendedActivities.push({ title: choice });
+        });
+      });
+      setRecommendations(recommendedActivities);
+    },
+  });
 
   const buttonClassname = clsx({
     [classes.buttonSuccess]: successButton,
@@ -66,7 +87,6 @@ export const WeeklySurveyForm = () => {
     setActiveIndex(newValue);
     console.log(formData);
   };
-
 
   const handleNext = () => {
     if (activeIndex === formData.length - 1) {
@@ -180,7 +200,7 @@ export const WeeklySurveyForm = () => {
                         id="activity"
                         freeSolo
                         style={{ width: '75%' }}
-                        options={Activity.map((option) => option.title)}
+                        options={recommendations.map((option) => option.title)}
                         defaultValue={selection.activity}
                         onChange={handleAutoFilledActivity(selectionIndex)}
                         renderInput={(params) => (
@@ -225,6 +245,9 @@ export const WeeklySurveyForm = () => {
       </>
     );
   };
+
+  if (graphqlLoading) { return <div>Loading…</div>; }
+  if (error) { return <div>Error</div>; }
 
   return (
     <Grid container component="main">
