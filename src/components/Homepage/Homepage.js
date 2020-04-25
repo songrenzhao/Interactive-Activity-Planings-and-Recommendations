@@ -59,7 +59,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const IAPR = [1];
+const GoodPlan = [1];
 const CCNY = [1];
 const GoodWill = [1];
 
@@ -74,7 +74,7 @@ export const Homepage = () => {
           <a href="/signin">
             <img
               alt="logo"
-              src="https://i.imgur.com/VaIhVnS.png"
+              src="/images/GoodPlan_Logo.png"
               className="profile-img"
               width="60px"
               height="60px"
@@ -91,7 +91,7 @@ export const Homepage = () => {
             </Typography>
             <Typography variant="h6" align="left" color="textSecondary" paragraph>
               Some people have difficuties talking but still have thoughts they would like to express.
-              When you have someone who finds it difficult to talk to others, IAPR is here to let their feelings and opinions be heard.
+              When you have someone who finds it difficult to talk to others, GoodPlan is here to let their feelings and opinions be heard.
 
             </Typography>
           </Container>
@@ -100,16 +100,16 @@ export const Homepage = () => {
           {/* End hero unit */}
 
           <Grid container spacing={5}>
-            {IAPR.map((card) => (
+            {GoodPlan.map((card) => (
               <Grid item key={card} xs={12} sm={4} md={4}>
                 <Card className={classes.card}>
                   <CardMedia
                     className={classes.cardMedia}
-                    title="IAPR's mission statement"
+                    title="GoodPlan's mission statement"
                   />
                   <img
                     alt="logo"
-                    src="https://i.imgur.com/VaIhVnS.png"
+                    src="/images/GoodPlan_Logo.png"
                     className="profile-img"
                     width="300px"
                     height="300px"
@@ -117,10 +117,10 @@ export const Homepage = () => {
                   />
                   <CardContent className={classes.cardContent}>
                     <Typography gutterBottom variant="h2" component="h2">
-                      What is IAPR?
+                      What is GoodPlan?
                     </Typography>
                     <Typography>
-                      IAPR (Interactive Activity Plannings and Recommendations) is an app that focuses on increasing communication
+                      GoodPlan (Interactive Activity Plannings and Recommendations) is an app that focuses on increasing communication
                       between staff and the people they work with. Some people in the program can find it hard to communicate with people,
                       especially face to face, and if there is an activity that is planned for the day that they are uncomfortable with, they may have trouble
                       expressing it until it overwhelms them. Our app is designed to make it easier for the users to express their opinions and emotions
@@ -151,7 +151,7 @@ export const Homepage = () => {
                   />
                   <CardContent className={classes.cardContent}>
                     <Typography gutterBottom variant="h2" component="h2">
-                      Who is IAPR?
+                      Who is GoodPlan?
                     </Typography>
                     <Typography>
                       We are Xiaoyan Zhang, Songren Zhao, Hyojun Moon, 3 undergraduate seniors at CCNY(The City College of New York).
@@ -159,7 +159,7 @@ export const Homepage = () => {
                       Professor Zhu's specialty in the Computer Science (CSc) department at CCNY is using technology to helped the disabled and as his students we were tasked
                       with finding a way to help those who need it the most. When we visited the Harlem Goodwill, we saw all the good the staff were doing in helping people with
                       autism to take control of their lives, find jobs, and be self-sustaining and we decided that we wanted to help in our way. That is when we drew up our first
-                      outline for IAPR.
+                      outline for GoodPlan.
                     </Typography>
                   </CardContent>
                 </Card>
