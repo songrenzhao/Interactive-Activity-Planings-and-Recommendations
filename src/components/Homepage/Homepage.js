@@ -36,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
   },
   heroContent: {
     backgroundColor: theme.palette.background.paper,
-    padding: theme.spacing(8, 0, 6),
+    padding: theme.spacing(8, 0, 5),
   },
   heroButtons: {
     marginTop: theme.spacing(4),
@@ -92,7 +92,7 @@ export const Homepage = () => {
       <main>
         <div className={classes.heroContent}>
           <Container maxWidth="sm">
-            <Typography component="h1" variant="h2" align="left" color="textPrimary" gutterBottom>
+            <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
               Communication is Important.
             </Typography>
             <Typography variant="h6" align="left" color="textSecondary" paragraph>
@@ -105,7 +105,7 @@ export const Homepage = () => {
         <Container className={classes.cardGrid} maxWidth="xl">
           {/* End hero unit */}
 
-          <Grid container spacing={5}>
+          <Grid container spacing={10}>
             {GoodPlan.map((card) => (
               <Grid item key={card} xs={12} sm={4} md={4}>
                 <a href="/signin">
@@ -118,7 +118,7 @@ export const Homepage = () => {
                       alt="logo"
                       src="/images/GoodPlan_Logo.png"
                       className="profile-img"
-                      width="200px"
+                      width="210px"
                       height="300px"
                       position="center"
                     />
@@ -138,7 +138,7 @@ export const Homepage = () => {
                       alt="logo"
                       src="/images/ccny-logo.jpg"
                       className="profile-img"
-                      width="200px"
+                      width="210px"
                       height="260px"
                       position="center"
                     />
@@ -158,7 +158,7 @@ export const Homepage = () => {
                       alt="logo"
                       src="/images/goodwilllogo.png"
                       className="profile-img"
-                      width="200px"
+                      width="215px"
                       height="200px"
                       position="center"
                     />
