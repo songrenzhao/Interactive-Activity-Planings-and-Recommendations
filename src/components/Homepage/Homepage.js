@@ -3,7 +3,6 @@
 import React from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
@@ -12,6 +11,7 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Link from '@material-ui/core/Link';
+import Button from '@material-ui/core/Button';
 
 function Copyright() {
   return (
@@ -28,6 +28,9 @@ function Copyright() {
 }
 
 const useStyles = makeStyles((theme) => ({
+  margin: {
+    margin: theme.spacing(1),
+  },
   icon: {
     marginRight: theme.spacing(2),
   },
@@ -43,7 +46,7 @@ const useStyles = makeStyles((theme) => ({
     paddingBottom: theme.spacing(0),
   },
   card: {
-    height: '100%',
+    height: '50%',
     display: 'flex',
     flexDirection: 'column',
   },
@@ -70,16 +73,19 @@ export const Homepage = () => {
     <>
       <CssBaseline />
       <AppBar position="relative">
-        <Toolbar>
+        <Toolbar color="#2196f3">
           <a href="/signin">
             <img
               alt="logo"
-              src="/images/GoodPlan_Logo.png"
+              src="/images/GoodPlan_Logo.jpg"
               className="profile-img"
               width="60px"
               height="60px"
               style={{ marginRight: '5px' }}
             />
+            <Button variant="contained" size="medium" color="white" className={classes.margin}>
+              Sign In / Sign Up
+            </Button>
           </a>
         </Toolbar>
       </AppBar>
@@ -102,113 +108,77 @@ export const Homepage = () => {
           <Grid container spacing={5}>
             {GoodPlan.map((card) => (
               <Grid item key={card} xs={12} sm={4} md={4}>
-                <Card className={classes.card}>
-                  <CardMedia
-                    className={classes.cardMedia}
-                    title="GoodPlan's mission statement"
-                  />
-                  <img
-                    alt="logo"
-                    src="/images/GoodPlan_Logo.png"
-                    className="profile-img"
-                    width="300px"
-                    height="300px"
-                    position="center"
-                  />
-                  <CardContent className={classes.cardContent}>
-                    <Typography gutterBottom variant="h2" component="h2">
-                      What is GoodPlan?
-                    </Typography>
-                    <Typography>
-                      GoodPlan (Interactive Activity Plannings and Recommendations) is an app that focuses on increasing communication
-                      between staff and the people they work with. Some people in the program can find it hard to communicate with people,
-                      especially face to face, and if there is an activity that is planned for the day that they are uncomfortable with, they may have trouble
-                      expressing it until it overwhelms them. Our app is designed to make it easier for the users to express their opinions and emotions
-                      by giving them an easy medium and method to express themselves. We have achieved this by giving the staff the tools to create and edit
-                      the schedule from any internet-capable device and the users to comment or react, using an emoji, to the activity, all in real-time! This
-                      way, if one user has a problem with an activity but is uncomfortable in bringing it up with other people, the staff can take note and talk
-                      to them in private.
-                    </Typography>
-                  </CardContent>
-
-                </Card>
+                <a href="/signin">
+                  <Card className={classes.card}>
+                    <CardMedia
+                      className={classes.cardMedia}
+                      title="GoodPlan's mission statement"
+                    />
+                    <img
+                      alt="logo"
+                      src="/images/GoodPlan_Logo.png"
+                      className="profile-img"
+                      width="200px"
+                      height="300px"
+                      position="center"
+                    />
+                  </Card>
+                </a>
               </Grid>
             ))}
             {CCNY.map((card) => (
               <Grid item key={card} xs={12} sm={4} md={4}>
-                <Card className={classes.card}>
-                  <CardMedia
-                    className={classes.cardMedia}
-                    title="Our background"
-                  />
-                  <img
-                    alt="logo"
-                    src="/images/ccny-logo.jpg"
-                    className="profile-img"
-                    width="260px"
-                    height="260px"
-                    position="center"
-                  />
-                  <CardContent className={classes.cardContent}>
-                    <Typography gutterBottom variant="h2" component="h2">
-                      Who is GoodPlan?
-                    </Typography>
-                    <Typography>
-                      We are Xiaoyan Zhang, Songren Zhao, Hyojun Moon, 3 undergraduate seniors at CCNY(The City College of New York).
-                      Under the guidance of our senior design professor Prof. Zhigang Zhu, we met with the staff and Goodwill and found a way we could use our brain to help.
-                      Professor Zhu's specialty in the Computer Science (CSc) department at CCNY is using technology to helped the disabled and as his students we were tasked
-                      with finding a way to help those who need it the most. When we visited the Harlem Goodwill, we saw all the good the staff were doing in helping people with
-                      autism to take control of their lives, find jobs, and be self-sustaining and we decided that we wanted to help in our way. That is when we drew up our first
-                      outline for GoodPlan.
-                    </Typography>
-                  </CardContent>
-                </Card>
+                <a href="https://www.ccny.cuny.edu/">
+                  <Card className={classes.card}>
+                    <CardMedia
+                      className={classes.cardMedia}
+                      title="Our background"
+                    />
+                    <img
+                      alt="logo"
+                      src="/images/ccny-logo.jpg"
+                      className="profile-img"
+                      width="200px"
+                      height="260px"
+                      position="center"
+                    />
+                  </Card>
+                </a>
               </Grid>
             ))}
             {GoodWill.map((card) => (
               <Grid item key={card} xs={12} sm={4} md={4}>
-                <Card className={classes.card}>
-                  <CardMedia
-                    className={classes.cardMedia}
-                    title="Our background"
-                  />
-                  <img
-                    alt="logo"
-                    src="/images/goodwilllogo.png"
-                    className="profile-img"
-                    width="400px"
-                    height="260px"
-                    position="center"
-                  />
-                  <CardContent className={classes.cardContent}>
-                    <Typography gutterBottom variant="h2" component="h2">
-                      Who is GoodWill?
-                    </Typography>
-                    <Typography>
-                      Goodwill Industries International Inc., or shortened to Goodwill,
-                      is an American nonprofit 501 organization that provides job training,
-                      employment placement services, and other community-based programs for people who have barriers
-                      preventing them from otherwise obtaining a job.
-                    </Typography>
-                  </CardContent>
-
-                </Card>
+                <a href="https://www.goodwill.org/">
+                  <Card className={classes.card}>
+                    <CardMedia
+                      className={classes.cardMedia}
+                      title="Our background"
+                    />
+                    <img
+                      alt="logo"
+                      src="/images/goodwilllogo.png"
+                      className="profile-img"
+                      width="200px"
+                      height="200px"
+                      position="center"
+                    />
+                  </Card>
+                </a>
               </Grid>
 
             ))}
           </Grid>
-
+          {/* Footer */}
+          <footer className={classes.footer}>
+            <Typography variant="h6" align="center" gutterBottom />
+            <Typography variant="subtitle1" align="center" color="textSecondary" component="p">
+              Good Plan
+            </Typography>
+            <Copyright />
+          </footer>
+          {/* End footer */}
         </Container>
       </main>
-      {/* Footer */}
-      <footer className={classes.footer}>
-        <Typography variant="h6" align="center" gutterBottom />
-        <Typography variant="subtitle1" align="center" color="textSecondary" component="p">
-          Interactive Activitiy Plannings and Recommendations
-        </Typography>
-        <Copyright />
-      </footer>
-      {/* End footer */}
     </>
   );
 };
