@@ -8,6 +8,8 @@ import { CreateParticipant } from '../components/Forms/CreateParticipant';
 import { CreateSurvey } from '../components/Forms/CreateSurveyForm';
 import { Schedule } from '../components/Schedule';
 import { WeeklySurveyForm } from '../components/Forms/WeeklySurveyForm';
+import { WeeklyResponseList } from '../components/WeeklyResponse';
+import { DetailedResponse } from '../components/WeeklyResponse/DetailedResponse';
 
 const client = new ApolloClient({
   uri: 'https://iapr.herokuapp.com/graphql',
@@ -35,6 +37,12 @@ const DashboardRouter = () => {
         </Route>
         <Route path={`${path}/planning`}>
           <WeeklySurveyForm />
+        </Route>
+        <Route path={`${path}/weeklyresponse`}>
+          <WeeklyResponseList />
+        </Route>
+        <Route path={`${path}/profile`}>
+          <DetailedResponse />
         </Route>
       </Switch>
     </ApolloProvider>

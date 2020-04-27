@@ -1,6 +1,5 @@
 /* eslint-disable max-len */
 import React from 'react';
-import { useRouteMatch } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
@@ -20,14 +19,13 @@ const useStyles = makeStyles({
   },
 });
 
-export default function SurveyPost(prop) {
-  const { path } = useRouteMatch();
+export const WeeklyResponse = (prop) => {
   const { name, date } = prop;
   const displayDate = new Date(parseInt(date, 10)).toString();
   const classes = useStyles();
   return (
     <Grid item xs={12} md={6}>
-      <CardActionArea component="a" href={`${path}/table?query=${name}&createdAt=${parseInt(date, 10) - 1}`}>
+      <CardActionArea component="a" href={`/dashboard/profile?participant=${name}&createdAt=${parseInt(date, 10) - 1}`}>
         <Card className={classes.card}>
           <div className={classes.cardDetails}>
             <CardContent>
@@ -37,7 +35,7 @@ export default function SurveyPost(prop) {
               <Typography variant="Date" paragraph>
                 {displayDate}
               </Typography>
-              <Typography variant="Detail" color="primary" button component="a" href={`${path}/table?query=${name}&createdAt=${parseInt(date, 10) - 1}`}>
+              <Typography variant="Detail" color="primary" button component="a" href={`/dashboard/profile?participant=${name}&createdAt=${parseInt(date, 10) - 1}`}>
                 Continue reading...
               </Typography>
             </CardContent>
@@ -46,4 +44,4 @@ export default function SurveyPost(prop) {
       </CardActionArea>
     </Grid>
   );
-}
+};
