@@ -86,7 +86,7 @@ export const SignUpForm = () => {
       <Grid item xs={false} sm={4} md={7} className={classes.image} />
       <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square className={classes.signUpContainer}>
         <div className={classes.paper}>
-          <Avatar src="/images/IAPR_Logo.png" className={classes.avatar}> </Avatar>
+          <Avatar src="/images/GoodPlan_Logo.png" className={classes.avatar}> </Avatar>
           <Typography component="h1" variant="h5">
             Create an Account
           </Typography>
