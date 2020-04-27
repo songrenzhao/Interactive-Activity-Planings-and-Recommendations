@@ -41,6 +41,12 @@ export const mainListItems = (
       </ListItemIcon>
       <ListItemText primary="Planning" />
     </ListItem>
+    <ListItem button component={Link} to="/dashboard/weeklyresponse">
+      <ListItemIcon>
+        <AssignmentIcon />
+      </ListItemIcon>
+      <ListItemText primary="Weekly Response" />
+    </ListItem>
   </div>
 );
 
