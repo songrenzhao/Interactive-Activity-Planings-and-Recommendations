@@ -12,7 +12,7 @@ import cookie from 'react-cookies';
 import CardMedia from '@material-ui/core/CardMedia';
 import useStyles from './style';
 
-const expiredTime = 60 * 60 * 2; // 24hours
+const expiredTime = 60 * 60 * 2; // 2hours
 
 const SIGNIN = gql`
   {
