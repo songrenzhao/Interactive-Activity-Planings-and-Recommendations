@@ -80,8 +80,8 @@ export const Schedule = () => {
       console.log(data);
     }
     updatedScheduleInfo.data = data;
+    console.log(updatedScheduleInfo);
     setScheduleInfo(updatedScheduleInfo);
-    console.log(scheduleInfo);
   };
 
   const currentDateChange = (currentDate) => {
