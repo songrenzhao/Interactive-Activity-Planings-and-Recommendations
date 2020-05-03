@@ -177,7 +177,8 @@ export const WeeklySurveyForm = () => {
       const indexURL = recommendations.map((recommendation) => recommendation.title).indexOf(value);
       console.log(indexURL);
       // eslint-disable-next-line no-extra-boolean-cast
-      updatedFormData[activeIndex].selections[selectionIndex].url = (indexURL !== -1 ? recommendations[indexURL].url : '');
+      updatedFormData[activeIndex].selections[selectionIndex].url = (indexURL !== -1
+        ? recommendations[indexURL].url : '');
       setFormData(updatedFormData);
       console.log(formData);
     };
