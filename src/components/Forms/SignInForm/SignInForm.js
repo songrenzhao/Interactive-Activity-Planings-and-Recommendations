@@ -14,7 +14,6 @@ import Box from '@material-ui/core/Box';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
-import cookie from 'react-cookies';
 import { useMutation } from '@apollo/react-hooks';
 import { gql } from 'apollo-boost';
 import useStyles from './style';
@@ -38,8 +37,6 @@ const SIGNIN = gql`
     }
   }
 `;
-
-const expiredTime = 60 * 60 * 2; // 2hours
 
 export const SignInForm = () => {
   const classes = useStyles();
@@ -68,7 +65,7 @@ export const SignInForm = () => {
     clearTimeout(timer.current);
   }, []);
 
-  const signInRequest = async () => {
+  const signUpRequest = async () => {
     try {
       const { data } = await signIn({
         variables: {
@@ -77,7 +74,6 @@ export const SignInForm = () => {
         },
       });
       const { status } = data.signIn;
-      cookie.save('isAuthenticated', `${status}`, { path: '/', maxAge: expiredTime });
       timer.current = setTimeout(() => {
         setLoading(false);
         if (status) {
@@ -96,7 +92,7 @@ export const SignInForm = () => {
     try {
       e.preventDefault();
       setLoading(true);
-      await signInRequest();
+      await signUpRequest();
     } catch (error) {
       const newError = { isError: true, errorMsg: 'Internal Service Error' };
       console.log(newError);

@@ -184,7 +184,7 @@ export const CreateSurvey = () => {
 
   const TabPanel = ({ data, index }) => {
     const {
-      title, description, selections,
+      title, description, limit, question, selections,
     } = data;
     return (
       <>
@@ -213,6 +213,29 @@ export const CreateSurvey = () => {
                 id={`description-${index}`}
                 onChange={handleFormDataChange('description')}
                 defaultValue={description}
+              />
+              <TextField
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                type="number"
+                name={`limit-${index}`}
+                label="Limit"
+                id={`limit-${index}`}
+                onChange={handleFormDataChange('limit')}
+                defaultValue={limit}
+              />
+              <TextField
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                name={`question-${index}`}
+                label="Question"
+                onChange={handleFormDataChange('question')}
+                defaultValue={question}
+                id={`question-${index}`}
               />
               <Grid container className={classes.FormGrid}>
                 {selections.map((selection, selectionIndex) => (
