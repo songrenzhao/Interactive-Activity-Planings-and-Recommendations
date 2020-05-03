@@ -29,6 +29,12 @@ export const mainListItems = (
       </ListItemIcon>
       <ListItemText primary="Participants" />
     </ListItem>
+    <ListItem button component={Link} to="/dashboard/schedule">
+      <ListItemIcon>
+        <ScheduleIcon />
+      </ListItemIcon>
+      <ListItemText primary="Schedule" />
+    </ListItem>
     <ListItem button component={Link} to="/dashboard/planning">
       <ListItemIcon>
         <ViewWeekIcon />
@@ -40,12 +46,6 @@ export const mainListItems = (
         <AssignmentIcon />
       </ListItemIcon>
       <ListItemText primary="Weekly Response" />
-    </ListItem>
-    <ListItem button component={Link} to="/dashboard/schedule">
-      <ListItemIcon>
-        <ScheduleIcon />
-      </ListItemIcon>
-      <ListItemText primary="Schedule" />
     </ListItem>
   </div>
 );
