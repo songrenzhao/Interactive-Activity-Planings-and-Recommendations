@@ -15,6 +15,7 @@ import Paper from '@material-ui/core/Paper';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import NotificationsIcon from '@material-ui/icons/Notifications';
+import cookie from 'react-cookies';
 import { mainListItems } from '../../components/Lists';
 import DashboardRouter from '../../routes/DashboardRouter';
 import useStyles from './style';
@@ -22,15 +23,19 @@ import useStyles from './style';
 export const Dashboard = () => {
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
+  const [isAuthenticated, setIsAuthenticated] = React.useState(true);
   const handleDrawerOpen = () => {
     setOpen(true);
   };
   const handleDrawerClose = () => {
     setOpen(false);
   };
+  React.useEffect(() => {
+    setIsAuthenticated(cookie.load('isAuthenticated') === 'true');
+  }, []);
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
-  return (
+  const IsAuthenticatedResponse = () => (
     <div className={classes.root}>
       <CssBaseline />
       <AppBar position="absolute" className={clsx(classes.appBar, open && classes.appBarShift)}>
@@ -83,5 +88,9 @@ export const Dashboard = () => {
         </Container>
       </main>
     </div>
+  );
+
+  return (
+    isAuthenticated ? (<IsAuthenticatedResponse />) : (<div>Please Log In</div>)
   );
 };
