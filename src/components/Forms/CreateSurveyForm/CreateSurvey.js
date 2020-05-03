@@ -39,8 +39,6 @@ const formDataTemplate = [
   {
     title: '',
     description: '',
-    limit: '',
-    question: '',
     selections: [{
       choice: '',
       url: '',
@@ -49,8 +47,6 @@ const formDataTemplate = [
   {
     title: '',
     description: '',
-    limit: '',
-    question: '',
     selections: [{
       choice: '',
       url: '',
@@ -122,8 +118,6 @@ export const CreateSurvey = () => {
     updatedFormData.push({
       title: '',
       description: '',
-      limit: '',
-      question: '',
       selections: [{
         choice: '',
         url: '',
