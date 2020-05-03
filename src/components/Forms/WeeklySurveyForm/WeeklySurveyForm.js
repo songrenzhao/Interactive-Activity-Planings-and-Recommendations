@@ -30,8 +30,6 @@ const VIEWSURVEYFORM = gql`
     viewSurveyForm {
       title
       description
-      limit
-      question
       selections {
           choice
           url
