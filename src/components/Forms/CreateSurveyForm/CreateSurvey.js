@@ -29,8 +29,6 @@ const formDataTemplate = [
   {
     title: '',
     description: '',
-    limit: '',
-    question: '',
     selections: [{
       choice: '',
       url: '',
