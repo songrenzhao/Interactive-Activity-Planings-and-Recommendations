@@ -63,10 +63,11 @@ export const WeeklySurveyForm = () => {
       const { viewSurveyForm } = data;
       const recommendedActivities = [];
       viewSurveyForm.forEach(({ selections }) => {
-        selections.forEach(({ choice }) => {
-          recommendedActivities.push({ title: choice });
+        selections.forEach(({ choice, url }) => {
+          recommendedActivities.push({ title: choice, url });
         });
       });
+      console.log(recommendedActivities);
       setRecommendations(recommendedActivities);
     },
   });
@@ -171,8 +172,12 @@ export const WeeklySurveyForm = () => {
     } = data;
 
     const handleAutoFilledActivity = (selectionIndex) => (event, value) => {
-      const updatedFormData = formData;
+      const updatedFormData = [...formData];
       updatedFormData[activeIndex].selections[selectionIndex].activity = value;
+      const indexURL = recommendations.map((recommendation) => recommendation.title).indexOf(value);
+      console.log(indexURL);
+      // eslint-disable-next-line no-extra-boolean-cast
+      updatedFormData[activeIndex].selections[selectionIndex].url = (indexURL !== -1 ? recommendations[indexURL].url : '');
       setFormData(updatedFormData);
       console.log(formData);
     };
