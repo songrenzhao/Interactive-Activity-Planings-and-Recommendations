@@ -83,7 +83,7 @@ export const DetailedResponse = () => {
                 id={`title-${index}`}
                 label="Title"
                 name={`title-${index}`}
-                value={`Week ${index + 1}`}
+                value={`Day ${index + 1}`}
               />
               <Grid container className={classes.FormGrid}>
                 {selections.map((selection, selectionIndex) => (
