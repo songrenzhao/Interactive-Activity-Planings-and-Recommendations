@@ -18,6 +18,7 @@ const SIGNIN = gql`
   {
     participants {
       name
+      picture
     }
   }
 `;
@@ -25,7 +26,7 @@ const SIGNIN = gql`
 export const SignInParticipantForm = () => {
   const classes = useStyles();
   const { loading, error, data } = useQuery(SIGNIN);
-
+  console.log(data);
   const handleChange = (name) => () => {
     cookie.save('name', name, { path: '/', maxAge: expiredTime });
   };
@@ -56,7 +57,8 @@ export const SignInParticipantForm = () => {
                 <div className={classes.cardDetails}>
                   <CardMedia
                     className={classes.cardMedia}
-                    image="https://cdn1.iconfinder.com/data/icons/user-pictures/101/malecostume-512.png"
+                    image={value.picture
+                            || 'https://cdn1.iconfinder.com/data/icons/user-pictures/101/malecostume-512.png'}
                   />
                   <CardContent>
                     <Typography component="h2" variant="h5">
