@@ -2,6 +2,8 @@
 /* eslint-disable no-undefined */
 /* eslint-disable react/prop-types */
 import React, { useState } from 'react';
+import { gql } from 'apollo-boost';
+import { useMutation, useQuery } from '@apollo/react-hooks';
 import Paper from '@material-ui/core/Paper';
 import { ViewState, EditingState, IntegratedEditing } from '@devexpress/dx-react-scheduler';
 import {
@@ -18,27 +20,25 @@ import {
   ConfirmationDialog,
 } from '@devexpress/dx-react-scheduler-material-ui';
 
-export const appointments = [
+const UPDATESCHEDULE = gql`
+  mutation updateSchedule($schedule: [scheduleInput]) {
+    updateSchedule(schedule: $schedule) {
+        status
+    }
+}
+`;
+
+const VIEWSCHEDULE = gql`
   {
-    title: 'Install New Database',
-    startDate: new Date(2018, 5, 27, 9, 45),
-    endDate: new Date(2018, 5, 27, 11, 15),
-    id: 0,
-    location: 'Room 1',
-  }, {
-    title: 'Approve New Online Marketing Strategy',
-    startDate: new Date(2018, 5, 27, 12, 0),
-    endDate: new Date(2018, 5, 27, 14, 0),
-    id: 1,
-    location: 'Room 3',
-  }, {
-    title: 'Upgrade Personal Computers',
-    startDate: new Date(2018, 5, 27, 15, 15),
-    endDate: new Date(2018, 5, 27, 16, 30),
-    id: 2,
-    location: 'Room 3',
-  },
-];
+    viewSchedule {
+      title
+      startDate
+      endDate
+      id
+      notes
+    }
+}
+`;
 
 const Appointment = ({
   children, style, ...restProps
@@ -54,13 +54,53 @@ const Appointment = ({
   </Appointments.Appointment>
 );
 
+const parseDateToString = (data) => {
+  const parsedData = data.map((date) => {
+    const {
+      __typename, endDate, startDate, ...restDate
+    } = date;
+    return {
+      ...restDate,
+      endDate: new Date(parseInt(endDate, 10)),
+      startDate: new Date(parseInt(startDate, 10)),
+    };
+  });
+  console.log(parsedData);
+  return parsedData;
+};
+
+const parseStringToDate = (data) => {
+  const parsedData = data.map((date) => {
+    const {
+      endDate, startDate, id, ...restDate
+    } = date;
+    return {
+      ...restDate,
+      id: parseInt(id, 10),
+      endDate: Date.parse(endDate).toString(),
+      startDate: Date.parse(startDate).toString(),
+    };
+  });
+  console.log(parsedData);
+  return parsedData;
+};
+
 export const Schedule = () => {
   const [scheduleInfo, setScheduleInfo] = useState({
-    data: appointments,
-    currentDate: '2018-06-27',
+    data: [],
+    currentDate: new Date(),
+  });
+  const [updateSchedule] = useMutation(UPDATESCHEDULE);
+  const { error, loading } = useQuery(VIEWSCHEDULE, {
+    onCompleted: (data) => {
+      setScheduleInfo({
+        currentDate: new Date(),
+        data: parseDateToString(data.viewSchedule),
+      });
+    },
   });
 
-  const commitChanges = ({ added, changed, deleted }) => {
+  const commitChanges = async ({ added, changed, deleted }) => {
     console.log(added, changed, deleted);
     const updatedScheduleInfo = { ...scheduleInfo };
     let { data } = updatedScheduleInfo;
@@ -80,8 +120,14 @@ export const Schedule = () => {
       console.log(data);
     }
     updatedScheduleInfo.data = data;
-    console.log(updatedScheduleInfo);
     setScheduleInfo(updatedScheduleInfo);
+    console.log(updatedScheduleInfo);
+    console.log(parseStringToDate(updatedScheduleInfo.data));
+    await updateSchedule({
+      variables: {
+        schedule: parseStringToDate(updatedScheduleInfo.data),
+      },
+    });
   };
 
   const currentDateChange = (currentDate) => {
@@ -90,7 +136,8 @@ export const Schedule = () => {
     setScheduleInfo(updatedScheduleInfo);
     console.log(scheduleInfo.data);
   };
-
+  if (loading) { return <div>Loading…</div>; }
+  if (error) { return <div>Error</div>; }
   return (
     <Paper>
       <Scheduler
